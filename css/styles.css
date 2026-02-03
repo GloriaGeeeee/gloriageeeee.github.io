@@ -1,0 +1,1368 @@
+/* ==========================================
+   GLORIA YUNHAN GAO - PORTFOLIO WEBSITE
+   ==========================================
+   This stylesheet contains all the visual styling
+   for the portfolio website. It's organized into sections
+   for easy navigation and maintenance.
+   ========================================== */
+
+/* ==================== CSS VARIABLES ==================== */
+/* These are like "nicknames" for colors and values that we use
+   throughout the stylesheet. Change them here to update everywhere! */
+:root {
+    /* Primary Colors - Your brand colors */
+    --color-orange: #FFA502;
+    --color-blue: #2978A0;
+    --color-coral: #FE7C5D;
+
+    /* Neutral Colors - For text and backgrounds */
+    --color-neutral-900: #293A4C;
+    --color-neutral-600: #666666;
+    --color-neutral-100: #F5F5F5;
+    --color-white: #FFFFFF;
+
+    /* Font Families */
+    --font-heading: 'Gloock', serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Font Sizes */
+    --text-h1: 3.5rem;
+    --text-h2: 2.5rem;
+    --text-h3: 1.75rem;
+    --text-body: 1.125rem;
+    --text-small: 0.875rem;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-2xl: 4rem;
+
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-full: 50%;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* ==================== RESET & BASE STYLES ==================== */
+/* This removes default browser styling so everything looks consistent */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /* Enable smooth scrolling when clicking navigation links */
+    scroll-behavior: smooth;
+    /* Snap scrolling for case studies */
+    scroll-snap-type: y proximity;
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: 1.6;
+    color: var(--color-neutral-900);
+    background-color: var(--color-white);
+    overflow-x: hidden;
+}
+
+/* Make images responsive by default */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Remove default link styling */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Remove default list styling */
+ul, ol {
+    list-style: none;
+}
+
+/* ==================== TYPOGRAPHY ==================== */
+/* Heading styles using your Gloock font */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 400; /* Gloock only has regular weight */
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: var(--text-h1);
+    line-height: 1.1;
+}
+
+h2 {
+    font-size: var(--text-h2);
+}
+
+h3 {
+    font-size: var(--text-h3);
+}
+
+/* Orange highlight for "Design" text */
+.highlight-orange {
+    color: var(--color-orange);
+}
+
+/* ==================== BUTTONS ==================== */
+/* Reusable button styles */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-body);
+    font-size: var(--text-small);
+    font-weight: 500;
+    border-radius: var(--radius-lg);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+/* Primary button - filled with dark color */
+.btn-primary {
+    background-color: var(--color-neutral-900);
+    color: var(--color-white);
+    border-color: var(--color-neutral-900);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--color-neutral-900);
+}
+
+/* Secondary button - outlined style */
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-neutral-900);
+    border-color: var(--color-neutral-900);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-neutral-900);
+    color: var(--color-white);
+}
+
+/* Coral button for case studies */
+.btn-coral {
+    background-color: var(--color-coral);
+    color: var(--color-white);
+    border-color: var(--color-coral);
+}
+
+.btn-coral:hover {
+    background-color: #e5684a;
+    border-color: #e5684a;
+}
+
+/* ==================== NAVIGATION ==================== */
+/* Fixed navigation bar at the top */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Ensures it stays above other content */
+    background-color: var(--color-white);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo/Name styling */
+.nav-logo {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    color: var(--color-neutral-900);
+}
+
+/* Navigation links container */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.nav-link {
+    font-size: var(--text-small);
+    color: var(--color-neutral-600);
+    transition: color var(--transition-fast);
+}
+
+.nav-link:hover {
+    color: var(--color-neutral-900);
+}
+
+/* Resume button in navigation */
+.nav-btn {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--color-coral);
+    border-radius: var(--radius-lg);
+    color: var(--color-coral);
+}
+
+.nav-btn:hover {
+    background-color: var(--color-coral);
+    color: var(--color-white);
+}
+
+/* Mobile menu button (hamburger icon) */
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: var(--color-neutral-900);
+    transition: all var(--transition-fast);
+}
+
+/* ==================== HERO SECTION ==================== */
+/* The main landing section */
+.hero {
+    min-height: 100vh;
+    padding: 120px var(--spacing-lg) var(--spacing-2xl);
+    display: flex;
+    align-items: center;
+    background-color: var(--color-white);
+    overflow: hidden;
+}
+
+.hero-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+    width: 100%;
+}
+
+/* Left side: Text content */
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-greeting {
+    font-size: var(--text-body);
+    font-style: italic;
+    color: var(--color-neutral-600);
+    margin-bottom: var(--spacing-sm);
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.1;
+}
+
+/* Blinking cursor effect after "Design" */
+.typing-cursor {
+    color: var(--color-orange);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.hero-subtitle {
+    font-size: var(--text-body);
+    color: var(--color-neutral-600);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.6;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+/* Right side: Visual elements */
+.hero-visuals {
+    position: relative;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Years of experience badge (yellow starburst) */
+.badge-years {
+    position: absolute;
+    top: 0;
+    right: 20%;
+    width: 120px;
+    height: 120px;
+    background-color: var(--color-orange);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-neutral-900);
+    z-index: 10;
+    /* Create starburst effect */
+    clip-path: polygon(
+        50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%,
+        50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
+    );
+}
+
+.years-number {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.years-text {
+    font-size: var(--text-small);
+    font-weight: 600;
+}
+
+.years-description {
+    font-size: 0.65rem;
+    max-width: 60px;
+    line-height: 1.2;
+    margin-top: 2px;
+}
+
+/* Profile photo with coral background shape */
+.profile-photo-container {
+    position: relative;
+    z-index: 5;
+}
+
+.coral-shape {
+    width: 280px;
+    height: 350px;
+    background-color: var(--color-coral);
+    border-radius: 140px 140px 140px 140px;
+    position: relative;
+}
+
+.profile-photo {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 280px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    filter: grayscale(100%);
+}
+
+/* Singapore location badge (blue blob) */
+.badge-location {
+    position: absolute;
+    bottom: 60px;
+    left: 10%;
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: 100px 100px 20px 100px;
+    text-align: center;
+    z-index: 15;
+}
+
+.location-label {
+    display: block;
+    font-size: var(--text-small);
+    opacity: 0.9;
+}
+
+.location-city {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-top: 4px;
+}
+
+/* Phone mockup in hero */
+.phone-mockup {
+    position: absolute;
+    right: -20px;
+    bottom: 20px;
+    z-index: 20;
+}
+
+.phone-frame {
+    width: 160px;
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    border: 8px solid #1a1a1a;
+}
+
+.phone-screen {
+    padding: var(--spacing-sm);
+    background: var(--color-white);
+}
+
+.phone-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 1px solid var(--color-neutral-100);
+}
+
+.phone-icon {
+    color: var(--color-blue);
+}
+
+.phone-content {
+    padding-top: var(--spacing-xs);
+}
+
+.phone-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.6rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.rate-green {
+    color: #22c55e;
+    font-weight: 600;
+}
+
+.phone-amount {
+    text-align: center;
+    padding: var(--spacing-sm) 0;
+}
+
+.amount-value {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+}
+
+.phone-options {
+    font-size: 0.55rem;
+}
+
+.option-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.dot.blue { background-color: var(--color-blue); }
+.dot.green { background-color: #22c55e; }
+.dot.yellow { background-color: var(--color-orange); }
+
+/* ==================== PORTFOLIO SECTION ==================== */
+.portfolio {
+    background-color: var(--color-neutral-100);
+}
+
+/* Individual case study - takes full viewport height */
+.case-study {
+    min-height: 100vh;
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    scroll-snap-align: start;
+}
+
+.case-study-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+    width: 100%;
+}
+
+/* Reverse layout for alternating case studies */
+.case-study-container.reverse {
+    grid-template-columns: 1fr 1.2fr;
+}
+
+.case-study-container.reverse .case-info {
+    order: -1;
+}
+
+/* Case study imagery container */
+.case-imagery {
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.case-imagery-blue {
+    background-color: var(--color-blue);
+}
+
+.case-imagery-orange {
+    background-color: var(--color-orange);
+}
+
+.case-imagery-coral {
+    background-color: var(--color-coral);
+}
+
+/* Case study information card */
+.case-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.case-info-card {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    max-width: 450px;
+    border: 2px solid var(--color-neutral-100);
+}
+
+/* Company logos */
+.company-logo {
+    height: 40px;
+    margin-bottom: var(--spacing-lg);
+}
+
+.company-logo-text {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.logo-dot {
+    color: var(--color-coral);
+}
+
+/* OKX Logo styling */
+.okx-logo {
+    display: block;
+}
+
+.okx-text {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -2px;
+}
+
+.okx-x {
+    position: relative;
+}
+
+.okx-x::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 3px solid currentColor;
+}
+
+/* IBM iX Logo styling */
+.ibm-logo {
+    gap: var(--spacing-sm);
+}
+
+.ibm-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.ibm-ix {
+    font-size: 1.25rem;
+    font-weight: 700;
+    position: relative;
+}
+
+.ibm-ix::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -8px;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid currentColor;
+}
+
+.case-title {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+}
+
+.case-description {
+    font-size: var(--text-body);
+    color: var(--color-neutral-600);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.6;
+}
+
+.case-status {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-neutral-100);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-small);
+    color: var(--color-neutral-600);
+}
+
+/* ==================== MOCKUP STYLES ==================== */
+/* Dashboard mockup for Pepperstone */
+.dashboard-mockup {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--color-neutral-100);
+}
+
+.dashboard-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-weight: 600;
+    font-size: var(--text-small);
+}
+
+.logo-icon {
+    color: var(--color-coral);
+    font-size: 1.25rem;
+}
+
+.dashboard-content {
+    padding: var(--spacing-sm) 0;
+}
+
+.dashboard-greeting {
+    font-family: var(--font-body);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+}
+
+.dashboard-label {
+    font-size: var(--text-small);
+    color: var(--color-neutral-600);
+    margin-bottom: var(--spacing-sm);
+}
+
+.dashboard-stats {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.stat-box {
+    flex: 1;
+    background: var(--color-neutral-100);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    text-align: center;
+}
+
+.stat-value {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+}
+
+.stat-unit {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    margin-left: 2px;
+}
+
+.dashboard-chart {
+    height: 60px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.chart-line {
+    width: 100%;
+    height: 100%;
+}
+
+/* Phone mockups for OKX */
+.phones-mockup {
+    position: relative;
+    width: 320px;
+    height: 400px;
+}
+
+.phone-back,
+.phone-front {
+    position: absolute;
+    width: 180px;
+    background: #1a1a1a;
+    border-radius: var(--radius-xl);
+    padding: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.phone-back {
+    top: 0;
+    right: 0;
+    transform: rotate(5deg);
+}
+
+.phone-front {
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.phone-screen-mini {
+    background: var(--color-white);
+    border-radius: calc(var(--radius-xl) - 4px);
+    padding: var(--spacing-md);
+    min-height: 280px;
+}
+
+.mini-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--text-small);
+    font-weight: 600;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--color-neutral-100);
+}
+
+.mini-content {
+    padding-top: var(--spacing-md);
+}
+
+.mini-label {
+    font-size: var(--text-small);
+    color: var(--color-neutral-600);
+    margin-bottom: var(--spacing-xs);
+}
+
+.mini-value {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.mini-options {
+    margin-bottom: var(--spacing-md);
+}
+
+.mini-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--text-small);
+    margin-bottom: var(--spacing-xs);
+}
+
+.mini-btn {
+    width: 100%;
+    padding: var(--spacing-sm);
+    background: var(--color-neutral-900);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Browser mockups for IBM */
+.browser-mockups {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    height: 350px;
+}
+
+.browser-window {
+    position: absolute;
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.browser-back {
+    width: 90%;
+    height: 250px;
+    top: 0;
+    left: 0;
+}
+
+.browser-front {
+    width: 70%;
+    height: 200px;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.browser-bar {
+    display: flex;
+    gap: 6px;
+    padding: var(--spacing-sm);
+    background: var(--color-neutral-100);
+}
+
+.browser-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ddd;
+}
+
+.browser-content {
+    padding: var(--spacing-md);
+    height: calc(100% - 40px);
+}
+
+.map-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f0f0f0 25%, #e8e8e8 25%, #e8e8e8 50%, #f0f0f0 50%, #f0f0f0 75%, #e8e8e8 75%);
+    background-size: 20px 20px;
+    border-radius: var(--radius-sm);
+}
+
+.form-placeholder {
+    padding: var(--spacing-sm);
+}
+
+.form-row {
+    height: 12px;
+    background: var(--color-neutral-100);
+    border-radius: 4px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.form-row:nth-child(2) {
+    width: 70%;
+}
+
+.form-btn {
+    width: 50%;
+    height: 24px;
+    background: var(--color-coral);
+    border-radius: var(--radius-sm);
+    margin-top: var(--spacing-md);
+}
+
+/* ==================== FOOTER ==================== */
+.footer {
+    background-color: var(--color-white);
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    text-align: center;
+    border-top: 1px solid var(--color-neutral-100);
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footer-title {
+    font-size: var(--text-h3);
+    margin-bottom: var(--spacing-md);
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+}
+
+.footer-link {
+    font-size: var(--text-body);
+    color: var(--color-neutral-600);
+    position: relative;
+    padding-bottom: 4px;
+    transition: color var(--transition-fast);
+}
+
+.footer-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-coral);
+    transition: width var(--transition-normal);
+}
+
+.footer-link:hover {
+    color: var(--color-neutral-900);
+}
+
+.footer-link:hover::after {
+    width: 100%;
+}
+
+/* ==================== ANIMATIONS ==================== */
+/* Fade in animation for elements */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.hero-visuals {
+    animation: fadeInUp 0.8s ease 0.2s forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+/* Floating animation for decorative elements */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.badge-years {
+    animation: float 4s ease-in-out infinite;
+}
+
+.badge-location {
+    animation: float 4s ease-in-out infinite 0.5s;
+}
+
+.phone-mockup {
+    animation: float 4s ease-in-out infinite 1s;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+/* Styles for tablets (screens smaller than 1024px) */
+@media (max-width: 1024px) {
+    :root {
+        --text-h1: 2.75rem;
+        --text-h2: 2rem;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        order: 2;
+    }
+
+    .hero-visuals {
+        order: 1;
+        height: 400px;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .coral-shape {
+        width: 220px;
+        height: 280px;
+    }
+
+    .profile-photo {
+        width: 180px;
+        height: 220px;
+    }
+
+    .badge-years {
+        width: 100px;
+        height: 100px;
+        right: 5%;
+    }
+
+    .years-number {
+        font-size: 1.5rem;
+    }
+
+    .badge-location {
+        left: 0;
+        bottom: 40px;
+    }
+
+    .phone-mockup {
+        right: -10px;
+        bottom: 0;
+    }
+
+    .phone-frame {
+        width: 130px;
+    }
+
+    .case-study-container,
+    .case-study-container.reverse {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .case-study-container.reverse .case-info {
+        order: 0;
+    }
+
+    .case-imagery {
+        min-height: 350px;
+        order: -1;
+    }
+
+    .case-info-card {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .company-logo-text {
+        justify-content: center;
+    }
+
+    .dashboard-mockup {
+        max-width: 400px;
+    }
+
+    .phones-mockup {
+        width: 280px;
+        height: 350px;
+    }
+
+    .phone-back,
+    .phone-front {
+        width: 150px;
+    }
+
+    .phone-screen-mini {
+        min-height: 240px;
+    }
+}
+
+/* Styles for mobile phones (screens smaller than 768px) */
+@media (max-width: 768px) {
+    :root {
+        --text-h1: 2.25rem;
+        --text-h2: 1.75rem;
+        --text-h3: 1.5rem;
+        --text-body: 1rem;
+    }
+
+    /* Show mobile menu button, hide desktop links */
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-white);
+        flex-direction: column;
+        padding: var(--spacing-md);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    /* Mobile menu animation */
+    .mobile-menu-btn.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .hero {
+        padding: 100px var(--spacing-md) var(--spacing-xl);
+        min-height: auto;
+    }
+
+    .hero-visuals {
+        height: 320px;
+    }
+
+    .coral-shape {
+        width: 180px;
+        height: 230px;
+    }
+
+    .profile-photo {
+        width: 150px;
+        height: 180px;
+    }
+
+    .badge-years {
+        width: 80px;
+        height: 80px;
+        top: -10px;
+        right: 10%;
+    }
+
+    .years-number {
+        font-size: 1.25rem;
+    }
+
+    .years-text {
+        font-size: 0.65rem;
+    }
+
+    .years-description {
+        display: none;
+    }
+
+    .badge-location {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .location-city {
+        font-size: 1.25rem;
+    }
+
+    .phone-mockup {
+        display: none;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .case-study {
+        min-height: auto;
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .case-imagery {
+        min-height: 280px;
+        padding: var(--spacing-lg);
+    }
+
+    .case-info-card {
+        padding: var(--spacing-lg);
+    }
+
+    .dashboard-mockup {
+        padding: var(--spacing-md);
+    }
+
+    .dashboard-stats {
+        flex-direction: column;
+    }
+
+    .phones-mockup {
+        width: 220px;
+        height: 300px;
+    }
+
+    .phone-back,
+    .phone-front {
+        width: 130px;
+    }
+
+    .phone-screen-mini {
+        min-height: 200px;
+        padding: var(--spacing-sm);
+    }
+
+    .mini-value {
+        font-size: 1.5rem;
+    }
+
+    .browser-mockups {
+        height: 250px;
+    }
+
+    .browser-back {
+        height: 180px;
+    }
+
+    .browser-front {
+        height: 150px;
+    }
+
+    .footer {
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    :root {
+        --text-h1: 1.875rem;
+        --text-h2: 1.5rem;
+    }
+
+    .navbar {
+        padding: var(--spacing-sm);
+    }
+
+    .nav-logo {
+        font-size: 1rem;
+    }
+
+    .hero-visuals {
+        height: 280px;
+    }
+
+    .coral-shape {
+        width: 150px;
+        height: 190px;
+    }
+
+    .profile-photo {
+        width: 120px;
+        height: 150px;
+    }
+
+    .badge-years {
+        width: 70px;
+        height: 70px;
+    }
+
+    .badge-location {
+        bottom: 20px;
+    }
+
+    .phones-mockup {
+        width: 180px;
+        height: 250px;
+    }
+
+    .phone-back,
+    .phone-front {
+        width: 110px;
+    }
+}
+
+/* ==================== UTILITY CLASSES ==================== */
+/* Helper classes for quick styling */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mt-1 { margin-top: var(--spacing-sm); }
+.mt-2 { margin-top: var(--spacing-md); }
+.mt-3 { margin-top: var(--spacing-lg); }
+
+.mb-1 { margin-bottom: var(--spacing-sm); }
+.mb-2 { margin-bottom: var(--spacing-md); }
+.mb-3 { margin-bottom: var(--spacing-lg); }
+
+/* Screen reader only - for accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
