@@ -1,0 +1,29 @@
+IMAGES NEEDED FOR YOUR PORTFOLIO
+================================
+
+Please add the following images to this folder:
+
+1. profile-photo.jpg (or .png)
+   - Your profile photo
+   - Recommended size: 600x800 pixels or similar portrait ratio
+   - The photo will automatically be converted to black & white
+   - It should show you from about chest level up
+
+2. pepperstone-logo.svg (or .png)
+   - Pepperstone company logo
+   - Recommended size: 200x50 pixels
+   - Transparent background preferred
+
+3. (Optional) You can also add:
+   - okx-logo.svg - OKX company logo
+   - ibm-logo.svg - IBM iX company logo
+   - Any mockup images you want to use instead of the CSS-generated ones
+
+NOTES:
+------
+- The website will work without these images (it has fallbacks)
+- Make sure image filenames match exactly (case-sensitive)
+- SVG format is preferred for logos (scalable and crisp)
+- JPG or PNG works great for photos
+
+Once you add the images, they'll automatically appear on your website!

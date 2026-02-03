@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gloria Yunhan Gao | Product Designer</title>
+
+    <!-- Google Fonts - Loading Gloock for headings and Inter for body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Our custom CSS file -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- ==================== NAVIGATION ==================== -->
+    <!-- The top navigation bar that stays fixed as you scroll -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo/Name on the left -->
+            <a href="#" class="nav-logo">Gloria Yunhan Gao</a>
+
+            <!-- Navigation links on the right -->
+            <div class="nav-links">
+                <a href="#work" class="nav-link">My work</a>
+                <a href="#about" class="nav-link">About me</a>
+                <a href="#" class="nav-link nav-btn">Resume</a>
+            </div>
+
+            <!-- Mobile menu button (hamburger) - only shows on small screens -->
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <!-- The main landing section visitors see first -->
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <!-- Left side: Text content -->
+            <div class="hero-content">
+                <p class="hero-greeting">Hi! I'm Gloria.</p>
+                <h1 class="hero-title">
+                    I solve complex real-life problems with the power of
+                    <span class="highlight-orange">Design</span>
+                    <span class="typing-cursor">|</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Product designer @ Pepperstone, previously with OKX, IBM, and UCL HCI
+                </p>
+                <div class="hero-buttons">
+                    <a href="#work" class="btn btn-primary">Browse my work</a>
+                    <a href="#" class="btn btn-secondary">Download resume</a>
+                </div>
+            </div>
+
+            <!-- Right side: Decorative elements -->
+            <div class="hero-visuals">
+                <!-- Years of experience badge -->
+                <div class="badge-years">
+                    <span class="years-number">6</span>
+                    <span class="years-text">years</span>
+                    <p class="years-description">Crafting user experience</p>
+                </div>
+
+                <!-- Profile photo in coral circle -->
+                <div class="profile-photo-container">
+                    <div class="coral-shape"></div>
+                    <div class="profile-photo">
+                        <!-- Placeholder for profile image -->
+                        <img src="assets/profile-photo.jpg" alt="Gloria Yunhan Gao" onerror="this.style.display='none'">
+                    </div>
+                </div>
+
+                <!-- Singapore location badge -->
+                <div class="badge-location">
+                    <span class="location-label">Currently based in</span>
+                    <span class="location-city">Singapore</span>
+                </div>
+
+                <!-- Phone mockup -->
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="phone-header">
+                                <span class="phone-icon">◉</span>
+                                <span>USDC</span>
+                            </div>
+                            <div class="phone-content">
+                                <div class="phone-row">
+                                    <span>Compound v3 (Arbitrum)</span>
+                                    <span class="rate-green">8.29%</span>
+                                </div>
+                                <div class="phone-amount">
+                                    <span class="amount-value">1,200</span>
+                                </div>
+                                <div class="phone-options">
+                                    <div class="option-row"><span class="dot blue"></span> Coinbase</div>
+                                    <div class="option-row"><span class="dot green"></span> Compound</div>
+                                    <div class="option-row"><span class="dot yellow"></span> Stargate</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PORTFOLIO CASE STUDIES ==================== -->
+    <!-- Each case study takes up one full screen -->
+    <section class="portfolio" id="work">
+
+        <!-- Case Study 1: Pepperstone -->
+        <div class="case-study" id="pepperstone">
+            <div class="case-study-container">
+                <!-- Left: Project imagery with blue background -->
+                <div class="case-imagery case-imagery-blue">
+                    <div class="dashboard-mockup">
+                        <div class="dashboard-header">
+                            <div class="dashboard-logo">
+                                <span class="logo-icon">◉</span>
+                                <span>pepperstone</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-content">
+                            <h3 class="dashboard-greeting">Hi Sam</h3>
+                            <p class="dashboard-label">Your performance</p>
+                            <div class="dashboard-stats">
+                                <div class="stat-box">
+                                    <span class="stat-value">300,000<span class="stat-unit">USD</span></span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-value">300</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-value">10</span>
+                                </div>
+                            </div>
+                            <div class="dashboard-chart">
+                                <svg viewBox="0 0 200 60" class="chart-line">
+                                    <path d="M0,50 Q50,45 100,30 T200,10" stroke="#2978A0" fill="none" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Project information -->
+                <div class="case-info">
+                    <div class="case-info-card">
+                        <img src="assets/pepperstone-logo.svg" alt="Pepperstone" class="company-logo" onerror="this.outerHTML='<div class=\'company-logo-text\'><span class=\'logo-dot\'>◉</span> pepperstone</div>'">
+                        <h2 class="case-title">Empower partner success at every stage</h2>
+                        <p class="case-description">
+                            A unified portal designed to drive success for IBs and affiliates from day one
+                        </p>
+                        <span class="case-status">Coming soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case Study 2: OKX -->
+        <div class="case-study" id="okx">
+            <div class="case-study-container reverse">
+                <!-- Left: Project information -->
+                <div class="case-info">
+                    <div class="case-info-card">
+                        <div class="company-logo-text okx-logo">
+                            <span class="okx-text">OK<span class="okx-x">X</span></span>
+                        </div>
+                        <h2 class="case-title">Make Defi earning worry-free</h2>
+                        <p class="case-description">
+                            52% better conversion rates through subscription journey redesign
+                        </p>
+                        <a href="#" class="btn btn-coral">Learn more</a>
+                    </div>
+                </div>
+
+                <!-- Right: Project imagery with orange background -->
+                <div class="case-imagery case-imagery-orange">
+                    <div class="phones-mockup">
+                        <div class="phone-back">
+                            <div class="phone-screen-mini">
+                                <div class="mini-header">
+                                    <span>USDC</span>
+                                    <span class="rate-green">8.29%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="phone-front">
+                            <div class="phone-screen-mini">
+                                <div class="mini-content">
+                                    <p class="mini-label">Amount</p>
+                                    <p class="mini-value">1,200</p>
+                                    <div class="mini-options">
+                                        <div class="mini-row"><span class="dot green"></span> USDC savings</div>
+                                        <div class="mini-row"><span class="dot blue"></span> Compound v3</div>
+                                        <div class="mini-row"><span class="dot yellow"></span> Stargate</div>
+                                    </div>
+                                    <button class="mini-btn">Confirm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case Study 3: IBM -->
+        <div class="case-study" id="ibm">
+            <div class="case-study-container">
+                <!-- Left: Project imagery with coral background -->
+                <div class="case-imagery case-imagery-coral">
+                    <div class="browser-mockups">
+                        <div class="browser-window browser-back">
+                            <div class="browser-bar">
+                                <span class="browser-dot"></span>
+                                <span class="browser-dot"></span>
+                                <span class="browser-dot"></span>
+                            </div>
+                            <div class="browser-content">
+                                <div class="map-placeholder"></div>
+                            </div>
+                        </div>
+                        <div class="browser-window browser-front">
+                            <div class="browser-bar">
+                                <span class="browser-dot"></span>
+                                <span class="browser-dot"></span>
+                                <span class="browser-dot"></span>
+                            </div>
+                            <div class="browser-content">
+                                <div class="form-placeholder">
+                                    <div class="form-row"></div>
+                                    <div class="form-row"></div>
+                                    <div class="form-btn"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Project information -->
+                <div class="case-info">
+                    <div class="case-info-card">
+                        <div class="company-logo-text ibm-logo">
+                            <span class="ibm-text">IBM</span>
+                            <span class="ibm-ix">iX</span>
+                        </div>
+                        <h2 class="case-title">Make insurance easy & pleasant</h2>
+                        <p class="case-description">
+                            Global insurance website localisation and revamp
+                        </p>
+                        <a href="#" class="btn btn-coral">Learn more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <!-- Contact section at the bottom -->
+    <footer class="footer" id="contact">
+        <div class="footer-container">
+            <h2 class="footer-title">Let's connect!</h2>
+            <div class="footer-links">
+                <a href="https://linkedin.com" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+                <a href="mailto:gloria@example.com" class="footer-link">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for interactions -->
+    <script src="js/script.js"></script>
+</body>
+</html>
