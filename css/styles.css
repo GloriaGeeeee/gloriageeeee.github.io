@@ -39,7 +39,7 @@
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;
     --spacing-2xl: 4rem;
-    --page-padding: 80px;
+    --page-padding: 108px;
 
     /* Border Radius */
     --radius-sm: 8px;
@@ -122,6 +122,23 @@ h3 {
 /* Orange highlight for "Design" text */
 .highlight-orange {
     color: var(--color-orange);
+}
+
+/* Rotating word colors */
+.rotating-word {
+    transition: none;
+}
+
+.rotating-word.color-orange {
+    color: var(--color-orange);
+}
+
+.rotating-word.color-blue {
+    color: var(--color-blue);
+}
+
+.rotating-word.color-coral {
+    color: var(--color-coral);
 }
 
 /* ==================== BUTTONS ==================== */
@@ -280,25 +297,34 @@ h3 {
 /* Left side: Text content */
 .hero-content {
     max-width: 600px;
+    align-self: start;
+    padding-top: clamp(2vh, 3vw, 10vh);
 }
 
 .hero-greeting {
-    font-size: var(--text-body);
-    font-style: italic;
-    color: var(--color-neutral-600);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 300;
+    color: var(--color-neutral-900);
     margin-bottom: var(--spacing-sm);
 }
 
 .hero-title {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     margin-bottom: var(--spacing-md);
-    line-height: 1.1;
+    line-height: 1.2;
 }
 
-/* Blinking cursor effect after "Design" */
+/* Blinking cursor effect */
 .typing-cursor {
-    color: var(--color-orange);
+    display: inline-block;
+    width: 5px;
+    height: 1em;
+    background-color: var(--color-neutral-900);
+    margin-left: 4px;
+    vertical-align: middle;
     animation: blink 1s infinite;
+    color: transparent;
 }
 
 @keyframes blink {
@@ -307,8 +333,9 @@ h3 {
 }
 
 .hero-subtitle {
-    font-size: var(--text-body);
-    color: var(--color-neutral-600);
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--color-neutral-900);
     margin-bottom: var(--spacing-lg);
     line-height: 1.6;
 }
@@ -322,120 +349,148 @@ h3 {
 /* Right side: Visual elements */
 .hero-visuals {
     position: relative;
-    height: 500px;
+    height: 70vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: stretch;
+    justify-content: space-between;
+    width: calc(100% - 96px);
+    margin-left: 48px;
+    margin-right: 48px;
 }
 
-/* Years of experience badge (yellow starburst) */
-.badge-years {
-    position: absolute;
-    top: 0;
-    right: 20%;
-    width: 120px;
-    height: 120px;
-    background-color: var(--color-orange);
-    border-radius: 50%;
+/* Left column: Profile + Location */
+.hero-visuals-left {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: var(--color-neutral-900);
-    z-index: 10;
-    /* Create starburst effect */
-    clip-path: polygon(
-        50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%,
-        50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
-    );
-}
-
-.years-number {
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    line-height: 1;
-}
-
-.years-text {
-    font-size: var(--text-small);
-    font-weight: 600;
-}
-
-.years-description {
-    font-size: 0.65rem;
-    max-width: 60px;
-    line-height: 1.2;
-    margin-top: 2px;
-}
-
-/* Profile photo with coral background shape */
-.profile-photo-container {
-    position: relative;
-    z-index: 5;
-}
-
-.coral-shape {
-    width: 280px;
-    height: 350px;
-    background-color: var(--color-coral);
-    border-radius: 140px 140px 140px 140px;
-    position: relative;
-}
-
-.profile-photo {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 220px;
-    height: 280px;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-}
-
-.profile-photo img {
-    width: 100%;
+    width: 50%;
     height: 100%;
-    object-fit: cover;
-    object-position: top;
-    filter: grayscale(100%);
+    position: relative;
 }
 
-/* Singapore location badge (blue blob) */
+/* Right column: Years badge + Sample design */
+.hero-visuals-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    position: relative;
+}
+
+/* Singapore location badge (blob shape) */
 .badge-location {
-    position: absolute;
-    bottom: 60px;
-    left: 10%;
-    background-color: var(--color-blue);
-    color: var(--color-surface);
-    padding: var(--spacing-md) var(--spacing-lg);
-    border-radius: 100px 100px 20px 100px;
-    text-align: center;
+    width: 100%;
+    height: 35%;
+    background-image: url('../assets/blob_shape.svg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    padding-left: 15%;
+    padding-right: 15%;
+    box-sizing: border-box;
     z-index: 15;
+    position: relative;
+    margin-top: -60px;
 }
 
 .location-label {
     display: block;
-    font-size: var(--text-small);
-    opacity: 0.9;
+    font-size: clamp(12px, 0.9vw, 16px);
+    font-weight: 300;
+    color: var(--color-surface);
 }
 
 .location-city {
     display: block;
     font-family: var(--font-heading);
-    font-size: 1.5rem;
+    font-size: clamp(28px, 2.2vw, 40px);
+    color: var(--color-surface);
     margin-top: 4px;
 }
 
-/* Phone mockup in hero */
-.phone-mockup {
-    position: absolute;
-    right: -20px;
-    bottom: 20px;
-    z-index: 20;
+/* Profile photo with coral pill shape */
+.profile-photo-container {
+    width: 100%;
+    flex: 1;
+    background-color: var(--color-coral);
+    border-radius: 999px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+/* Years of experience badge (star shape) */
+.badge-years {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-image: url('../assets/star_shape.svg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-neutral-900);
+    z-index: 10;
+    margin: 0;
+}
+
+.badge-years-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    max-width: 60%;
+}
+
+.years-text {
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 2.2vw, 40px);
+    color: var(--color-neutral-900);
+}
+
+.years-description {
+    font-size: clamp(12px, 0.9vw, 16px);
+    font-weight: 300;
+    color: var(--color-neutral-900);
+    margin-top: 4px;
+}
+
+/* Sample design mockup */
+.sample-design {
+    width: 100%;
+    flex: 1;
+    background-color: var(--color-blue);
+    border-radius: 999px;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 8vh;
+}
+
+.sample-design-img {
+    width: 70%;
+    height: auto;
+    object-fit: contain;
 }
 
 .phone-frame {
@@ -1017,17 +1072,6 @@ h3 {
     }
 }
 
-.badge-years {
-    animation: float 4s ease-in-out infinite;
-}
-
-.badge-location {
-    animation: float 4s ease-in-out infinite 0.5s;
-}
-
-.phone-mockup {
-    animation: float 4s ease-in-out infinite 1s;
-}
 
 /* ==================== RESPONSIVE DESIGN ==================== */
 /* Styles for tablets (screens smaller than 1024px) */
@@ -1049,7 +1093,7 @@ h3 {
 
     .hero-visuals {
         order: 1;
-        height: 400px;
+        height: 60vh;
         margin-bottom: var(--spacing-lg);
     }
 
@@ -1057,38 +1101,25 @@ h3 {
         justify-content: center;
     }
 
-    .coral-shape {
-        width: 220px;
-        height: 280px;
-    }
-
-    .profile-photo {
-        width: 180px;
-        height: 220px;
+    .profile-photo-container {
+        width: 160px;
     }
 
     .badge-years {
-        width: 100px;
-        height: 100px;
-        right: 5%;
+        width: 160px;
     }
 
-    .years-number {
-        font-size: 1.5rem;
+    .years-text {
+        font-size: 1.25rem;
     }
 
     .badge-location {
-        left: 0;
-        bottom: 40px;
+        width: 160px;
+        height: 130px;
     }
 
-    .phone-mockup {
-        right: -10px;
-        bottom: 0;
-    }
-
-    .phone-frame {
-        width: 130px;
+    .sample-design {
+        width: 160px;
     }
 
     .case-study-container,
@@ -1183,48 +1214,36 @@ h3 {
     }
 
     .hero-visuals {
-        height: 320px;
+        height: 55vh;
     }
 
-    .coral-shape {
-        width: 180px;
-        height: 230px;
-    }
-
-    .profile-photo {
-        width: 150px;
-        height: 180px;
+    .profile-photo-container {
+        width: 140px;
     }
 
     .badge-years {
-        width: 80px;
-        height: 80px;
-        top: -10px;
-        right: 10%;
-    }
-
-    .years-number {
-        font-size: 1.25rem;
+        width: 140px;
     }
 
     .years-text {
-        font-size: 0.65rem;
+        font-size: 1rem;
     }
 
     .years-description {
-        display: none;
+        font-size: 0.75rem;
     }
 
     .badge-location {
-        padding: var(--spacing-sm) var(--spacing-md);
+        width: 140px;
+        height: 110px;
     }
 
     .location-city {
         font-size: 1.25rem;
     }
 
-    .phone-mockup {
-        display: none;
+    .sample-design {
+        width: 140px;
     }
 
     .hero-buttons {
@@ -1311,26 +1330,24 @@ h3 {
     }
 
     .hero-visuals {
-        height: 280px;
+        height: 50vh;
     }
 
-    .coral-shape {
-        width: 150px;
-        height: 190px;
-    }
-
-    .profile-photo {
+    .profile-photo-container {
         width: 120px;
-        height: 150px;
     }
 
     .badge-years {
-        width: 70px;
-        height: 70px;
+        width: 120px;
     }
 
     .badge-location {
-        bottom: 20px;
+        width: 120px;
+        height: 95px;
+    }
+
+    .sample-design {
+        width: 120px;
     }
 
     .phones-mockup {

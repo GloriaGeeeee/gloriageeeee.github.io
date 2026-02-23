@@ -45,9 +45,10 @@
             <div class="hero-content">
                 <p class="hero-greeting">Hi! I'm Gloria.</p>
                 <h1 class="hero-title">
-                    I solve complex real-life problems with the power of
-                    <span class="highlight-orange">Design</span>
-                    <span class="typing-cursor">|</span>
+                    I solve complex<br>
+                    real-life problems<br>
+                    with the power of<br>
+                    <span class="rotating-word" data-words="Design,Technology,Collaboration" data-colors="orange,blue,coral">Design</span><span class="typing-cursor"></span>
                 </h1>
                 <p class="hero-subtitle">
                     Product designer @ Pepperstone, previously with OKX, IBM, and UCL HCI
@@ -60,51 +61,33 @@
 
             <!-- Right side: Decorative elements -->
             <div class="hero-visuals">
-                <!-- Years of experience badge -->
-                <div class="badge-years">
-                    <span class="years-number">6</span>
-                    <span class="years-text">years</span>
-                    <p class="years-description">Crafting user experience</p>
-                </div>
+                <!-- Left column: Profile photo + Location -->
+                <div class="hero-visuals-left">
+                    <!-- Profile photo in pill shape -->
+                    <div class="profile-photo-container">
+                        <img src="assets/gloria-photo.png" alt="Gloria Yunhan Gao" class="profile-photo">
+                    </div>
 
-                <!-- Profile photo in coral circle -->
-                <div class="profile-photo-container">
-                    <div class="coral-shape"></div>
-                    <div class="profile-photo">
-                        <!-- Placeholder for profile image -->
-                        <img src="assets/profile-photo.jpg" alt="Gloria Yunhan Gao" onerror="this.style.display='none'">
+                    <!-- Singapore location badge -->
+                    <div class="badge-location">
+                        <span class="location-label">Currently based in</span>
+                        <span class="location-city">Singapore</span>
                     </div>
                 </div>
 
-                <!-- Singapore location badge -->
-                <div class="badge-location">
-                    <span class="location-label">Currently based in</span>
-                    <span class="location-city">Singapore</span>
-                </div>
-
-                <!-- Phone mockup -->
-                <div class="phone-mockup">
-                    <div class="phone-frame">
-                        <div class="phone-screen">
-                            <div class="phone-header">
-                                <span class="phone-icon">◉</span>
-                                <span>USDC</span>
-                            </div>
-                            <div class="phone-content">
-                                <div class="phone-row">
-                                    <span>Compound v3 (Arbitrum)</span>
-                                    <span class="rate-green">8.29%</span>
-                                </div>
-                                <div class="phone-amount">
-                                    <span class="amount-value">1,200</span>
-                                </div>
-                                <div class="phone-options">
-                                    <div class="option-row"><span class="dot blue"></span> Coinbase</div>
-                                    <div class="option-row"><span class="dot green"></span> Compound</div>
-                                    <div class="option-row"><span class="dot yellow"></span> Stargate</div>
-                                </div>
-                            </div>
+                <!-- Right column: Years badge + Sample design -->
+                <div class="hero-visuals-right">
+                    <!-- Years of experience badge -->
+                    <div class="badge-years">
+                        <div class="badge-years-content">
+                            <span class="years-text"><span id="years-count">5+</span> years</span>
+                            <span class="years-description">crafting delightful user experience</span>
                         </div>
+                    </div>
+
+                    <!-- Sample design mockup -->
+                    <div class="sample-design">
+                        <img src="assets/hero-mockup.png" alt="Sample design mockup" class="sample-design-img">
                     </div>
                 </div>
             </div>

@@ -14,6 +14,18 @@
 // Wait for the page to fully load before running any code
 document.addEventListener('DOMContentLoaded', function() {
 
+    // ==================== YEARS OF EXPERIENCE CALCULATOR ====================
+    // Dynamically calculates years since Aug 03, 2020
+    const yearsCountElement = document.getElementById('years-count');
+    if (yearsCountElement) {
+        const startDate = new Date('2020-08-03');
+        const now = new Date();
+        const diffInMs = now - startDate;
+        const msPerYear = 1000 * 60 * 60 * 24 * 365.25;
+        const years = Math.floor(diffInMs / msPerYear);
+        yearsCountElement.textContent = years + '+';
+    }
+
     // ==================== MOBILE MENU ====================
     // This makes the hamburger menu work on mobile devices
 
@@ -148,14 +160,61 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('scroll', handleNavbarScroll);
 
-    // ==================== TYPING ANIMATION ====================
-    // Creates a typing effect for the word "Design" (optional enhancement)
+    // ==================== ROTATING WORD ANIMATION ====================
+    // Rotates through words with typing effect and color changes
 
-    const typingCursor = document.querySelector('.typing-cursor');
+    const rotatingWord = document.querySelector('.rotating-word');
 
-    if (typingCursor) {
-        // The cursor blinks via CSS animation
-        // This is just here if you want to add more advanced typing effects later
+    if (rotatingWord) {
+        const words = rotatingWord.dataset.words.split(',');
+        const colors = rotatingWord.dataset.colors.split(',');
+        let currentIndex = 0;
+
+        // Set initial color
+        rotatingWord.classList.add('color-' + colors[0]);
+
+        function typeWord(word, colorClass, callback) {
+            let charIndex = 0;
+            rotatingWord.textContent = '';
+
+            // Remove all color classes and add the new one
+            colors.forEach(c => rotatingWord.classList.remove('color-' + c));
+            rotatingWord.classList.add('color-' + colorClass);
+
+            function typeChar() {
+                if (charIndex < word.length) {
+                    rotatingWord.textContent += word[charIndex];
+                    charIndex++;
+                    setTimeout(typeChar, 100);
+                } else if (callback) {
+                    setTimeout(callback, 2000); // Wait before deleting
+                }
+            }
+            typeChar();
+        }
+
+        function deleteWord(callback) {
+            function deleteChar() {
+                const currentText = rotatingWord.textContent;
+                if (currentText.length > 0) {
+                    rotatingWord.textContent = currentText.slice(0, -1);
+                    setTimeout(deleteChar, 50);
+                } else if (callback) {
+                    callback();
+                }
+            }
+            deleteChar();
+        }
+
+        function rotateWords() {
+            deleteWord(function() {
+                currentIndex = (currentIndex + 1) % words.length;
+                typeWord(words[currentIndex], colors[currentIndex], rotateWords);
+            });
+        }
+
+        // Start rotation after initial delay
+        setTimeout(rotateWords, 3000);
     }
 
     // ==================== PARALLAX EFFECT ====================
