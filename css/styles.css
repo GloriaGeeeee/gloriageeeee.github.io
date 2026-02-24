@@ -68,8 +68,11 @@
 html {
     /* Enable smooth scrolling when clicking navigation links */
     scroll-behavior: smooth;
-    /* Snap scrolling for case studies */
-    scroll-snap-type: y proximity;
+}
+
+html, body {
+    scroll-snap-type: y mandatory;
+    overscroll-behavior: none;
 }
 
 body {
@@ -203,7 +206,7 @@ h3 {
     right: 0;
     z-index: 1000; /* Ensures it stays above other content */
     background-color: var(--color-surface);
-    padding: var(--spacing-sm) var(--page-padding);
+    padding: var(--spacing-sm) var(--page-padding) 0;
 }
 
 .nav-container {
@@ -283,6 +286,8 @@ h3 {
     align-items: center;
     background-color: var(--color-surface);
     overflow: hidden;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 
 .hero-container {
@@ -577,11 +582,12 @@ h3 {
 
 /* Individual case study - takes full viewport height */
 .case-study {
-    min-height: 100vh;
+    height: 100vh;
     padding: var(--spacing-2xl) var(--page-padding);
     display: flex;
     align-items: center;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
 }
 
 .case-study-container {
@@ -1104,6 +1110,8 @@ h3 {
     padding: var(--spacing-2xl) var(--page-padding);
     text-align: center;
     border-top: 1px solid var(--color-neutral-100);
+    scroll-snap-align: end;
+    scroll-snap-stop: always;
 }
 
 .footer-container {

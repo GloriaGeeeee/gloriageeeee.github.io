@@ -145,21 +145,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Run once on page load
     highlightNavigation();
 
-    // ==================== NAVBAR SHADOW ON SCROLL ====================
-    // Adds a subtle shadow to the navbar when scrolling down
-
-    const navbar = document.querySelector('.navbar');
-
-    function handleNavbarScroll() {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    }
-
-    window.addEventListener('scroll', handleNavbarScroll);
-
     // ==================== ROTATING WORD ANIMATION ====================
     // Rotates through words with typing effect and color changes
 
@@ -295,19 +280,15 @@ scrollAnimationStyles.textContent = `
     /* Initial state for scroll animations */
     .animate-on-scroll {
         opacity: 0;
-        transform: translateY(40px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
+        transform: translateY(20px);
+        transition: opacity 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+                    transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
     }
 
     /* Visible state after scrolling into view */
     .animate-on-scroll.visible {
         opacity: 1;
         transform: translateY(0);
-    }
-
-    /* Navbar shadow when scrolled */
-    .navbar.scrolled {
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
 
     /* Active navigation link */
