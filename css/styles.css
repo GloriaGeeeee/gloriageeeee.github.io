@@ -152,7 +152,7 @@ h3 {
     font-family: var(--font-body);
     font-size: var(--text-small);
     font-weight: 500;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     border: 2px solid transparent;
     cursor: pointer;
     transition: all var(--transition-normal);
@@ -245,7 +245,7 @@ h3 {
     padding: 0.5rem 1rem;
     background-color: var(--color-coral);
     border: 2px solid var(--color-coral);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     color: var(--color-neutral-900);
 }
 
@@ -652,6 +652,38 @@ h3 {
     border-radius: var(--radius-md);
 }
 
+/* OKX specific imagery styling */
+#okx .case-imagery {
+    overflow: visible;
+    position: relative;
+}
+
+#okx .case-imagery-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 108%;
+    width: auto;
+    max-width: none;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+}
+
+/* IBM specific imagery styling */
+#ibm .case-imagery {
+    overflow: hidden;
+}
+
+#ibm .case-imagery-img {
+    height: 100%;
+    width: auto;
+    max-width: none;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    transform: rotate(-7deg);
+}
+
 /* Case study information card */
 .case-info {
     display: flex;
@@ -690,6 +722,28 @@ h3 {
 }
 
 #ibm .case-info-card {
+    border-color: var(--color-coral);
+}
+
+/* Case study buttons - colors matching imagery backgrounds */
+.case-info-card .btn {
+    color: var(--color-neutral-900);
+    border-radius: var(--radius-xl);
+    font-weight: 400;
+}
+
+#pepperstone .case-info-card .btn {
+    background-color: var(--color-blue);
+    border-color: var(--color-blue);
+}
+
+#okx .case-info-card .btn {
+    background-color: var(--color-orange);
+    border-color: var(--color-orange);
+}
+
+#ibm .case-info-card .btn {
+    background-color: var(--color-coral);
     border-color: var(--color-coral);
 }
 
@@ -770,7 +824,8 @@ h3 {
 }
 
 .case-title {
-    font-size: clamp(28px, 2.2vw, 40px);
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 2.2vw, 48px);
     margin-bottom: var(--spacing-md);
     line-height: 1.2;
 }
