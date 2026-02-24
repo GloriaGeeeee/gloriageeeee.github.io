@@ -1327,20 +1327,53 @@ h3 {
     }
 
     .hero {
-        padding: 100px var(--spacing-md) var(--spacing-xl);
+        padding: 80px var(--spacing-md) var(--spacing-md);
         min-height: auto;
     }
 
+    .hero-greeting {
+        font-size: 1.125rem;
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .hero-title {
+        font-size: 2rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .typing-cursor {
+        width: 3px;
+    }
+
+    .hero-container {
+        gap: var(--spacing-sm);
+    }
+
     .hero-visuals {
-        height: 55vh;
+        height: 45vh;
+        margin-bottom: 0;
+        width: calc(100% - 48px);
+        margin-left: 24px;
+        margin-right: 24px;
+    }
+
+    .hero-visuals-left,
+    .hero-visuals-right {
+        width: 50%;
+        align-items: stretch;
     }
 
     .profile-photo-container {
-        width: 140px;
+        width: 100%;
     }
 
     .badge-years {
-        width: 140px;
+        width: 100%;
     }
 
     .years-text {
@@ -1348,25 +1381,38 @@ h3 {
     }
 
     .years-description {
-        font-size: 0.75rem;
+        font-size: 0.625rem;
     }
 
     .badge-location {
-        width: 140px;
-        height: 110px;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 315 / 250;
+        margin-top: -30px;
+    }
+
+    .location-label {
+        font-size: 0.625rem;
     }
 
     .location-city {
-        font-size: 1.25rem;
+        font-size: 1rem;
     }
 
     .sample-design {
-        width: 140px;
+        width: 100%;
+        padding-top: 4vh;
     }
 
     .hero-buttons {
         flex-direction: column;
         align-items: center;
+        gap: var(--spacing-sm);
+    }
+
+    .hero-buttons .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: var(--text-small);
     }
 
     .btn {
@@ -1375,17 +1421,102 @@ h3 {
     }
 
     .case-study {
-        min-height: auto;
-        padding: var(--spacing-xl) var(--spacing-md);
+        height: 100vh;
+        padding: 60px var(--spacing-md) var(--spacing-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .case-study-container {
+        height: auto;
+        gap: var(--spacing-sm);
     }
 
     .case-imagery {
-        min-height: 280px;
-        padding: var(--spacing-lg);
+        min-height: 0;
+        height: 50vh;
+        padding: var(--spacing-md);
+        border-radius: var(--radius-xl);
+    }
+
+    .case-info {
+        height: auto;
     }
 
     .case-info-card {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-md);
+        border-radius: var(--radius-xl);
+        align-items: center;
+        height: auto;
+        border: none;
+    }
+
+    .company-logo {
+        height: 28px;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .case-title {
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .case-description {
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .case-info-card .case-status,
+    .case-info-card .btn {
+        margin-top: var(--spacing-sm);
+        width: 100%;
+        text-align: center;
+    }
+
+    .case-status {
+        padding: 0.75rem 1.5rem;
+        font-size: var(--text-small);
+        border-radius: var(--radius-xl);
+    }
+
+    .case-imagery {
+        padding: var(--spacing-sm);
+        justify-content: center;
+    }
+
+    .case-imagery-img {
+        height: 85%;
+        width: auto;
+        max-width: 100%;
+    }
+
+    #okx .case-study-container {
+        gap: var(--spacing-sm);
+    }
+
+    #okx .case-imagery {
+        overflow: visible;
+        align-items: center;
+    }
+
+    #okx .case-imagery-img {
+        height: 110% !important;
+        max-height: none;
+    }
+
+    #pepperstone .case-imagery {
+        justify-content: center;
+        padding: 16px !important;
+    }
+
+    #pepperstone .case-imagery-img {
+        height: auto;
+        width: 100%;
+        max-width: none;
+        max-height: 95%;
     }
 
     .dashboard-mockup {
@@ -1440,32 +1571,72 @@ h3 {
     }
 
     .navbar {
-        padding: var(--spacing-sm);
+        padding: var(--spacing-sm) var(--spacing-sm) 0;
     }
 
     .nav-logo {
         font-size: 1rem;
     }
 
+    .hero-greeting {
+        font-size: 1rem;
+    }
+
+    .hero-title {
+        font-size: 1.75rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.875rem;
+    }
+
     .hero-visuals {
-        height: 50vh;
+        height: 38vh;
     }
 
-    .profile-photo-container {
-        width: 120px;
+    .years-text {
+        font-size: 1rem;
     }
 
-    .badge-years {
-        width: 120px;
+    .years-description {
+        font-size: 0.625rem;
     }
 
     .badge-location {
-        width: 120px;
-        height: 95px;
+        margin-top: -30px;
+    }
+
+    .location-label {
+        font-size: 0.625rem;
+    }
+
+    .location-city {
+        font-size: 1rem;
     }
 
     .sample-design {
-        width: 120px;
+        padding-top: 2vh;
+    }
+
+    .case-imagery {
+        height: 45vh;
+        border-radius: var(--radius-lg);
+    }
+
+    .case-info-card {
+        border-radius: var(--radius-lg);
+    }
+
+    .company-logo {
+        height: 24px;
+    }
+
+    .case-title {
+        font-size: 24px;
+    }
+
+    .case-description {
+        font-size: 14px;
     }
 
     .phones-mockup {
