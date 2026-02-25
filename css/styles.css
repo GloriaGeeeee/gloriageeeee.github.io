@@ -1327,23 +1327,25 @@ h3 {
     }
 
     .hero {
-        padding: 80px var(--spacing-md) var(--spacing-md);
-        min-height: auto;
+        padding: 70px var(--spacing-md) var(--spacing-sm);
+        min-height: 100dvh;
+        height: 100dvh;
+        overflow: hidden;
     }
 
     .hero-greeting {
-        font-size: 1.125rem;
-        margin-bottom: var(--spacing-xs);
+        font-size: clamp(0.875rem, 2vh, 1.125rem);
+        margin-bottom: clamp(4px, 1vh, 8px);
     }
 
     .hero-title {
-        font-size: 2rem;
-        margin-bottom: var(--spacing-sm);
+        font-size: clamp(1.5rem, 4.5vh, 2rem);
+        margin-bottom: clamp(8px, 1.5vh, 16px);
     }
 
     .hero-subtitle {
-        font-size: 1rem;
-        margin-bottom: var(--spacing-sm);
+        font-size: clamp(0.75rem, 2vh, 1rem);
+        margin-bottom: clamp(8px, 1.5vh, 16px);
     }
 
     .typing-cursor {
@@ -1351,11 +1353,12 @@ h3 {
     }
 
     .hero-container {
-        gap: var(--spacing-sm);
+        gap: 0;
+        height: 100%;
     }
 
     .hero-visuals {
-        height: 45vh;
+        height: clamp(35vh, 40vh, 45vh);
         margin-bottom: 0;
         width: calc(100% - 48px);
         margin-left: 24px;
@@ -1421,8 +1424,8 @@ h3 {
     }
 
     .case-study {
-        height: 100vh;
-        padding: 60px var(--spacing-md) var(--spacing-md);
+        height: 100dvh;
+        padding: 80px var(--spacing-md) var(--spacing-md);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1579,19 +1582,19 @@ h3 {
     }
 
     .hero-greeting {
-        font-size: 1rem;
+        font-size: clamp(0.75rem, 1.8vh, 1rem);
     }
 
     .hero-title {
-        font-size: 1.75rem;
+        font-size: clamp(1.25rem, 4vh, 1.75rem);
     }
 
     .hero-subtitle {
-        font-size: 0.875rem;
+        font-size: clamp(0.625rem, 1.8vh, 0.875rem);
     }
 
     .hero-visuals {
-        height: 38vh;
+        height: clamp(30vh, 35vh, 38vh);
     }
 
     .years-text {
