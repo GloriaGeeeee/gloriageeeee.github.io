@@ -1,183 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gloria Yunhan Gao | Product Designer</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gloria Gao — AI-Curious Product Designer</title>
+<meta name="description" content="Gloria Gao is a product designer with 6+ years of experience turning complex fintech systems into scalable and pleasurable experiences.">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 
-    <!-- Google Fonts - Loading Gloock for headings and Inter for body text -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Fonts: Geist for headings, Inter for body, Instrument Serif for the editorial accent, Geist Mono for labels -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
-    <!-- Our custom CSS file -->
-    <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
+<!-- Preloader: shown for a moment while the page "counts up" to 100% -->
+<div class="preloader" data-preloader>
+  <div class="preloader-top">
+    <span class="preloader-label">Gloria Gao — Portfolio 2026</span>
+    <span class="preloader-count"><span data-count>0</span>%</span>
+  </div>
+  <div class="preloader-bar"><div class="preloader-bar-fill" data-bar></div></div>
+</div>
+
+<!-- Page-transition curtain, swipes up when you click an internal link -->
+<div class="curtain" data-curtain></div>
+
+<!-- Custom cursor (desktop only) -->
+<div class="cursor-ring" data-cursor-ring></div>
+<div class="cursor-dot" data-cursor-dot></div>
+
+<div class="page">
+
+  <div class="container">
     <!-- ==================== NAVIGATION ==================== -->
-    <!-- The top navigation bar that stays fixed as you scroll -->
     <nav class="navbar">
-        <div class="nav-container">
-            <!-- Logo/Name on the left -->
-            <a href="#" class="nav-logo">Gloria Yunhan Gao</a>
-
-            <!-- Navigation links on the right -->
-            <div class="nav-links">
-                <a href="#work" class="nav-link">My work</a>
-                <a href="#about" class="nav-link">About me</a>
-                <a href="#" class="nav-link nav-btn">Resume</a>
-            </div>
-
-            <!-- Mobile menu button (hamburger) - only shows on small screens -->
-            <button class="mobile-menu-btn" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
+      <a href="index.html" class="nav-logo" aria-label="Gloria Gao — home">
+        <svg width="26" height="26" viewBox="0 0 168 168" aria-hidden="true">
+          <rect width="84" height="168" fill="#FFE020"/>
+          <rect x="84" y="84" width="84" height="84" fill="#78B4EA"/>
+          <circle cx="84" cy="84" r="84" fill="#F23C8A"/>
+          <path d="M 83.626 167.999 C 37.234 167.793 -0.206 130.017 0.001 83.626 C 0.207 37.234 37.983 -0.206 84.374 0.001 L 83.626 167.999 Z" fill="#EF3E2E"/>
+          <path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#A61E6E"/>
+        </svg>
+      </a>
+      <div class="nav-links">
+        <a href="about.html" data-transition>About me</a>
+        <a href="#work">Work</a>
+        <a href="https://substack.com" target="_blank" rel="noopener">Blog</a>
+      </div>
+      <a href="assets/Gloria-Gao-CV.pdf" class="btn btn-primary nav-cta">
+        Download CV
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.5 L10.5 8 L6 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </nav>
 
-    <!-- ==================== HERO SECTION ==================== -->
-    <!-- The main landing section visitors see first -->
-    <section class="hero" id="hero">
-        <div class="hero-container">
-            <!-- Left side: Text content -->
-            <div class="hero-content">
-                <p class="hero-greeting">Hi! I'm Gloria.</p>
-                <h1 class="hero-title">
-                    I solve complex<br>
-                    real-life problems<br>
-                    with the power of<br>
-                    <span class="rotating-word" data-words="Design,Technology,Collaboration" data-colors="orange,blue,coral">Design</span><span class="typing-cursor"></span>
-                </h1>
-                <p class="hero-subtitle">
-                    Product designer @ Pepperstone, previously with OKX, IBM, and UCL HCI
-                </p>
-                <div class="hero-buttons">
-                    <a href="#work" class="btn btn-primary">Browse my work</a>
-                    <a href="#" class="btn btn-secondary">Download resume</a>
-                </div>
-            </div>
+    <!-- ==================== HERO ==================== -->
+    <header class="hero">
+      <div class="hero-title-row">
+        <span class="hero-flourish" data-hero>Yunhan</span>
+        <h1 class="hero-title">
+          <span class="hero-word-mask"><span class="hero-word" data-hero>Gloria</span></span>
+          <span class="hero-word-mask"><span class="hero-word" data-hero style="animation-delay:.12s">Gao</span></span>
+        </h1>
+      </div>
+      <div class="hero-subtitle-mask"><p class="hero-subtitle" data-hero style="animation-delay:.4s">AI-Curious Product Designer</p></div>
+    </header>
+  </div>
 
-            <!-- Right side: Decorative elements -->
-            <div class="hero-visuals">
-                <!-- Left column: Profile photo + Location -->
-                <div class="hero-visuals-left">
-                    <!-- Profile photo in pill shape -->
-                    <div class="profile-photo-container">
-                        <img src="assets/gloria-photo.png" alt="Gloria Yunhan Gao" class="profile-photo">
-                    </div>
+  <!-- ==================== RISO COLOR BAND ==================== -->
+  <div class="container">
+    <div class="riso-band" data-reveal>
+      <div class="riso-panel" style="background:#ffe020;">
+        <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#F23C8A"/><path d="M 83.626 167.999 C 37.234 167.793 -0.206 130.017 0.001 83.626 C 0.207 37.234 37.983 -0.206 84.374 0.001 L 83.626 167.999 Z" fill="#EF3E2E"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#A61E6E"/></svg>
+      </div>
+      <div class="riso-panel" style="background:#78b4ea;">
+        <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#ef3e2e"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#a61e6e"/></svg>
+      </div>
+      <div class="riso-panel" style="background:#f23c8a;">
+        <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><rect width="84" height="168" fill="#ffe020"/><circle cx="84" cy="84" r="84" fill="#f47920"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#a61e6e"/></svg>
+      </div>
+      <div class="riso-panel" style="background:#1a1714;">
+        <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#78b4ea"/><path d="M 83.626 167.999 C 37.234 167.793 -0.206 130.017 0.001 83.626 C 0.207 37.234 37.983 -0.206 84.374 0.001 L 83.626 167.999 Z" fill="#f23c8a"/></svg>
+      </div>
+    </div>
+  </div>
 
-                    <!-- Singapore location badge -->
-                    <div class="badge-location">
-                        <span class="location-label">Currently based in</span>
-                        <span class="location-city">Singapore</span>
-                    </div>
-                </div>
-
-                <!-- Right column: Years badge + Sample design -->
-                <div class="hero-visuals-right">
-                    <!-- Years of experience badge -->
-                    <div class="badge-years">
-                        <div class="badge-years-content">
-                            <span class="years-text"><span id="years-count">5+</span> years</span>
-                            <span class="years-description">crafting delightful user experience</span>
-                        </div>
-                    </div>
-
-                    <!-- Sample design mockup -->
-                    <div class="sample-design">
-                        <img src="assets/hero-mockup.png" alt="Sample design mockup" class="sample-design-img">
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <!-- ==================== ABOUT ME (intro) ==================== -->
+    <section class="intro">
+      <div class="intro-eyebrow" data-reveal>About me</div>
+      <div class="intro-body">
+        <h2 class="intro-heading" data-reveal>Product designer with 6+ years of experience turning complex fintech systems into scalable and pleasurable experiences</h2>
+        <div class="intro-facts" data-reveal style="animation-delay:.1s">
+          <div class="intro-fact">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg>
+            <span>Pepperstone</span>
+          </div>
+          <div class="intro-fact">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <span>Singapore</span>
+          </div>
         </div>
+        <div data-reveal style="animation-delay:.18s">
+          <a href="about.html" data-transition class="btn btn-secondary">
+            Learn more
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.5 L10.5 8 L6 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== MARQUEE STRIP ==================== -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <div class="marquee-group">
+        <span>Product design</span><span class="dot dot-red">✳</span><span>Design systems</span><span class="dot dot-pink">✳</span><span>Fintech</span><span class="dot dot-blue">✳</span><span>AI workflows</span><span class="dot dot-orange">✳</span><span>Prototyping</span><span class="dot dot-magenta">✳</span>
+      </div>
+      <div class="marquee-group" aria-hidden="true">
+        <span>Product design</span><span class="dot dot-red">✳</span><span>Design systems</span><span class="dot dot-pink">✳</span><span>Fintech</span><span class="dot dot-blue">✳</span><span>AI workflows</span><span class="dot dot-orange">✳</span><span>Prototyping</span><span class="dot dot-magenta">✳</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- ==================== SELECTED WORK ==================== -->
+    <section class="work" id="work">
+      <div class="work-header">
+        <h2>Selected work</h2>
+        <span class="work-meta">2020 — 2026 · 04</span>
+      </div>
+      <div class="work-grid">
+
+        <a href="case-pepperstone.html" data-transition data-reveal class="work-card">
+          <div class="work-card-art" style="background:#ffe020;">
+            <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#F23C8A"/><path d="M 83.626 167.999 C 37.234 167.793 -0.206 130.017 0.001 83.626 C 0.207 37.234 37.983 -0.206 84.374 0.001 L 83.626 167.999 Z" fill="#EF3E2E"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#A61E6E"/></svg>
+            <span class="work-card-no" style="color:#fffbf3;background:rgba(26,23,20,0.85);">01</span>
+          </div>
+          <div class="work-card-body">
+            <div>
+              <h3>The Pepperstone Partner Portal</h3>
+              <p>Designing a complex, data-heavy partner dashboard with an AI-assisted Figma-to-delivery workflow.</p>
+              <div class="tags">
+                <span class="tag tag-red">Product design</span>
+                <span class="tag tag-neutral">Design systems</span>
+              </div>
+            </div>
+            <svg class="work-card-arrow" width="26" height="26" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 16 L16 6 M8 6 h8 v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </a>
+
+        <a href="case-okx.html" data-transition data-reveal class="work-card">
+          <div class="work-card-art" style="background:#78b4ea;">
+            <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#ef3e2e"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#a61e6e"/></svg>
+            <span class="work-card-no" style="color:#1a1714;background:rgba(255,251,243,0.9);">02</span>
+          </div>
+          <div class="work-card-body">
+            <div>
+              <h3>Simplify the DeFi earning experience</h3>
+              <p>How redesigning OKX On-chain Earn's subscription journey led to 52% better conversion.</p>
+              <div class="tags">
+                <span class="tag tag-blue">DeFi</span>
+                <span class="tag tag-neutral">UX</span>
+              </div>
+            </div>
+            <svg class="work-card-arrow" width="26" height="26" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 16 L16 6 M8 6 h8 v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </a>
+
+        <a href="case-insurance.html" data-transition data-reveal class="work-card">
+          <div class="work-card-art" style="background:#f47920;">
+            <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><rect width="84" height="168" fill="#ffe020"/><circle cx="84" cy="84" r="84" fill="#f47920"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#a61e6e"/></svg>
+            <span class="work-card-no" style="color:#1a1714;background:rgba(255,251,243,0.9);">03</span>
+          </div>
+          <div class="work-card-body">
+            <div>
+              <h3>Global insurance localization &amp; revamp</h3>
+              <p>Award-winning digital transformation — 500+ responsive pages across three languages.</p>
+              <div class="tags">
+                <span class="tag tag-orange">Localization</span>
+                <span class="tag tag-neutral">Web</span>
+              </div>
+            </div>
+            <svg class="work-card-arrow" width="26" height="26" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 16 L16 6 M8 6 h8 v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </a>
+
+        <a href="case-co2llab.html" data-transition data-reveal class="work-card">
+          <div class="work-card-art" style="background:#a61e6e;">
+            <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#78b4ea"/><path d="M 83.626 167.999 C 37.234 167.793 -0.206 130.017 0.001 83.626 C 0.207 37.234 37.983 -0.206 84.374 0.001 L 83.626 167.999 Z" fill="#f23c8a"/></svg>
+            <span class="work-card-no" style="color:#fffbf3;background:rgba(26,23,20,0.6);">04</span>
+          </div>
+          <div class="work-card-body">
+            <div>
+              <h3>CO2LLAB</h3>
+              <p>Nurturing a low-carbon lifestyle through public installation &amp; AR display.</p>
+              <div class="tags">
+                <span class="tag tag-pink">AR</span>
+                <span class="tag tag-neutral">Public</span>
+              </div>
+            </div>
+            <svg class="work-card-arrow" width="26" height="26" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 16 L16 6 M8 6 h8 v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </a>
+
+      </div>
     </section>
 
-    <!-- ==================== PORTFOLIO CASE STUDIES ==================== -->
-    <!-- Each case study takes up one full screen -->
-    <section class="portfolio" id="work">
-
-        <!-- Case Study 1: Pepperstone -->
-        <div class="case-study" id="pepperstone">
-            <div class="case-study-container">
-                <!-- Left: Project imagery with blue background -->
-                <div class="case-imagery case-imagery-blue">
-                    <img src="assets/pepperstone_screen.png" alt="Pepperstone dashboard" class="case-imagery-img">
-                </div>
-
-                <!-- Right: Project information -->
-                <div class="case-info">
-                    <div class="case-info-card">
-                        <img src="assets/Logo - Pepperstone.png" alt="Pepperstone" class="company-logo">
-                        <h2 class="case-title">Empowering partner success at every stage</h2>
-                        <p class="case-description">
-                            Designing a unified CRM portal that sets Introducing Brokers up for success from day one
-                        </p>
-                        <span class="case-status">Coming soon</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Case Study 2: OKX -->
-        <div class="case-study" id="okx">
-            <div class="case-study-container reverse">
-                <!-- Left: Project information -->
-                <div class="case-info">
-                    <div class="case-info-card">
-                        <img src="assets/Logo - OKX.png" alt="OKX" class="company-logo">
-                        <h2 class="case-title">Making DeFi earning worry free</h2>
-                        <p class="case-description">
-                            A smarter subscription journey that drove a 52% lift in conversions
-                        </p>
-                        <a href="#" class="btn btn-coral">Learn more</a>
-                    </div>
-                </div>
-
-                <!-- Right: Project imagery with orange background -->
-                <div class="case-imagery case-imagery-orange">
-                    <img src="assets/okx_screen.png" alt="OKX dashboard" class="case-imagery-img">
-                </div>
-            </div>
-        </div>
-
-        <!-- Case Study 3: IBM -->
-        <div class="case-study" id="ibm">
-            <div class="case-study-container">
-                <!-- Left: Project imagery with coral background -->
-                <div class="case-imagery case-imagery-coral">
-                    <img src="assets/ibm_screen.png" alt="IBM iX dashboard" class="case-imagery-img">
-                </div>
-
-                <!-- Right: Project information -->
-                <div class="case-info">
-                    <div class="case-info-card">
-                        <img src="assets/Logo - IBM.png" alt="IBM iX" class="company-logo">
-                        <h2 class="case-title">Insurance, Without the Headache</h2>
-                        <p class="case-description">
-                            A global website revamp that made insurance feel clear, local, and refreshingly simple
-                        </p>
-                        <a href="#" class="btn btn-coral">Learn more</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- ==================== MY THOUGHTS ==================== -->
+    <section class="thoughts">
+      <div class="eyebrow">My thoughts</div>
+      <a href="https://substack.com" target="_blank" rel="noopener" class="thoughts-link" data-reveal>
+        <h2>Where most people see chaos, I write about the <em>patterns</em>.</h2>
+        <span class="thoughts-cta">Read on Substack
+          <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 16 L16 6 M8 6 h8 v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
     </section>
+  </div>
 
-    <!-- ==================== FOOTER ==================== -->
-    <!-- Contact section at the bottom -->
-    <footer class="footer" id="contact">
-        <div class="footer-container">
-            <h2 class="footer-title">Let's connect!</h2>
-            <div class="footer-links">
-                <a href="https://linkedin.com" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
-                <a href="mailto:gloria@example.com" class="footer-link">Email</a>
-            </div>
+  <!-- ==================== FOOTER / LET'S CONNECT ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="eyebrow eyebrow-inverse">Let's connect</div>
+      <div class="footer-top">
+        <h2>Say hello.</h2>
+        <div class="footer-links">
+          <a href="mailto:hello@gloriagao.design" class="footer-email">hello@gloriagao.design</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://substack.com" target="_blank" rel="noopener">Substack</a>
+          <a href="https://read.cv" target="_blank" rel="noopener">Read.cv</a>
         </div>
-    </footer>
+      </div>
+      <div class="footer-bottom">
+        <span>Gloria Gao Yunhan · Product Designer</span>
+        <span>© 2026 · Singapore</span>
+      </div>
+    </div>
+  </footer>
 
-    <!-- JavaScript for interactions -->
-    <script src="js/script.js"></script>
+</div>
+
+<script src="js/script.js"></script>
 </body>
 </html>
