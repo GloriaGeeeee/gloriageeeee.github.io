@@ -5,7 +5,8 @@
    1. Preloader — counts 0 → 100% then slides away
    2. Scroll reveals — sections fade/rise in as you scroll to them
    3. Custom cursor — a ring that follows the mouse (desktop only)
-   4. Page transition — a color "curtain" wipes up before leaving the page
+   4. Rotating banner — the hero image strip drifts left as you scroll
+   5. Page transition — a color "curtain" wipes up before leaving the page
    ========================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -55,6 +56,30 @@ document.addEventListener('DOMContentLoaded', () => {
     revealTargets.forEach((el) => el.classList.add('is-visible'));
   }
 
+  /* About me's grid lines + stat blocks reveal together as one group,
+     separate from the generic fade above — lines grow down, text slides up. */
+  const statsReveal = $('[data-stats-reveal]');
+  if (statsReveal) {
+    const gridBg = document.querySelector('.about-grid-bg');
+    const revealGroup = () => {
+      statsReveal.classList.add('is-visible');
+      if (gridBg) gridBg.classList.add('is-visible');
+    };
+    if ('IntersectionObserver' in window) {
+      const ioStats = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            revealGroup();
+            ioStats.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+      ioStats.observe(statsReveal);
+    } else {
+      revealGroup();
+    }
+  }
+
   /* ---------- 3. Custom cursor ---------- */
   if (window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
     const ring = $('[data-cursor-ring]');
@@ -86,7 +111,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---------- 4. Page transition curtain ---------- */
+  /* ---------- 4. Rotating banner — drifts left as you scroll ---------- */
+  const bannerTrack = $('[data-banner-track]');
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (bannerTrack && bannerTrack.children.length && !reducedMotion) {
+    const panelCount = bannerTrack.children.length;
+    const sequenceLength = panelCount / 2; // track holds two back-to-back copies for a seamless loop
+    const SPEED = 0.6; // px of drift per px scrolled
+
+    function tickBanner() {
+      const panelWidth = bannerTrack.children[0].getBoundingClientRect().width;
+      const sequenceWidth = panelWidth * sequenceLength;
+      if (sequenceWidth > 0) {
+        const offset = (window.scrollY * SPEED) % sequenceWidth;
+        bannerTrack.style.transform = `translateX(${-offset}px)`;
+      }
+      requestAnimationFrame(tickBanner);
+    }
+    requestAnimationFrame(tickBanner);
+  }
+
+  /* ---------- 5. Page transition curtain ---------- */
   const curtain = $('[data-curtain]');
   $$('a[data-transition]').forEach((link) => {
     link.addEventListener('click', (e) => {

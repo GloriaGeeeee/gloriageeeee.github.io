@@ -38,11 +38,32 @@
   --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
   --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
+  /* Type scale, from the design system's typography tokens (Figma: Portfolio 2026 → type-specimens).
+     Homepage headlines (hero, footer, etc.) use bespoke oversized sizes and don't pull from this
+     scale — these tokens are for body copy, UI text, and future page builds. */
+  --text-display-size: 200px; --text-display-line: 240px; --text-display-weight: 400;
+  --text-h1-size: 48px;       --text-h1-line: 56px;        --text-h1-weight: 500;
+  --text-h2-size: 36px;       --text-h2-line: 44px;        --text-h2-weight: 500;
+  --text-h3-size: 28px;       --text-h3-line: 36px;        --text-h3-weight: 500;
+  --text-h4-size: 24px;       --text-h4-line: 32px;        --text-h4-weight: 500;
+  --text-body-lg-size: 18px;  --text-body-lg-line: 28px;   --text-body-lg-weight: 400;
+  --text-body-size: 16px;     --text-body-line: 24px;      --text-body-weight: 400;
+  --text-body-sm-size: 14px;  --text-body-sm-line: 20px;   --text-body-sm-weight: 400;
+  --text-caption-size: 12px;  --text-caption-line: 16px;   --text-caption-weight: 400;
+  --text-overline-size: 12px; --text-overline-line: 16px;  --text-overline-weight: 600;
+
   /* Layout */
   --page-max: 1344px;
   --page-pad: 48px;
   --radius-pill: 100px;
   --radius-card: 12px;
+
+  /* Nav/header/about-me use a wider max-width and side padding than the rest
+     of the page (matches the Figma redesign, node 1:914) — scoped to their
+     own --hero-pad/--hero-max so the Work/thoughts/footer sections below
+     are untouched until we redesign those too. */
+  --hero-pad: 80px;
+  --hero-max: 1440px;
 }
 
 /* ---------- Reset ---------- */
@@ -82,8 +103,8 @@ h1, h2, h3, p { margin: 0; }
   border: none;
   border-radius: var(--radius-pill);
   font-family: var(--font-display);
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 16px;
+  line-height: 24px;
   white-space: nowrap;
   cursor: pointer;
   transition: background 120ms ease, color 120ms ease;
@@ -93,6 +114,7 @@ h1, h2, h3, p { margin: 0; }
 .btn-primary:hover { background: #d8351f; color: var(--color-bg); }
 .btn-secondary { background: var(--color-surface); color: var(--color-ink); }
 .btn-secondary:hover { background: #e2ddd2; color: var(--color-ink); }
+.btn-sm { padding: 8px 16px; gap: 8px; }
 
 /* ---------- Tags ---------- */
 .tags { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -197,46 +219,100 @@ h1, h2, h3, p { margin: 0; }
 .navbar {
   display: flex;
   align-items: center;
-  gap: 36px;
-  height: 92px;
-  border-top: 1px solid var(--color-stroke);
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: var(--hero-max);
+  margin: 0 auto;
+  padding: 32px var(--hero-pad);
 }
-.nav-logo { display: flex; align-items: center; }
-.nav-links { display: flex; gap: 32px; font-size: 15px; color: var(--color-text-secondary); }
+.nav-links {
+  display: flex;
+  gap: 64px;
+  font-family: var(--font-display);
+  font-weight: var(--text-h4-weight);
+  font-size: var(--text-h4-size);
+  line-height: var(--text-h4-line);
+  color: var(--color-ink);
+}
 .nav-links a { transition: color .12s; }
-.nav-cta { margin-left: auto; }
 
 /* ---------- Hero ---------- */
-.hero { padding: 40px 0 8px; position: relative; }
-.hero-title-row { position: relative; }
+/* Nav + header together fill the top half of the first screenful — see
+   .rotating-banner for why. min-height (not height) so it can still grow
+   on short viewports instead of clipping. */
+.hero-wrap {
+  min-height: 50vh;
+  min-height: 50dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+  max-width: var(--hero-max);
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px var(--hero-pad) 40px;
+}
+/* Faint reference-grid texture behind the header text, with a small "+"
+   marker at each top corner — a decorative echo of the Figma layout grid. */
+.hero-grid-bg {
+  position: absolute;
+  inset: 0 var(--hero-pad);
+  background-image:
+    repeating-linear-gradient(to right, var(--color-surface) 0 1px, transparent 1px calc(100% / 10)),
+    repeating-linear-gradient(to bottom, var(--color-surface) 0 1px, transparent 1px calc(100% / 3));
+  /* the repeating pattern above draws every line except the very last one on
+     each edge — these close the grid off on the right and bottom */
+  border-right: 1px solid var(--color-surface);
+  border-bottom: 1px solid var(--color-surface);
+  pointer-events: none;
+}
+.hero-grid-marker { position: absolute; top: 0; color: var(--color-ink); }
+.hero-grid-marker-left { left: 0; transform: translate(-50%, -50%); }
+.hero-grid-marker-right { right: 0; transform: translate(50%, -50%); }
+/* fit-content so its right edge is the actual end of "Gao", not the full
+   container width — the flourish below anchors off that edge */
+.hero-title-row { position: relative; width: fit-content; }
 .hero-flourish {
   position: absolute;
-  right: 4px;
-  top: -10px;
+  left: 100%;
+  margin-left: 16px;
+  top: -34px;
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 40px;
+  font-weight: 500;
+  font-size: 48px;
   color: var(--color-ink);
+  white-space: nowrap;
   opacity: 0;
   transform: translateY(115%);
 }
 .hero-title {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 400;
   font-size: 200px;
-  line-height: 0.86;
-  letter-spacing: -0.045em;
+  line-height: 1;
+  letter-spacing: 0;
   display: flex;
   flex-wrap: wrap;
   column-gap: 0.14em;
 }
 .hero-word-mask { overflow: hidden; padding-bottom: 0.04em; }
 .hero-word { display: inline-block; opacity: 0; transform: translateY(115%); }
-.hero-subtitle-mask { overflow: hidden; margin-top: 14px; }
+.hero-subtitle-mask { overflow: hidden; }
 .hero-subtitle {
-  font-family: var(--font-mono);
-  font-size: 17px;
-  letter-spacing: 0.02em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: 0;
   color: var(--color-ink);
   opacity: 0;
   transform: translateY(115%);
@@ -250,25 +326,37 @@ h1, h2, h3, p { margin: 0; }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ---------- Riso color band ---------- */
-.riso-band {
-  display: flex;
-  height: 340px;
-  border-radius: var(--radius-card);
+/* ---------- Rotating banner ----------
+   Exactly one screen tall, centered between the hero and About me, so the
+   first screenful of the page ends at its vertical midpoint and the next
+   screenful starts there too. The track holds two copies of the same 6
+   panels back to back; script.js slides it left as you scroll and wraps
+   the offset with modulo math so it loops forever without a visible seam. */
+.rotating-banner {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 420px;
   overflow: hidden;
-  margin: 28px 0 0;
-  opacity: 0;
-  transform: translateY(40px) scale(.97);
+  display: flex;
+  align-items: center;
 }
-.riso-band.is-visible {
-  animation: bandIn 1s cubic-bezier(.22,1,.36,1) both;
+.rotating-banner-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
 }
-@keyframes bandIn {
-  from { opacity: 0; transform: translateY(40px) scale(.97); }
-  to   { opacity: 1; transform: none; }
+.rotating-banner-panel {
+  position: relative;
+  flex-shrink: 0;
+  width: 100vh;
+  width: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+  min-width: 420px;
+  min-height: 420px;
 }
-.riso-panel { flex: 1; position: relative; }
-.riso-panel svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.rotating-banner-panel svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 
 /* Generic scroll-reveal used across sections (about, work cards, thoughts) */
 [data-reveal] { opacity: 0; transform: translateY(28px); }
@@ -280,26 +368,101 @@ h1, h2, h3, p { margin: 0; }
   to   { opacity: 1; transform: none; }
 }
 
-/* ---------- About me (intro) ---------- */
-.intro {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  padding: 88px 0;
-  align-items: start;
+/* ---------- About me ---------- */
+.about-me {
+  position: relative;
+  max-width: var(--hero-max);
+  margin: 0 auto;
+  padding: 96px var(--hero-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
-.intro-eyebrow { font-family: var(--font-mono); font-size: 15px; color: var(--color-text-secondary); }
-.intro-body { display: flex; flex-direction: column; gap: 40px; }
-.intro-heading {
+/* 5 lines marking the 4 columns the stats below sit in. Grow downward
+   (scaleY from a top origin) the first time you scroll them into view —
+   see the data-stats-reveal handler in script.js. */
+.about-grid-bg {
+  position: absolute;
+  inset: 0 var(--hero-pad);
+  pointer-events: none;
+}
+.about-grid-line {
+  position: absolute;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: var(--color-surface);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 1s cubic-bezier(.22,1,.36,1);
+}
+.about-grid-line:nth-child(1) { left: 0; }
+.about-grid-line:nth-child(2) { left: 25%; }
+.about-grid-line:nth-child(3) { left: 50%; }
+.about-grid-line:nth-child(4) { left: 75%; }
+.about-grid-line:nth-child(5) { left: 100%; }
+.about-grid-bg.is-visible .about-grid-line { transform: scaleY(1); }
+.about-grid-bg.is-visible .about-grid-line:nth-child(2) { transition-delay: .06s; }
+.about-grid-bg.is-visible .about-grid-line:nth-child(3) { transition-delay: .12s; }
+.about-grid-bg.is-visible .about-grid-line:nth-child(4) { transition-delay: .18s; }
+.about-grid-bg.is-visible .about-grid-line:nth-child(5) { transition-delay: .24s; }
+.about-eyebrow {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--color-ink);
+}
+.about-heading {
+  position: relative;
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: 44px;
-  line-height: 1.14;
-  letter-spacing: -0.02em;
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: 0;
+  color: var(--color-ink);
+  max-width: 650px;
+  margin-top: -16px;
   text-wrap: pretty;
 }
-.intro-facts { display: flex; gap: 48px; }
-.intro-fact { display: flex; align-items: center; gap: 8px; font-size: 18px; }
+/* 4 equal columns with no gap, so each stat's left edge sits exactly on a
+   grid line above — spacing comes from padding-right instead of a gap. */
+.about-stats {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.about-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 24px;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .6s ease-in, transform .6s ease-in;
+}
+.about-stats.is-visible .about-stat { opacity: 1; transform: none; }
+.about-stats.is-visible .about-stat:nth-child(2) { transition-delay: .08s; }
+.about-stats.is-visible .about-stat:nth-child(3) { transition-delay: .16s; }
+.about-stats.is-visible .about-stat:nth-child(4) { transition-delay: .24s; }
+.about-stat svg { color: var(--color-text-secondary); }
+.about-stat-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+.about-stat-value {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: var(--color-ink);
+}
 
 /* ---------- Marquee ---------- */
 .marquee {
@@ -485,23 +648,35 @@ h1, h2, h3, p { margin: 0; }
    scales it down for tablet and phone.
    ========================================== */
 @media (max-width: 1100px) {
+  :root { --hero-pad: 56px; }
   .hero-title { font-size: 130px; }
+  .hero-subtitle { font-size: 36px; line-height: 44px; }
+  .nav-links { gap: 40px; font-size: 22px; }
+  .about-heading { font-size: 40px; line-height: 48px; }
   .footer-top h2 { font-size: 76px; }
   .thoughts-link h2 { font-size: 52px; }
   .work-header h2 { font-size: 44px; }
 }
 
 @media (max-width: 860px) {
-  :root { --page-pad: 28px; }
-  .navbar { gap: 20px; height: auto; padding: 20px 0; flex-wrap: wrap; }
-  .nav-links { gap: 20px; font-size: 14px; }
-  .nav-cta { margin-left: 0; }
-  .hero { padding-top: 28px; }
+  :root { --page-pad: 28px; --hero-pad: 32px; }
+  .navbar { gap: 20px; padding: 24px var(--hero-pad); flex-wrap: wrap; }
+  .nav-links { gap: 24px; font-size: 18px; line-height: 1.3; }
+  .hero { padding: 20px var(--hero-pad) 32px; gap: 10px; }
+  .hero-grid-bg {
+    background-image:
+      repeating-linear-gradient(to right, var(--color-surface) 0 1px, transparent 1px 25%),
+      repeating-linear-gradient(to bottom, var(--color-surface) 0 1px, transparent 1px calc(100% / 3));
+  }
   .hero-title { font-size: 84px; }
-  .hero-flourish { font-size: 26px; top: -4px; }
-  .riso-band { height: 200px; }
-  .intro { grid-template-columns: 1fr; gap: 28px; padding: 56px 0; }
-  .intro-heading { font-size: 32px; }
+  .hero-subtitle { font-size: 26px; line-height: 32px; }
+  .hero-flourish { font-size: 22px; top: -18px; }
+  .rotating-banner { min-height: 320px; }
+  .rotating-banner-panel { min-width: 320px; min-height: 320px; }
+  .about-me { padding: 56px var(--hero-pad); gap: 28px; }
+  .about-heading { font-size: 32px; line-height: 40px; margin-top: 0; }
+  .about-stat { padding-right: 16px; }
+  .about-stat-value { font-size: 20px; line-height: 28px; }
   .marquee-group { font-size: 28px; gap: 24px; padding-right: 24px; }
   .work { padding: 56px 0 24px; }
   .work-header h2 { font-size: 34px; }
@@ -516,12 +691,17 @@ h1, h2, h3, p { margin: 0; }
 }
 
 @media (max-width: 480px) {
-  :root { --page-pad: 20px; }
+  :root { --page-pad: 20px; --hero-pad: 20px; }
+  .nav-links { gap: 16px; font-size: 15px; }
   .hero-title { font-size: 56px; }
-  .hero-subtitle { font-size: 15px; }
-  .riso-band { height: 140px; border-radius: 8px; }
-  .intro-heading { font-size: 26px; }
-  .intro-facts { gap: 24px; flex-wrap: wrap; }
+  .hero-subtitle { font-size: 19px; line-height: 26px; }
+  .hero-flourish { font-size: 16px; top: -12px; }
+  .rotating-banner { min-height: 220px; }
+  .rotating-banner-panel { min-width: 220px; min-height: 220px; }
+  .about-heading { font-size: 26px; line-height: 34px; }
+  .about-stat { padding-right: 8px; }
+  .about-stat-label { font-size: 10px; }
+  .about-stat-value { font-size: 16px; line-height: 22px; }
   .work-card-body { flex-direction: column; gap: 12px; }
   .work-card-body h3 { font-size: 22px; }
   .footer-bottom { flex-direction: column; }
