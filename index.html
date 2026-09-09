@@ -165,90 +165,174 @@
     </div>
   </div>
 
+  <!-- ==================== SELECTED WORK / CASE STUDIES ====================
+       Matches the Figma "Case study" frames (node 1:913): each fold pairs
+       a big filled geometric shape with an overlapping mockup placeholder,
+       text on the opposite side, sides alternating fold to fold. Shape and
+       mockup drift at different speeds as you scroll (script.js) for a
+       parallax depth effect — swap the mockup body for a real screenshot
+       whenever you're ready, its frame needs no changes. Desktop-only
+       composition; below 860px it collapses to a plain stack. -->
+  <section class="case-studies" id="work">
+    <div class="case-grid-bg" aria-hidden="true"></div>
+
+    <article class="case-fold" id="case-study-1" data-scroll-fold>
+      <div class="case-stage">
+        <div class="case-shape" data-parallax="0.08" style="--top:6%;--left:-14%;--w:52%;">
+          <svg data-scroll-grow viewBox="0 0 100 100" style="color:var(--color-blue);" aria-hidden="true"><circle cx="50" cy="50" r="50" fill="currentColor"/></svg>
+        </div>
+        <div class="case-mockup" data-parallax="0.24" style="--top:14%;--left:6%;--w:38%;--ar:1/1;">
+          <div class="case-mockup-slide" data-scroll-slide>
+            <div class="case-mockup-bar"><span></span><span></span><span></span></div>
+            <div class="case-mockup-body">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              <span class="case-mockup-label">Pepperstone — mockup</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-content case-content--right" data-scroll-fade style="--top:12%;--w:44%;">
+          <div class="case-text">
+            <span class="case-eyebrow">{case study 01}</span>
+            <h3 class="case-heading">Designing for Complexity: The Pepperstone Partner Portal</h3>
+            <p class="case-desc">Designing a complex, data-heavy partner dashboard with an AI-assisted Figma-to-delivery workflow.</p>
+          </div>
+          <div class="tags">
+            <span class="tag tag-neutral">Platform design</span>
+            <span class="tag tag-pink">AI Design Workflow</span>
+            <span class="tag tag-blue">Design Systems</span>
+          </div>
+          <a href="case-pepperstone.html" data-transition class="case-link">
+            View case study
+            <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 16 L16 6 M8 6 h8 v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <article class="case-fold" id="case-study-2" data-scroll-fold>
+      <div class="case-stage">
+        <!-- .case-stage is a fixed 640px tall (so its % coordinates stay
+             predictable) but sits centered inside this fold's taller
+             min-height:100vh — so spanning "the whole height" means the
+             fold, not just the stage. The calc() below cancels out that
+             (100vh - 640px) gap on both sides, stretching the shape past
+             the stage's own box to reach the fold's real top/bottom edge,
+             at any viewport height. -->
+        <div class="case-shape" data-parallax="0.08" style="--top:calc((640px - 100vh) / 2);--bottom:calc((640px - 100vh) / 2);--right:-14%;--w:54%;">
+          <svg data-scroll-clip-y viewBox="0 0 695 1040" preserveAspectRatio="none" style="color:var(--color-orange);" aria-hidden="true"><path d="M0 1040L250.666 0H695L466.398 1040H0Z" fill="currentColor"/></svg>
+        </div>
+        <div class="case-mockup" data-parallax="0.22" style="--top:10%;--right:24%;--w:24%;--ar:359/639;">
+          <div class="case-mockup-slide" data-scroll-slide>
+            <div class="case-mockup-bar"><span></span><span></span><span></span></div>
+            <div class="case-mockup-body">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              <span class="case-mockup-label">OKX — mockup 01</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-mockup" data-parallax="0.32" style="--top:30%;--right:6%;--w:26%;--ar:382/657;">
+          <div class="case-mockup-slide" data-scroll-slide>
+            <div class="case-mockup-bar"><span></span><span></span><span></span></div>
+            <div class="case-mockup-body">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              <span class="case-mockup-label">OKX — mockup 02</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-content" data-scroll-fade style="--top:16%;--w:44%;">
+          <div class="case-text">
+            <span class="case-eyebrow">{case study 02}</span>
+            <h3 class="case-heading">Make DeFi earning worry-free</h3>
+            <p class="case-desc">How redesigning OKX On-chain Earn's subscription journey led to 52% better conversion rates.</p>
+          </div>
+          <div class="tags">
+            <span class="tag tag-orange">Crypto</span>
+            <span class="tag tag-red">Subscription &amp; Conversion</span>
+            <span class="tag tag-blue">Fintech</span>
+          </div>
+          <a href="case-okx.html" data-transition class="case-link">
+            View case study
+            <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 16 L16 6 M8 6 h8 v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <article class="case-fold" id="case-study-3" data-scroll-fold>
+      <div class="case-stage">
+        <!-- Same fold-height-not-stage-height calc as case study 2 — see
+             its comment for why. -->
+        <div class="case-shape" data-parallax="0.08" style="--top:calc((640px - 100vh) / 2);--bottom:calc((640px - 100vh) / 2);--left:-8%;--w:40vw;">
+          <svg data-scroll-grow-x-right viewBox="0 0 100 100" preserveAspectRatio="none" style="color:var(--color-red);" aria-hidden="true"><rect width="100" height="100" fill="currentColor"/></svg>
+        </div>
+        <div class="case-mockup" data-parallax="0.24" style="--top:16%;--left:6%;--w:36%;--ar:1/1;">
+          <div class="case-mockup-slide" data-scroll-slide>
+            <div class="case-mockup-bar"><span></span><span></span><span></span></div>
+            <div class="case-mockup-body">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              <span class="case-mockup-label">Insurance — mockup</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-content case-content--right" data-scroll-fade style="--top:16%;--w:44%;">
+          <div class="case-text">
+            <span class="case-eyebrow">{case study 03}</span>
+            <h3 class="case-heading">Global insurance localization &amp; revamp</h3>
+            <p class="case-desc">Award-winning digital transformation — 500+ responsive pages across three languages.</p>
+          </div>
+          <div class="tags">
+            <span class="tag tag-orange">Localization</span>
+            <span class="tag tag-neutral">Web</span>
+          </div>
+          <a href="case-insurance.html" data-transition class="case-link">
+            View case study
+            <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 16 L16 6 M8 6 h8 v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <article class="case-fold" id="case-study-4" data-scroll-fold>
+      <div class="case-stage">
+        <!-- Per Figma (node 78:489): a bounded-height rectangle — NOT full
+             fold height like case studies 2 & 3 — flush with the stage's
+             true right edge (--right:0% lands exactly there, since an
+             absolutely-positioned child measures right/left against its
+             container's padding box, ignoring the container's own
+             padding), 45vw wide. -->
+        <div class="case-shape" data-parallax="0.08" style="--top:19%;--bottom:14%;--right:0%;--w:45vw;">
+          <svg data-scroll-grow-x-right viewBox="0 0 100 100" preserveAspectRatio="none" style="color:var(--color-yellow);" aria-hidden="true"><rect width="100" height="100" fill="currentColor"/></svg>
+        </div>
+        <div class="case-mockup" data-parallax="0.26" style="--top:32%;--right:14%;--w:26%;--ar:402/365;">
+          <div class="case-mockup-slide" data-scroll-slide>
+            <div class="case-mockup-bar"><span></span><span></span><span></span></div>
+            <div class="case-mockup-body">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              <span class="case-mockup-label">CO2LLAB — mockup</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-content" data-scroll-fade style="--top:16%;--w:44%;">
+          <div class="case-text">
+            <span class="case-eyebrow">{case study 04}</span>
+            <h3 class="case-heading">CO2LLAB</h3>
+            <p class="case-desc">Nurturing a low-carbon lifestyle through public installation &amp; AR display.</p>
+          </div>
+          <div class="tags">
+            <span class="tag tag-pink">AR</span>
+            <span class="tag tag-neutral">Public</span>
+          </div>
+          <a href="case-co2llab.html" data-transition class="case-link">
+            View case study
+            <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 16 L16 6 M8 6 h8 v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
   <div class="container">
-    <!-- ==================== SELECTED WORK ==================== -->
-    <section class="work" id="work">
-      <div class="work-header">
-        <h2>Selected work</h2>
-        <span class="work-meta">2020 — 2026 · 04</span>
-      </div>
-      <div class="work-grid">
-
-        <a href="case-pepperstone.html" data-transition data-reveal class="work-card">
-          <div class="work-card-art" style="background:#ffe020;">
-            <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#F23C8A"/><path d="M 83.626 167.999 C 37.234 167.793 -0.206 130.017 0.001 83.626 C 0.207 37.234 37.983 -0.206 84.374 0.001 L 83.626 167.999 Z" fill="#EF3E2E"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#A61E6E"/></svg>
-            <span class="work-card-no" style="color:#fffbf3;background:rgba(26,23,20,0.85);">01</span>
-          </div>
-          <div class="work-card-body">
-            <div>
-              <h3>The Pepperstone Partner Portal</h3>
-              <p>Designing a complex, data-heavy partner dashboard with an AI-assisted Figma-to-delivery workflow.</p>
-              <div class="tags">
-                <span class="tag tag-red">Product design</span>
-                <span class="tag tag-neutral">Design systems</span>
-              </div>
-            </div>
-            <svg class="work-card-arrow" width="26" height="26" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 16 L16 6 M8 6 h8 v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </a>
-
-        <a href="case-okx.html" data-transition data-reveal class="work-card">
-          <div class="work-card-art" style="background:#78b4ea;">
-            <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#ef3e2e"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#a61e6e"/></svg>
-            <span class="work-card-no" style="color:#1a1714;background:rgba(255,251,243,0.9);">02</span>
-          </div>
-          <div class="work-card-body">
-            <div>
-              <h3>Simplify the DeFi earning experience</h3>
-              <p>How redesigning OKX On-chain Earn's subscription journey led to 52% better conversion.</p>
-              <div class="tags">
-                <span class="tag tag-blue">DeFi</span>
-                <span class="tag tag-neutral">UX</span>
-              </div>
-            </div>
-            <svg class="work-card-arrow" width="26" height="26" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 16 L16 6 M8 6 h8 v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </a>
-
-        <a href="case-insurance.html" data-transition data-reveal class="work-card">
-          <div class="work-card-art" style="background:#f47920;">
-            <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><rect width="84" height="168" fill="#ffe020"/><circle cx="84" cy="84" r="84" fill="#f47920"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#a61e6e"/></svg>
-            <span class="work-card-no" style="color:#1a1714;background:rgba(255,251,243,0.9);">03</span>
-          </div>
-          <div class="work-card-body">
-            <div>
-              <h3>Global insurance localization &amp; revamp</h3>
-              <p>Award-winning digital transformation — 500+ responsive pages across three languages.</p>
-              <div class="tags">
-                <span class="tag tag-orange">Localization</span>
-                <span class="tag tag-neutral">Web</span>
-              </div>
-            </div>
-            <svg class="work-card-arrow" width="26" height="26" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 16 L16 6 M8 6 h8 v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </a>
-
-        <a href="case-co2llab.html" data-transition data-reveal class="work-card">
-          <div class="work-card-art" style="background:#a61e6e;">
-            <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#78b4ea"/><path d="M 83.626 167.999 C 37.234 167.793 -0.206 130.017 0.001 83.626 C 0.207 37.234 37.983 -0.206 84.374 0.001 L 83.626 167.999 Z" fill="#f23c8a"/></svg>
-            <span class="work-card-no" style="color:#fffbf3;background:rgba(26,23,20,0.6);">04</span>
-          </div>
-          <div class="work-card-body">
-            <div>
-              <h3>CO2LLAB</h3>
-              <p>Nurturing a low-carbon lifestyle through public installation &amp; AR display.</p>
-              <div class="tags">
-                <span class="tag tag-pink">AR</span>
-                <span class="tag tag-neutral">Public</span>
-              </div>
-            </div>
-            <svg class="work-card-arrow" width="26" height="26" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 16 L16 6 M8 6 h8 v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </a>
-
-      </div>
-    </section>
-
     <!-- ==================== MY THOUGHTS ==================== -->
     <section class="thoughts">
       <div class="eyebrow">My thoughts</div>

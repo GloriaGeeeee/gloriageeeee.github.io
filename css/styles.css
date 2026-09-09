@@ -42,6 +42,7 @@
      Homepage headlines (hero, footer, etc.) use bespoke oversized sizes and don't pull from this
      scale — these tokens are for body copy, UI text, and future page builds. */
   --text-display-size: 200px; --text-display-line: 240px; --text-display-weight: 400;
+  --text-display-sm-size: 72px; --text-display-sm-line: 80px; --text-display-sm-weight: 400;
   --text-h1-size: 48px;       --text-h1-line: 56px;        --text-h1-weight: 500;
   --text-h2-size: 36px;       --text-h2-line: 44px;        --text-h2-weight: 500;
   --text-h3-size: 28px;       --text-h3-line: 36px;        --text-h3-weight: 500;
@@ -123,10 +124,10 @@ h1, h2, h3, p { margin: 0; }
   align-items: center;
   padding: 4px 10px;
   border-radius: var(--radius-pill);
-  font-family: var(--font-sans);
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
+  font-family: var(--font-display);
+  font-weight: var(--text-body-sm-weight);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line);
   white-space: nowrap;
 }
 .tag-neutral { background: var(--color-surface); color: var(--color-ink); }
@@ -496,61 +497,192 @@ h1, h2, h3, p { margin: 0; }
   .marquee-track { animation: none; }
 }
 
-/* ---------- Selected work ---------- */
-.work { padding: 96px 0 40px; }
-.work-header { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 40px; }
-.work-header h2 { font-family: var(--font-display); font-weight: 500; font-size: 56px; letter-spacing: -0.03em; }
-.work-meta { font-family: var(--font-mono); font-size: 14px; color: var(--color-text-secondary); }
-
-.work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-.work-card { display: block; }
-.work-card-art {
+/* ---------- Case studies (Selected work) ----------
+   One fold per project, matching the Figma "Case study" frames (node
+   1:913): a big filled geometric shape sits behind an overlapping mockup
+   placeholder, both bleeding past the fold's own edge, with the text
+   block (eyebrow, heading, description, tags, link) on the opposite side
+   — sides alternate fold to fold. Shape and mockup each carry a
+   data-parallax speed and drift at different rates as you scroll
+   (script.js) for a depth effect. --hero-pad/--hero-max match the
+   nav/header treatment so the grid backgrounds line up with them. */
+.case-studies { position: relative; overflow-x: hidden; }
+.case-fold {
   position: relative;
-  height: 380px;
-  border-radius: var(--radius-card);
-  overflow: hidden;
-  transition: transform .25s ease;
-}
-.work-card-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.work-card:hover .work-card-art { transform: translateY(-6px); }
-.work-card-no {
-  position: absolute;
-  left: 20px;
-  top: 20px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  padding: 6px 10px;
-  border-radius: var(--radius-pill);
-}
-.work-card-body {
+  min-height: 100vh;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 22px 4px 0;
+  align-items: center;
 }
-.work-card-body h3 {
-  margin: 0 0 6px;
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 26px;
-  letter-spacing: -0.01em;
+/* Larger than a typical section gap on purpose — case studies 1–3's
+   shapes now reach their own fold's exact top/bottom edge with zero
+   internal breathing room, so this margin is the ONLY separation between
+   one fold's content and the next; 80px reads as barely-there against that. */
+.case-fold + .case-fold { margin-top: 160px; }
+.case-stage {
+  position: relative;
+  max-width: var(--hero-max);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--hero-pad);
+  height: 640px;
 }
-.work-card-body p {
-  margin: 0 0 14px;
-  font-size: 16px;
-  line-height: 1.45;
+/* One continuous grid behind all four folds — same texture as the header
+   (hero-grid-bg) — rather than a separate one per fold, so there's no
+   seam or divider between projects. Fixed pixel spacing (not a
+   percentage of height) keeps the module consistent no matter how tall
+   the whole section ends up being. */
+.case-grid-bg {
+  position: absolute;
+  inset: 0 var(--hero-pad);
+  background-image:
+    repeating-linear-gradient(to right, var(--color-surface) 0 1px, transparent 1px calc(100% / 10)),
+    repeating-linear-gradient(to bottom, var(--color-surface) 0 1px, transparent 1px 128px);
+  border-right: 1px solid var(--color-surface);
+  border-bottom: 1px solid var(--color-surface);
+  pointer-events: none;
+}
+.case-shape {
+  position: absolute;
+  z-index: 1;
+  top: var(--top, auto);
+  left: var(--left, auto);
+  right: var(--right, auto);
+  bottom: var(--bottom, auto);
+  width: var(--w, 40%);
+  will-change: transform;
+}
+.case-shape svg { display: block; width: 100%; height: 100%; }
+/* Scroll-scrubbed shape growth: tracks scroll position directly — grows
+   as the fold scrolls up into view, shrinks back if you scroll back up
+   past it (script.js sets style.transform every frame, no CSS
+   transition, so it always matches the current scroll position exactly
+   rather than easing toward a one-time target). This is a separate
+   transform from the parallax drift, which JS applies to the outer
+   .case-shape div — so the two never fight over one style.transform. The
+   0 states here are only the pre-JS fallback for a frame or two on load.
+   - [data-scroll-grow]: uniform scale from center (case study 1's circle)
+   - [data-scroll-grow-x-right]: horizontal-only, anchored to the right
+     edge, so it grows right-to-left (case studies 3 & 4's shapes; the
+     scaleX reveal makes each look like it's extending out from the right) */
+[data-scroll-grow] { transform: scale(0); transform-origin: 50% 50%; }
+[data-scroll-grow-x-right] { transform: scaleX(0); transform-origin: 100% 50%; }
+
+/* Case study 2 only: unlike the scale-based growth above, this one has
+   TWO independent edges — entering scroll reveals it from the bottom
+   edge up, and scrolling further past it hides it again starting from
+   the bottom edge (so it shrinks bottom-to-top too, not the mirror image
+   top-to-bottom a single scaleY/transform-origin could give). A fixed
+   scale can't have two different anchor points, so this uses clip-path
+   instead: script.js sets inset(<entry-driven top> 0 <exit-driven
+   bottom> 0) every frame, each side driven by its own progress value. */
+[data-scroll-clip-y] { clip-path: inset(100% 0 0 0); }
+
+/* Mockup placeholder — swap the body for a real screenshot/<img> later,
+   the frame (position/size) needs no changes. */
+.case-mockup {
+  position: absolute;
+  z-index: 2;
+  top: var(--top, auto);
+  left: var(--left, auto);
+  right: var(--right, auto);
+  bottom: var(--bottom, auto);
+  width: var(--w, 320px);
+  aspect-ratio: var(--ar, 1 / 1);
+  background: var(--color-bg);
+  border: 1px solid var(--color-stroke);
+  border-radius: 10px;
+  overflow: hidden;
+  will-change: transform;
+}
+/* Case study 1 only: same scroll-scrubbed idea as the circle above — the
+   mockup's slide-in position and opacity track scroll position directly,
+   so scrolling back up slides it back out and fades it away. Lives on an
+   inner wrapper so it doesn't collide with the outer .case-mockup's
+   continuous parallax transform. */
+.case-mockup-slide { width: 100%; height: 100%; }
+[data-scroll-slide] { opacity: 0; transform: translateX(48px); }
+.case-mockup-bar {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--color-surface);
+}
+.case-mockup-bar span { width: 8px; height: 8px; border-radius: 50%; background: var(--color-surface); }
+.case-mockup-body {
+  height: calc(100% - 33px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--color-stroke);
+}
+.case-mockup-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--color-text-secondary);
-  max-width: 460px;
+}
+
+/* Absolutely-positioned children measure right/left against the padding
+   BOX of their containing block, which includes the padding itself — so
+   right:0/left:0 here would ignore .case-stage's padding entirely and
+   sit flush with the browser edge. Baking --hero-pad in directly (via the
+   --right modifier below) is what actually keeps this text inset. */
+.case-content {
+  position: absolute;
+  z-index: 3;
+  top: var(--top, auto);
+  left: var(--hero-pad);
+  width: var(--w, 44%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+/* Case study 1 only: opacity tracks scroll position directly, same
+   scroll-scrubbed system as the circle and mockup above — scrolling back
+   up fades it back out instead of leaving it revealed. */
+.case-content[data-scroll-fade] { opacity: 0; }
+.case-content--right { left: auto; right: var(--hero-pad); align-items: flex-end; text-align: right; }
+/* Eyebrow + heading + description read as one tight group (16px); the
+   32px above lives between that group, the tags, and the button. */
+.case-text { display: flex; flex-direction: column; align-items: inherit; gap: 16px; width: 100%; }
+.case-eyebrow { font-family: var(--font-display); font-size: 18px; line-height: 28px; color: var(--color-ink); }
+.case-heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--text-h1-weight);
+  font-size: var(--text-h1-size);
+  line-height: var(--text-h1-line);
+  letter-spacing: -0.01em;
   text-wrap: pretty;
 }
-.work-card-arrow {
-  flex-shrink: 0;
-  color: var(--color-text-secondary);
-  transition: transform .2s, color .2s;
+.case-desc {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--color-ink);
+  text-wrap: pretty;
 }
-.work-card:hover .work-card-arrow { transform: translate(3px, -3px); color: var(--color-ink); }
+/* "View case study" — same plain text-link treatment as .thoughts-cta
+   below (no pill background), except the whole label also turns red on
+   hover here, not just the icon. */
+.case-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  white-space: nowrap;
+  color: var(--color-ink);
+  transition: color .15s;
+}
+.case-link svg { color: var(--color-red); transition: transform .2s; }
+.case-link:hover { color: var(--color-red); }
+.case-link:hover svg { transform: translate(3px, -3px); }
 
 /* ---------- My thoughts ---------- */
 .thoughts { padding: 96px 0; border-top: 1px solid var(--color-stroke); }
@@ -655,7 +787,8 @@ h1, h2, h3, p { margin: 0; }
   .about-heading { font-size: 40px; line-height: 48px; }
   .footer-top h2 { font-size: 76px; }
   .thoughts-link h2 { font-size: 52px; }
-  .work-header h2 { font-size: 44px; }
+  .case-stage { height: 560px; }
+  .case-heading { font-size: 40px; }
 }
 
 @media (max-width: 860px) {
@@ -678,10 +811,25 @@ h1, h2, h3, p { margin: 0; }
   .about-stat { padding-right: 16px; }
   .about-stat-value { font-size: 20px; line-height: 28px; }
   .marquee-group { font-size: 28px; gap: 24px; padding-right: 24px; }
-  .work { padding: 56px 0 24px; }
-  .work-header h2 { font-size: 34px; }
-  .work-grid { grid-template-columns: 1fr; gap: 32px; }
-  .work-card-art { height: 300px; }
+  /* Below this width the freeform shape+mockup composition gives way to a
+     plain stack: shape, mockup, then the text block, in DOM order.
+     display:block on the stage neutralizes every child's absolute inset
+     the same way it does elsewhere on this page. */
+  .case-fold { min-height: auto; padding: 56px 0; }
+  .case-stage { display: block; height: auto; padding: 0 var(--hero-pad); }
+  .case-grid-bg { display: none; }
+  .case-shape { position: static; width: 60%; max-width: 260px; margin: 0 0 20px; }
+  .case-mockup { position: static; width: 100%; max-width: 320px; margin: -60px 0 24px; }
+  .case-content { position: static; width: auto; align-items: flex-start; text-align: left; }
+  /* Case studies 1–4's scroll-scrubbed grow/slide/fade is desktop-only
+     (script.js gates it the same way it gates the parallax) — reset each
+     element to its plain resting state so it isn't stuck invisible/
+     scaled-to-0 here. */
+  [data-scroll-grow], [data-scroll-grow-x-right] { transform: none; }
+  [data-scroll-clip-y] { clip-path: none; }
+  [data-scroll-slide] { opacity: 1; transform: none; }
+  .case-content[data-scroll-fade] { opacity: 1; }
+  .case-heading { font-size: 32px; line-height: 1.15; }
   .thoughts { padding: 56px 0; }
   .thoughts-link { flex-direction: column; align-items: flex-start; gap: 20px; }
   .thoughts-link h2 { font-size: 36px; }
@@ -702,7 +850,8 @@ h1, h2, h3, p { margin: 0; }
   .about-stat { padding-right: 8px; }
   .about-stat-label { font-size: 10px; }
   .about-stat-value { font-size: 16px; line-height: 22px; }
-  .work-card-body { flex-direction: column; gap: 12px; }
-  .work-card-body h3 { font-size: 22px; }
+  .case-heading { font-size: 26px; }
+  .case-shape { max-width: 180px; }
+  .case-mockup { margin-top: -40px; }
   .footer-bottom { flex-direction: column; }
 }

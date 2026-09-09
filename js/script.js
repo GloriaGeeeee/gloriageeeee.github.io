@@ -6,7 +6,11 @@
    2. Scroll reveals — sections fade/rise in as you scroll to them
    3. Custom cursor — a ring that follows the mouse (desktop only)
    4. Rotating banner — the hero image strip drifts left as you scroll
-   5. Page transition — a color "curtain" wipes up before leaving the page
+   5. Case study parallax — each fold's shape and mockup drift at
+      different speeds for a depth effect
+   6. Case study scroll-scrub (folds 1 & 2) — shape/mockup/content track
+      scroll position directly, reversible in both directions
+   7. Page transition — a color "curtain" wipes up before leaving the page
    ========================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -131,7 +135,114 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(tickBanner);
   }
 
-  /* ---------- 5. Page transition curtain ---------- */
+  /* ---------- 5. Case study parallax ----------
+     The shape sits further "back" (slow) and the mockup sits further
+     "front" (faster) — same drift-toward-viewport-center math as the
+     rotating banner, just applied per element instead of to one track. */
+  const parallaxLayers = $$('[data-parallax]');
+  const parallaxQuery = window.matchMedia('(min-width: 861px)');
+  if (parallaxLayers.length && !reducedMotion) {
+    function tickCaseParallax() {
+      if (parallaxQuery.matches) {
+        const viewportMid = window.innerHeight / 2;
+        parallaxLayers.forEach((el) => {
+          const speed = parseFloat(el.dataset.parallax) || 0;
+          const rect = el.getBoundingClientRect();
+          const elMid = rect.top + rect.height / 2;
+          const offset = (viewportMid - elMid) * speed;
+          el.style.transform = `translateY(${offset}px)`;
+        });
+      } else {
+        parallaxLayers.forEach((el) => { el.style.transform = ''; });
+      }
+      requestAnimationFrame(tickCaseParallax);
+    }
+    requestAnimationFrame(tickCaseParallax);
+  }
+
+  /* ---------- 6. Case study scroll-scrub (folds 1–4) ----------
+     Progress (0–1) is a direct function of a fold's current position — 0
+     when it's just entering from the bottom of the screen, 1 once it
+     fully fills the viewport — recomputed every frame from scratch, so
+     scrolling back up genuinely reverses it rather than replaying a
+     one-time entrance. Any [data-scroll-fold] gets the same treatment.
+     Each shape picks one growth axis via its data attribute:
+     - data-scroll-grow: uniform scale from center (case study 1's circle)
+     - data-scroll-grow-x-right: from the right edge, growing leftward
+       (case studies 3 & 4)
+     - data-scroll-clip-y: case study 2's shape only — see the clip-path
+       comment in styles.css for why this one is a different mechanism
+       (it grows in AND shrinks back out, both bottom-to-top, which needs
+       two independently-driven edges rather than one scale + one anchor)
+     Desktop only, same gate as the parallax above. */
+  const GROW_ATTRS = {
+    'data-scroll-grow': (p) => `scale(${p})`,
+    'data-scroll-grow-x-right': (p) => `scaleX(${p})`,
+  };
+  const growSelector = Object.keys(GROW_ATTRS).map((a) => `[${a}]`).concat('[data-scroll-clip-y]').join(', ');
+
+  function initScrollScrub(fold) {
+    const growGroups = Object.entries(GROW_ATTRS).map(([attr, toTransform]) => ({
+      els: fold.querySelectorAll(`[${attr}]`),
+      toTransform,
+    }));
+    const clipYEls = fold.querySelectorAll('[data-scroll-clip-y]');
+    const slideEls = fold.querySelectorAll('[data-scroll-slide]');
+    const fadeEls = fold.querySelectorAll('[data-scroll-fade]');
+
+    function tickCaseScrub() {
+      if (parallaxQuery.matches) {
+        const vh = window.innerHeight;
+        const rect = fold.getBoundingClientRect();
+        // entryProgress: 0 while still below the viewport, 1 once the fold's
+        // top has reached the viewport's top. exitAmount: 0 until that same
+        // point, then rises toward 1 as you keep scrolling the fold further
+        // past the top — both are pure functions of rect.top, so scrolling
+        // back up unwinds either one exactly, no separate state needed.
+        const entryProgress = Math.min(1, Math.max(0, 1 - rect.top / vh));
+        const exitAmount = Math.min(1, Math.max(0, -rect.top / vh));
+        growGroups.forEach(({ els, toTransform }) => {
+          els.forEach((el) => { el.style.transform = toTransform(entryProgress); });
+        });
+        clipYEls.forEach((el) => {
+          const topInset = (1 - entryProgress) * 100;
+          const bottomInset = exitAmount * 100;
+          el.style.clipPath = `inset(${topInset}% 0 ${bottomInset}% 0)`;
+        });
+        slideEls.forEach((el) => {
+          el.style.opacity = entryProgress;
+          el.style.transform = `translateX(${(1 - entryProgress) * 48}px)`;
+        });
+        fadeEls.forEach((el) => {
+          el.style.opacity = entryProgress;
+          el.style.transform = `translateY(${(1 - entryProgress) * 20}px)`;
+        });
+      } else {
+        growGroups.forEach(({ els }) => { els.forEach((el) => { el.style.transform = ''; }); });
+        clipYEls.forEach((el) => { el.style.clipPath = ''; });
+        slideEls.forEach((el) => { el.style.opacity = ''; el.style.transform = ''; });
+        fadeEls.forEach((el) => { el.style.opacity = ''; el.style.transform = ''; });
+      }
+      requestAnimationFrame(tickCaseScrub);
+    }
+    requestAnimationFrame(tickCaseScrub);
+  }
+
+  const scrollFolds = $$('[data-scroll-fold]');
+  if (!reducedMotion) {
+    scrollFolds.forEach(initScrollScrub);
+  } else {
+    // Reduced-motion: skip the scroll-scrub entirely, just show everything at rest.
+    scrollFolds.forEach((fold) => {
+      fold.querySelectorAll(`${growSelector}, [data-scroll-slide], [data-scroll-fade]`).forEach((el) => {
+        el.style.transform = 'none';
+        el.style.opacity = '1';
+      });
+      fold.querySelectorAll('[data-scroll-clip-y]').forEach((el) => { el.style.clipPath = 'none'; });
+    });
+  }
+
+  /* ---------- 7. Page transition curtain ---------- */
   const curtain = $('[data-curtain]');
   $$('a[data-transition]').forEach((link) => {
     link.addEventListener('click', (e) => {
