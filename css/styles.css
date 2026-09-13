@@ -53,6 +53,11 @@
   --text-caption-size: 12px;  --text-caption-line: 16px;   --text-caption-weight: 400;
   --text-overline-size: 12px; --text-overline-line: 16px;  --text-overline-weight: 600;
 
+  /* Serif accent — the italic editorial voice. Used for the emphasised word in a
+     headline (homepage "patterns") and for pull quotes on case study pages.
+     Apply with the .serif-accent class; colour is set per context. */
+  --text-quote-size: 28px;    --text-quote-line: 40px;     --text-quote-weight: 400;
+
   /* Layout */
   --page-max: 1344px;
   --page-pad: 48px;
@@ -70,6 +75,11 @@
 /* ---------- Reset ---------- */
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+/* Anchor links (the case study side nav, "Work" in the header) glide
+   rather than jump — unless the reader has asked for less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
 body {
   background: var(--color-bg);
   color: var(--color-ink);
@@ -136,6 +146,15 @@ h1, h2, h3, p { margin: 0; }
 .tag-red     { background: var(--tag-red-bg);    color: var(--tag-red-fg); }
 .tag-blue    { background: var(--tag-blue-bg);   color: var(--tag-blue-fg); }
 .tag-yellow  { background: var(--tag-yellow-bg); color: var(--tag-yellow-fg); }
+
+/* ---------- Serif accent ----------
+   Family + italic only — size and colour come from whatever it's placed in,
+   so the same treatment works inside a 72px headline and a 28px pull quote. */
+.serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--text-quote-weight);
+}
 
 /* ---------- Preloader ---------- */
 .preloader {
@@ -706,7 +725,7 @@ h1, h2, h3, p { margin: 0; }
 .thoughts-link em {
   font-family: var(--font-serif);
   font-style: italic;
-  font-weight: 400;
+  font-weight: var(--text-quote-weight);
   color: var(--color-red);
 }
 .thoughts-cta {
@@ -854,4 +873,363 @@ h1, h2, h3, p { margin: 0; }
   .case-shape { max-width: 180px; }
   .case-mockup { margin-top: -40px; }
   .footer-bottom { flex-direction: column; }
+}
+
+/* ==========================================
+   CASE STUDY PAGE  (case-*.html)
+   ==========================================
+   The whole page hangs off one two-column grid, used twice:
+
+     header   title / description / details  |  hero image
+     body     sticky "on this page" nav      |  case study content
+
+   Because both grids share the same 1fr / 2fr tracks, the content column
+   lines up exactly under the hero image, and the side nav lines up under
+   the title. Change --cs-split in one place and both follow.
+
+   Width: 80px of breathing room either side, and the content stops growing
+   at --cs-max so the page doesn't stretch thin on very wide monitors.
+   ========================================== */
+
+.case-study { --cs-max: 1280px; --cs-split: 72px; }
+
+.cs-shell {
+  width: min(var(--cs-max), 100% - var(--hero-pad) * 2);
+  margin-inline: auto;
+}
+
+.cs-header,
+.cs-main {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--cs-split);
+}
+/* One rule under the whole header — both columns — rather than a line
+   inside the left column separating the description from the details. */
+.cs-header {
+  padding-bottom: 56px;
+  border-bottom: 1px solid var(--color-stroke);
+}
+
+/* ---------- Header ---------- */
+/* The left column is a flex column so the details block can be pushed to
+   the bottom with margin-top:auto, landing level with the foot of the
+   hero image rather than floating under the description. */
+.cs-intro { display: flex; flex-direction: column; }
+.cs-intro-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.cs-meta {
+  margin: auto 0 0;          /* auto top margin = sits on the bottom edge */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px 24px;
+}
+.cs-meta dd { margin: 0; }
+
+/* The hero fills the full height of the header row rather than sitting at a
+   fixed aspect ratio, so its bottom edge lands level with the details block
+   on the left however long the title and description run. */
+.cs-hero-media { display: flex; min-height: 420px; }
+.cs-hero-media .cs-figure { flex: 1; display: flex; }
+.cs-hero-media .cs-placeholder { flex: 1; aspect-ratio: auto; }
+.cs-hero-media img,
+.cs-hero-media video { height: 100%; object-fit: cover; }
+
+/* ---------- Body + sticky side nav ----------
+   The nav's column stretches to the full height of the body, which is what
+   gives the sticky nav inside it room to travel as you scroll. */
+/* The padding matches the first section's top padding, so the nav starts on
+   the same line as the case study content rather than hard against the
+   divider above it. */
+.cs-sidenav-col { grid-column: 1; padding-top: 96px; }
+.cs-content { grid-column: 2; min-width: 0; }
+
+.cs-sidenav {
+  position: sticky;
+  top: 48px;
+}
+.cs-sidenav-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption-size);
+  line-height: var(--text-caption-line);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin-bottom: 16px;
+}
+.cs-sidenav ul { list-style: none; margin: 0; padding: 0; }
+.cs-sidenav a {
+  display: block;
+  padding: 8px 0 8px 14px;
+  border-left: 2px solid transparent;
+  font-family: var(--font-display);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line);
+  color: var(--color-text-secondary);
+  transition: color 120ms ease, border-color 120ms ease;
+}
+.cs-sidenav a:hover { color: var(--color-ink); }
+.cs-sidenav a.is-active {
+  color: var(--color-ink);
+  border-left-color: var(--color-red);
+}
+
+/* Anchor jumps land with the heading clear of the top of the screen */
+.cs-content > section { scroll-margin-top: 48px; }
+
+/* ---------- Sections ---------- */
+.cs-section { padding: 96px 0; }
+.cs-section + .cs-section { padding-top: 0; }
+.cs-label {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--color-text-secondary);
+  margin-bottom: 20px;
+}
+.cs-h2 {
+  font-family: var(--font-display);
+  font-weight: var(--text-h2-weight);
+  font-size: var(--text-h2-size);
+  line-height: var(--text-h2-line);
+  letter-spacing: -0.01em;
+  margin-bottom: 32px;
+}
+.cs-h3 {
+  font-family: var(--font-display);
+  font-weight: var(--text-h3-weight);
+  font-size: var(--text-h3-size);
+  line-height: var(--text-h3-line);
+}
+.cs-h4 {
+  font-family: var(--font-display);
+  font-weight: var(--text-h4-weight);
+  font-size: var(--text-h4-size);
+  line-height: var(--text-h4-line);
+}
+.cs-body {
+  font-family: var(--font-sans);
+  font-weight: var(--text-body-lg-weight);
+  font-size: var(--text-body-lg-size);
+  line-height: var(--text-body-lg-line);
+  color: var(--color-ink);
+  text-wrap: pretty;
+}
+.cs-body-sm {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line);
+  color: var(--color-text-secondary);
+  text-wrap: pretty;
+}
+
+/* ---------- Page header ---------- */
+.cs-title {
+  font-family: var(--font-display);
+  font-weight: var(--text-h2-weight);
+  font-size: var(--text-h2-size);
+  line-height: var(--text-h2-line);
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+.cs-meta-label {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-caption-size);
+  line-height: var(--text-caption-line);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  margin-bottom: 6px;
+}
+
+/* ---------- Media frame ----------
+   Square corners on images and video — everything else on the site keeps
+   the corners it has. A hairline border separates dark screenshots from
+   the cream page. */
+.cs-figure { margin: 0; }
+.cs-figure img,
+.cs-figure video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-stroke);
+  border-radius: 0;
+  background: var(--color-surface);
+}
+.cs-caption {
+  font-family: var(--font-mono);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line);
+  color: var(--color-text-secondary);
+  margin-top: 12px;
+}
+
+/* ---------- Video placeholder ----------
+   Swap for the real thing when clips are ready:
+   <video autoplay loop muted playsinline preload="metadata" src="..."></video> */
+.cs-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+  border: 1px dashed var(--color-stroke);
+  background: var(--color-surface);
+  font-family: var(--font-mono);
+  font-size: var(--text-body-sm-size);
+  color: var(--color-text-secondary);
+  text-align: center;
+  padding: 24px;
+}
+/* For a single wide, short overview image rather than a 16:9 demo clip */
+.cs-placeholder--wide { aspect-ratio: 3 / 1; }
+
+/* ---------- Pull quote ---------- */
+.cs-quote {
+  margin: 40px 0 0;
+  padding-left: 28px;
+  border-left: 2px solid var(--color-red);
+}
+.cs-quote p {
+  font-size: var(--text-quote-size);
+  line-height: var(--text-quote-line);
+  color: var(--color-ink);
+  text-wrap: pretty;
+}
+.cs-quote footer {
+  font-family: var(--font-mono);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line);
+  color: var(--color-text-secondary);
+  margin-top: 16px;
+}
+
+/* ---------- Column blocks ---------- */
+.cs-grid-2,
+.cs-grid-3 { display: grid; gap: 48px; }
+.cs-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.cs-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.cs-grid-item { display: flex; flex-direction: column; gap: 12px; }
+
+/* ---------- Solution blocks ---------- */
+.cs-solution + .cs-solution { margin-top: 96px; }
+.cs-solution .cs-h3 { margin-bottom: 12px; }
+.cs-solution .cs-body { margin-bottom: 32px; }
+
+/* ---------- Numbered principles ---------- */
+.cs-principles {
+  list-style: none;
+  margin: 48px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  counter-reset: principle;
+}
+.cs-principles li {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 20px;
+  align-items: start;
+  counter-increment: principle;
+}
+.cs-principles li::before {
+  content: counter(principle, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: var(--text-h4-size);
+  line-height: var(--text-h4-line);
+  color: var(--color-red);
+}
+.cs-principle-body { display: flex; flex-direction: column; gap: 8px; }
+
+/* ---------- Outcome metrics ---------- */
+.cs-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 8px;
+}
+.cs-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-stroke);
+}
+.cs-metric-value {
+  font-family: var(--font-display);
+  font-weight: var(--text-h1-weight);
+  font-size: var(--text-h1-size);
+  line-height: var(--text-h1-line);
+  color: var(--color-ink);
+}
+.cs-metric-value[data-empty] { color: var(--color-stroke); }
+.cs-metric-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-caption-size);
+  line-height: var(--text-caption-line);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Back to work ---------- */
+.cs-pagenav {
+  padding: 64px 0 96px;
+  border-top: 1px solid var(--color-stroke);
+  margin-top: 96px;
+}
+/* The shared .case-link arrow nudges up-and-right; a back link should nudge left. */
+.cs-pagenav .case-link:hover svg { transform: translateX(-3px); }
+
+/* Copy still to be written — visible on the page so it can't be forgotten. */
+.cs-todo { color: var(--color-stroke); }
+
+/* ---------- Case study page — responsive ---------- */
+/* Below this the left column is too narrow to hold a title or a nav, so
+   both grids collapse: the hero image drops under the header text, and the
+   side nav is dropped entirely (the content is short enough to scroll). */
+@media (max-width: 1200px) {
+  .cs-header,
+  .cs-main { display: block; }
+  .cs-sidenav-col { display: none; }
+  .cs-intro { display: block; }
+  .cs-hero-media { margin-top: 48px; }
+  .cs-meta { margin-top: 40px; }
+}
+
+@media (max-width: 1100px) {
+  .cs-section { padding: 72px 0; }
+}
+
+@media (max-width: 860px) {
+  .cs-title { font-size: 28px; line-height: 36px; }
+  .cs-header { padding-bottom: 40px; }
+  .cs-meta { grid-template-columns: 1fr; gap: 20px; }
+  .cs-section { padding: 56px 0; }
+  .cs-h2 { font-size: 28px; line-height: 36px; margin-bottom: 24px; }
+  .cs-grid-2,
+  .cs-grid-3 { grid-template-columns: 1fr; gap: 40px; }
+  .cs-metrics { grid-template-columns: 1fr; gap: 24px; }
+  .cs-solution + .cs-solution { margin-top: 64px; }
+  .cs-quote { padding-left: 20px; margin-top: 32px; }
+  .cs-quote p { font-size: 22px; line-height: 32px; }
+  .cs-principles { gap: 32px; }
+  .cs-principles li { grid-template-columns: 40px 1fr; gap: 14px; }
+  .cs-pagenav { margin-top: 56px; padding: 40px 0 64px; }
+}
+
+@media (max-width: 480px) {
+  .cs-title { font-size: 32px; line-height: 40px; }
+  .cs-h2 { font-size: 24px; line-height: 32px; }
+  .cs-body { font-size: var(--text-body-size); line-height: var(--text-body-line); }
+  .cs-quote p { font-size: 19px; line-height: 28px; }
+  .cs-metric-value { font-size: 36px; line-height: 44px; }
 }

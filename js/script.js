@@ -10,7 +10,9 @@
       different speeds for a depth effect
    6. Case study scroll-scrub (folds 1 & 2) — shape/mockup/content track
       scroll position directly, reversible in both directions
-   7. Page transition — a color "curtain" wipes up before leaving the page
+   7. Case study side nav — "On this page" list highlights the section
+      you're currently reading (case-*.html only)
+   8. Page transition — a color "curtain" wipes up before leaving the page
    ========================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -242,7 +244,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---------- 7. Page transition curtain ---------- */
+  /* ---------- 7. Case study side nav ----------
+     Marks whichever section you're currently reading. A section counts as
+     current once its top passes a line a third of the way down the screen,
+     so the highlight changes as a heading settles into view rather than the
+     instant it appears at the bottom. */
+  const sideNav = $('[data-sidenav]');
+  if (sideNav) {
+    const navLinks = Array.from(sideNav.querySelectorAll('a[href^="#"]'));
+    const navSections = navLinks
+      .map((a) => document.getElementById(a.getAttribute('href').slice(1)))
+      .filter(Boolean);
+
+    let navTicking = false;
+    function updateSideNav() {
+      navTicking = false;
+      const line = window.innerHeight / 3;
+      let active = 0;
+      navSections.forEach((section, i) => {
+        if (section.getBoundingClientRect().top <= line) active = i;
+      });
+      navLinks.forEach((a, i) => a.classList.toggle('is-active', i === active));
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!navTicking) {
+        navTicking = true;
+        requestAnimationFrame(updateSideNav);
+      }
+    }, { passive: true });
+    updateSideNav();
+  }
+
+  /* ---------- 8. Page transition curtain ---------- */
   const curtain = $('[data-curtain]');
   $$('a[data-transition]').forEach((link) => {
     link.addEventListener('click', (e) => {

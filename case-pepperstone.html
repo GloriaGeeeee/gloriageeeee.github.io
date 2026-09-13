@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From days to minutes: Redesigning IB onboarding — Gloria Gao</title>
+<meta name="description" content="Redesigning IB onboarding for the Pepperstone Partnership Program — cutting partner activation from days to minutes.">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+
+<!-- Fonts: Geist for headings, Inter for body, Instrument Serif for the editorial accent, Geist Mono for labels -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<!-- ?v= is a cache-buster: bump the number whenever styles.css changes so browsers
+     fetch the new file instead of reusing the copy they already have. -->
+<link rel="stylesheet" href="css/styles.css?v=10">
+</head>
+<body>
+
+<!-- Preloader: shown for a moment while the page "counts up" to 100% -->
+<div class="preloader" data-preloader>
+  <div class="preloader-top">
+    <span class="preloader-label">Gloria Gao — Portfolio 2026</span>
+    <span class="preloader-count"><span data-count>0</span>%</span>
+  </div>
+  <div class="preloader-bar"><div class="preloader-bar-fill" data-bar></div></div>
+</div>
+
+<!-- Page-transition curtain, swipes up when you click an internal link -->
+<div class="curtain" data-curtain></div>
+
+<!-- Custom cursor (desktop only) — without this markup the page has no visible cursor at all -->
+<div class="cursor-ring" data-cursor-ring></div>
+<div class="cursor-dot" data-cursor-dot></div>
+
+<div class="page case-study">
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="about.html" data-transition>About me</a>
+      <a href="index.html#work" data-transition>Work</a>
+      <a href="https://substack.com" target="_blank" rel="noopener">Blog</a>
+    </div>
+    <a href="assets/Gloria-Gao-CV.pdf" class="btn btn-primary btn-sm nav-cta">
+      Download CV
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.5 L10.5 8 L6 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </nav>
+
+  <!-- .cs-shell holds the whole page to a max width with 80px either side -->
+  <div class="cs-shell">
+
+  <!-- ==================== HEADER ====================
+       Two columns: title / description / details on the left, hero image on
+       the right. The details block is pushed to the bottom of the left
+       column (margin-top:auto) so it sits level with the foot of the image.
+       HERO PLACEHOLDER — when the real clip is ready, replace the
+       <div class="cs-placeholder"> with:
+       <video autoplay loop muted playsinline preload="metadata" src="assets/pepperstone/hero.mp4"></video> -->
+  <header class="cs-header">
+    <div class="cs-intro">
+      <div class="cs-intro-top">
+        <h1 class="cs-title">From days to minutes: Redesigning IB onboarding for faster activation</h1>
+        <p class="cs-body-sm">Pepperstone Partnership Program uses a revenue-sharing model designed for educators, signal providers, and trading communities to monetise their networks. Partners earn volume-based rebates and get dedicated support to grow their referral business.</p>
+        <div class="tags">
+          <span class="tag tag-neutral">Onboarding Experience</span>
+          <span class="tag tag-pink">Fintech</span>
+        </div>
+      </div>
+
+      <dl class="cs-meta">
+        <div>
+          <dt class="cs-meta-label">Status</dt>
+          <dd class="cs-body-sm">Shipped in Jan 2026</dd>
+        </div>
+        <div>
+          <dt class="cs-meta-label">Timeline</dt>
+          <dd class="cs-body-sm">4 months</dd>
+        </div>
+        <div>
+          <dt class="cs-meta-label">Team</dt>
+          <dd class="cs-body-sm">Product, content design, 5 engineers</dd>
+        </div>
+        <div>
+          <dt class="cs-meta-label">My role</dt>
+          <dd class="cs-body-sm">End-to-end product designer</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="cs-hero-media">
+      <figure class="cs-figure">
+        <div class="cs-placeholder">Hero video — partner onboarding walkthrough</div>
+      </figure>
+    </div>
+  </header>
+
+  <!-- ==================== BODY + STICKY SIDE NAV ====================
+       Same two columns as the header above, so the content lines up under
+       the hero image and the nav lines up under the title. The nav sticks
+       as you scroll and highlights the section you're in (section 7 of
+       js/script.js). Both columns collapse below 1200px. -->
+  <div class="cs-main">
+
+    <div class="cs-sidenav-col">
+      <nav class="cs-sidenav" data-sidenav aria-label="Case study sections">
+        <p class="cs-sidenav-label">On this page</p>
+        <ul>
+          <li><a href="#challenge">The challenge</a></li>
+          <li><a href="#goals">Business goals</a></li>
+          <li><a href="#solution">Solution</a></li>
+          <li><a href="#current-state">Current state</a></li>
+          <li><a href="#design-strategy">Design strategy</a></li>
+          <li><a href="#outcome">Outcome</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="cs-content">
+
+  <!-- ==================== THE CHALLENGE ==================== -->
+  <section class="cs-section" id="challenge">
+    <div data-reveal>
+      <div class="cs-label">The challenge</div>
+      <h2 class="cs-h2">The onboarding process for partner is full of friction, lengthy, and dependent on manual ops team follow-up</h2>
+      <p class="cs-body">New IBs have to complete a long, all-or-nothing process before they could start referring clients. This has caused significant drop-off and delayed activation to days.</p>
+
+      <blockquote class="cs-quote">
+        <p class="serif-accent">“This process works, but it’s highly manual and back-and-forth between sales and partners — especially since even opening a trading account is a hassle for the client”</p>
+        <footer>Sales team feedback</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ==================== BUSINESS GOALS ==================== -->
+  <section class="cs-section" id="goals">
+    <div data-reveal>
+      <div class="cs-label">Business goals</div>
+      <h2 class="cs-h2">What we set out to achieve</h2>
+      <div class="cs-grid-2">
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Create a simple, frictionless onboarding experience</h3>
+          <p class="cs-body-sm">Let partners start referring clients right away with minimum information required</p>
+        </div>
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Cut activation time from days to minutes</h3>
+          <p class="cs-body-sm">Automate KYC and account set up to reduce manual ops review dependency and reduce # of follow-ups</p>
+        </div>
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Grow the number of active IBs</h3>
+          <p class="cs-body-sm">Convert lower friction into more signups, faster referrals, and more active partners</p>
+        </div>
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Due diligence at the right time</h3>
+          <p class="cs-body-sm">Maintain compliance and due diligence in partner review to ensure quality</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SOLUTION ====================
+       Each block: heading + description in the reading column, then the
+       demo video below it. All three videos are placeholders — see the
+       hero comment above for the markup to swap in. -->
+  <section class="cs-section" id="solution">
+    <div>
+      <div class="cs-label">Solution</div>
+      <h2 class="cs-h2">Three changes that removed the wait</h2>
+    </div>
+
+    <div class="cs-solution" data-reveal>
+      <div>
+        <h3 class="cs-h3">Immediate activation after registration</h3>
+        <p class="cs-body cs-todo">[Add a short description of this solution]</p>
+      </div>
+      <div>
+        <figure class="cs-figure">
+          <div class="cs-placeholder">Demo video — immediate activation after registration</div>
+        </figure>
+      </div>
+    </div>
+
+    <div class="cs-solution" data-reveal>
+      <div>
+        <h3 class="cs-h3">Onboarding widget to guide user to complete the rest</h3>
+        <p class="cs-body cs-todo">[Add a short description of this solution]</p>
+      </div>
+      <div>
+        <figure class="cs-figure">
+          <div class="cs-placeholder">Demo video — onboarding widget</div>
+        </figure>
+      </div>
+    </div>
+
+    <div class="cs-solution" data-reveal>
+      <div>
+        <h3 class="cs-h3">Divide into sub-sections so user can pick up anytime</h3>
+        <p class="cs-body cs-todo">[Add a short description of this solution]</p>
+      </div>
+      <div>
+        <figure class="cs-figure">
+          <div class="cs-placeholder">Demo video — sub-sections and resumable progress</div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROCESS — UNDERSTAND CURRENT STATE ==================== -->
+  <section class="cs-section" id="current-state">
+    <div>
+      <div class="cs-label">Process</div>
+      <h2 class="cs-h2">Understand current state</h2>
+    </div>
+
+    <!-- PLACEHOLDER — swap the div below for your wide overview image:
+         <img src="assets/pepperstone/current-state.png" alt="..." loading="lazy" decoding="async" width="..." height="..."> -->
+    <div data-reveal style="margin-bottom:48px;">
+      <figure class="cs-figure">
+        <div class="cs-placeholder cs-placeholder--wide">Wide overview image — current onboarding flow</div>
+      </figure>
+    </div>
+
+    <div data-reveal>
+      <div class="cs-grid-3">
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Sales &amp; Ops team interview</h3>
+          <p class="cs-body-sm">I interviewed with sales, account managers, and operation team to understand the current onboarding flow for both new user and existing user. Understand the business need for each steps and remove unnecessary steps.</p>
+        </div>
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Scenario mapping with PMs</h3>
+          <p class="cs-body-sm">To make sure the new flow is as compliant as the old one, we map the new flow against the old flow, to understand all the scenario we need to cater for with different business type, COR, and user type</p>
+        </div>
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Competitor analysis</h3>
+          <p class="cs-body-sm">Benchmarking competitor platform to understand how partners currently onboard with other platforms</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROCESS — DESIGN STRATEGY ==================== -->
+  <section class="cs-section" id="design-strategy">
+    <div>
+      <div class="cs-label">Process</div>
+      <h2 class="cs-h2">Design strategy</h2>
+    </div>
+    <div data-reveal>
+      <figure class="cs-figure">
+        <img src="assets/pepperstone/design-strategy.png" alt="Design file overview showing the KYC, IB questionnaire, reapplication and risk disclosure flows" loading="lazy" decoding="async" width="2384" height="490">
+      </figure>
+    </div>
+    <div>
+      <!-- Descriptions below are drafted from context — edit freely. -->
+      <ol class="cs-principles">
+        <li>
+          <div class="cs-principle-body">
+            <h3 class="cs-h4">Always clear next steps</h3>
+            <p class="cs-body-sm">After each completed step the partner is shown exactly what to do next, rather than being left to guess or wait to be contacted.</p>
+          </div>
+        </li>
+        <li>
+          <div class="cs-principle-body">
+            <h3 class="cs-h4">When waiting is required, give a correct estimate</h3>
+            <p class="cs-body-sm">Where a review genuinely takes time, the screen says how long, so partners aren’t left chasing status updates.</p>
+          </div>
+        </li>
+        <li>
+          <div class="cs-principle-body">
+            <h3 class="cs-h4">For longer forms, set correct expectation</h3>
+            <p class="cs-body-sm">Longer sections are split into labelled sub-steps with visible progress, so partners know what’s left before they begin.</p>
+          </div>
+        </li>
+        <li>
+          <div class="cs-principle-body">
+            <h3 class="cs-h4">Designing for both desktop and mobile</h3>
+            <p class="cs-body-sm">Every step works equally well on a phone, so partners can complete onboarding on whichever device they have to hand.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ==================== OUTCOME ====================
+       PLACEHOLDER metrics — replace the "—" in each .cs-metric-value with
+       your real number and drop the data-empty attribute so it turns dark. -->
+  <section class="cs-section" id="outcome">
+    <div data-reveal>
+      <div class="cs-label">Outcome</div>
+      <h2 class="cs-h2">Where it landed</h2>
+      <div class="cs-metrics">
+        <div class="cs-metric">
+          <span class="cs-metric-value" data-empty>—</span>
+          <span class="cs-metric-label">Metric one</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-value" data-empty>—</span>
+          <span class="cs-metric-label">Metric two</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-value" data-empty>—</span>
+          <span class="cs-metric-label">Metric three</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    </div><!-- /.cs-content -->
+  </div><!-- /.cs-main -->
+
+  <!-- ==================== BACK TO WORK ==================== -->
+  <div class="cs-pagenav">
+    <a href="index.html#work" data-transition class="case-link">
+      <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M16 11 H6 M10 6 L5 11 L10 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to all work
+    </a>
+  </div>
+
+  </div><!-- /.cs-shell -->
+
+  <!-- ==================== FOOTER / LET'S CONNECT ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="eyebrow eyebrow-inverse">Let's connect</div>
+      <div class="footer-top">
+        <h2>Say hello.</h2>
+        <div class="footer-links">
+          <a href="mailto:hello@gloriagao.design" class="footer-email">hello@gloriagao.design</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://substack.com" target="_blank" rel="noopener">Substack</a>
+          <a href="https://read.cv" target="_blank" rel="noopener">Read.cv</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Gloria Gao Yunhan · Product Designer</span>
+        <span>© 2026 · Singapore</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script src="js/script.js?v=10"></script>
+</body>
+</html>
