@@ -14,7 +14,7 @@
 
 <!-- ?v= is a cache-buster: bump the number whenever styles.css changes so browsers
      fetch the new file instead of reusing the copy they already have. -->
-<link rel="stylesheet" href="css/styles.css?v=10">
+<link rel="stylesheet" href="css/styles.css?v=13">
 </head>
 <body>
 
@@ -110,9 +110,9 @@
         <ul>
           <li><a href="#challenge">The challenge</a></li>
           <li><a href="#goals">Business goals</a></li>
-          <li><a href="#solution">Solution</a></li>
           <li><a href="#current-state">Current state</a></li>
-          <li><a href="#design-strategy">Design strategy</a></li>
+          <li><a href="#principles">Design principles</a></li>
+          <li><a href="#solution">Solution</a></li>
           <li><a href="#outcome">Outcome</a></li>
         </ul>
       </nav>
@@ -124,8 +124,8 @@
   <section class="cs-section" id="challenge">
     <div data-reveal>
       <div class="cs-label">The challenge</div>
-      <h2 class="cs-h2">The onboarding process for partner is full of friction, lengthy, and dependent on manual ops team follow-up</h2>
-      <p class="cs-body">New IBs have to complete a long, all-or-nothing process before they could start referring clients. This has caused significant drop-off and delayed activation to days.</p>
+      <h2 class="cs-h2">The IB onboarding flow was long, high-friction, and heavily dependent on manual follow-ups from the ops team.</h2>
+      <p class="cs-body">Partners had to complete an all-or-nothing process before they could start referring clients, which caused drop-off and delayed activation from minutes to days.</p>
 
       <blockquote class="cs-quote">
         <p class="serif-accent">“This process works, but it’s highly manual and back-and-forth between sales and partners — especially since even opening a trading account is a hassle for the client”</p>
@@ -137,72 +137,23 @@
   <!-- ==================== BUSINESS GOALS ==================== -->
   <section class="cs-section" id="goals">
     <div data-reveal>
-      <div class="cs-label">Business goals</div>
-      <h2 class="cs-h2">What we set out to achieve</h2>
-      <div class="cs-grid-2">
+      <h2 class="cs-h2">Business goals</h2>
+      <div class="cs-grid-3">
         <div class="cs-grid-item">
-          <h3 class="cs-h4">Create a simple, frictionless onboarding experience</h3>
-          <p class="cs-body-sm">Let partners start referring clients right away with minimum information required</p>
+          <img class="cs-goal-icon" src="assets/illustrations/logo-pattern-01.svg" alt="" width="40" height="40">
+          <h3 class="cs-h4">Grow active IBs with frictionless onboarding</h3>
+          <p class="cs-body-sm">Reduce redundant steps, lower onboarding friction and enabling faster referrals</p>
         </div>
         <div class="cs-grid-item">
-          <h3 class="cs-h4">Cut activation time from days to minutes</h3>
-          <p class="cs-body-sm">Automate KYC and account set up to reduce manual ops review dependency and reduce # of follow-ups</p>
+          <img class="cs-goal-icon" src="assets/illustrations/logo-pattern-04.svg" alt="" width="40" height="40">
+          <h3 class="cs-h4">Reduce time-to-activation</h3>
+          <p class="cs-body-sm">Automate KYC and account set up to reduce manual ops review dependency and number of follow-ups required</p>
         </div>
         <div class="cs-grid-item">
-          <h3 class="cs-h4">Grow the number of active IBs</h3>
-          <p class="cs-body-sm">Convert lower friction into more signups, faster referrals, and more active partners</p>
-        </div>
-        <div class="cs-grid-item">
+          <img class="cs-goal-icon" src="assets/illustrations/logo-pattern-05.svg" alt="" width="40" height="40">
           <h3 class="cs-h4">Due diligence at the right time</h3>
-          <p class="cs-body-sm">Maintain compliance and due diligence in partner review to ensure quality</p>
+          <p class="cs-body-sm">Moving due diligence to the right moments, not removing it</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== SOLUTION ====================
-       Each block: heading + description in the reading column, then the
-       demo video below it. All three videos are placeholders — see the
-       hero comment above for the markup to swap in. -->
-  <section class="cs-section" id="solution">
-    <div>
-      <div class="cs-label">Solution</div>
-      <h2 class="cs-h2">Three changes that removed the wait</h2>
-    </div>
-
-    <div class="cs-solution" data-reveal>
-      <div>
-        <h3 class="cs-h3">Immediate activation after registration</h3>
-        <p class="cs-body cs-todo">[Add a short description of this solution]</p>
-      </div>
-      <div>
-        <figure class="cs-figure">
-          <div class="cs-placeholder">Demo video — immediate activation after registration</div>
-        </figure>
-      </div>
-    </div>
-
-    <div class="cs-solution" data-reveal>
-      <div>
-        <h3 class="cs-h3">Onboarding widget to guide user to complete the rest</h3>
-        <p class="cs-body cs-todo">[Add a short description of this solution]</p>
-      </div>
-      <div>
-        <figure class="cs-figure">
-          <div class="cs-placeholder">Demo video — onboarding widget</div>
-        </figure>
-      </div>
-    </div>
-
-    <div class="cs-solution" data-reveal>
-      <div>
-        <h3 class="cs-h3">Divide into sub-sections so user can pick up anytime</h3>
-        <p class="cs-body cs-todo">[Add a short description of this solution]</p>
-      </div>
-      <div>
-        <figure class="cs-figure">
-          <div class="cs-placeholder">Demo video — sub-sections and resumable progress</div>
-        </figure>
       </div>
     </div>
   </section>
@@ -214,11 +165,9 @@
       <h2 class="cs-h2">Understand current state</h2>
     </div>
 
-    <!-- PLACEHOLDER — swap the div below for your wide overview image:
-         <img src="assets/pepperstone/current-state.png" alt="..." loading="lazy" decoding="async" width="..." height="..."> -->
     <div data-reveal style="margin-bottom:48px;">
-      <figure class="cs-figure">
-        <div class="cs-placeholder cs-placeholder--wide">Wide overview image — current onboarding flow</div>
+      <figure class="cs-figure cs-figure--plain">
+        <img src="assets/pepperstone/current-state.png" alt="Research artefacts from the discovery phase: a team interview call, the new onboarding flow mapped out, and a competitor benchmarking board" loading="lazy" decoding="async" width="1440" height="458">
       </figure>
     </div>
 
@@ -226,59 +175,116 @@
       <div class="cs-grid-3">
         <div class="cs-grid-item">
           <h3 class="cs-h4">Sales &amp; Ops team interview</h3>
-          <p class="cs-body-sm">I interviewed with sales, account managers, and operation team to understand the current onboarding flow for both new user and existing user. Understand the business need for each steps and remove unnecessary steps.</p>
+          <p class="cs-body-sm">Interviewed sales, account managers, and ops to understand each step’s purpose and operational cost. Identified where information was duplicated, where checks were delayed, and where partners got stuck.</p>
         </div>
         <div class="cs-grid-item">
           <h3 class="cs-h4">Scenario mapping with PMs</h3>
-          <p class="cs-body-sm">To make sure the new flow is as compliant as the old one, we map the new flow against the old flow, to understand all the scenario we need to cater for with different business type, COR, and user type</p>
+          <p class="cs-body-sm">Mapped the new flow against the legacy flow to ensure we still covered edge cases (business type, COR, new vs. existing user). Defined which steps were required before vs. after activation.</p>
         </div>
         <div class="cs-grid-item">
-          <h3 class="cs-h4">Competitor analysis</h3>
-          <p class="cs-body-sm">Benchmarking competitor platform to understand how partners currently onboard with other platforms</p>
+          <h3 class="cs-h4">Competitor Benchmarking</h3>
+          <p class="cs-body-sm">Benchmarking competitor platform to compare onboarding patterns and expectation-setting across their journeys.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== PROCESS — DESIGN STRATEGY ==================== -->
-  <section class="cs-section" id="design-strategy">
+  <!-- ==================== PROCESS — DESIGN PRINCIPLES ==================== -->
+  <section class="cs-section" id="principles">
     <div>
       <div class="cs-label">Process</div>
-      <h2 class="cs-h2">Design strategy</h2>
+      <h2 class="cs-h2">Design principles</h2>
     </div>
-    <div data-reveal>
+    <div data-reveal style="margin-bottom:48px;">
       <figure class="cs-figure">
-        <img src="assets/pepperstone/design-strategy.png" alt="Design file overview showing the KYC, IB questionnaire, reapplication and risk disclosure flows" loading="lazy" decoding="async" width="2384" height="490">
+        <img src="assets/pepperstone/design-principles.png" alt="Design file overview showing the KYC, IB questionnaire, reapplication and risk disclosure flows" loading="lazy" decoding="async" width="2384" height="490">
       </figure>
     </div>
-    <div>
-      <!-- Descriptions below are drafted from context — edit freely. -->
+    <div data-reveal>
       <ol class="cs-principles">
         <li>
           <div class="cs-principle-body">
-            <h3 class="cs-h4">Always clear next steps</h3>
-            <p class="cs-body-sm">After each completed step the partner is shown exactly what to do next, rather than being left to guess or wait to be contacted.</p>
+            <h3 class="cs-h4">Clarity on the next step</h3>
+            <p class="cs-body-sm">After each step, partners should know exactly what to do next, rather than being left to guess or wait to be contacted.</p>
           </div>
         </li>
         <li>
           <div class="cs-principle-body">
-            <h3 class="cs-h4">When waiting is required, give a correct estimate</h3>
-            <p class="cs-body-sm">Where a review genuinely takes time, the screen says how long, so partners aren’t left chasing status updates.</p>
+            <h3 class="cs-h4">Set expectations when waiting is real</h3>
+            <p class="cs-body-sm">If review takes time, show how long and why.</p>
           </div>
         </li>
         <li>
           <div class="cs-principle-body">
-            <h3 class="cs-h4">For longer forms, set correct expectation</h3>
-            <p class="cs-body-sm">Longer sections are split into labelled sub-steps with visible progress, so partners know what’s left before they begin.</p>
+            <h3 class="cs-h4">Make long forms feel doable</h3>
+            <p class="cs-body-sm">Longer sections are split into labelled sub-steps with visible progress.</p>
           </div>
         </li>
         <li>
           <div class="cs-principle-body">
-            <h3 class="cs-h4">Designing for both desktop and mobile</h3>
-            <p class="cs-body-sm">Every step works equally well on a phone, so partners can complete onboarding on whichever device they have to hand.</p>
+            <h3 class="cs-h4">Design for mobile-first completion</h3>
+            <p class="cs-body-sm">~19% of partners primarily use mobile, so every step must work end-to-end on mobile.</p>
           </div>
         </li>
       </ol>
+    </div>
+  </section>
+
+  <!-- ==================== SOLUTION ====================
+       Each block: heading + description, then the demo video below it.
+       All videos are placeholders — see the hero comment above for the
+       markup to swap in. -->
+  <section class="cs-section" id="solution">
+    <div>
+      <h2 class="cs-h2">Solution</h2>
+    </div>
+
+    <div class="cs-solution" data-reveal>
+      <div>
+        <h3 class="cs-h3">Immediate activation after registration</h3>
+        <p class="cs-body">Partners can start referring with minimal information. This shifts onboarding from “complete everything first” to “start now, verify progressively.”</p>
+      </div>
+      <div>
+        <figure class="cs-figure">
+          <div class="cs-placeholder">Demo video — immediate activation after registration</div>
+        </figure>
+      </div>
+    </div>
+
+    <div class="cs-solution" data-reveal>
+      <div>
+        <h3 class="cs-h3">Guided onboarding (tour + persistent checklist)</h3>
+        <p class="cs-body">Persistent benefit-driven messaging to encourage partners to complete the rest of the required step.</p>
+      </div>
+      <div>
+        <figure class="cs-figure">
+          <div class="cs-placeholder">Demo video — guided onboarding tour and checklist</div>
+        </figure>
+      </div>
+    </div>
+
+    <div class="cs-solution" data-reveal>
+      <div>
+        <h3 class="cs-h3">Split the form into 3 sections partners can finish over time</h3>
+        <p class="cs-body">The onboarding form is divided into three parts that can be completed in separate sittings. Each section provides time estimate and required info for clear expectation setting.</p>
+      </div>
+      <div>
+        <figure class="cs-figure">
+          <div class="cs-placeholder">Demo video — three-part form with time estimates</div>
+        </figure>
+      </div>
+    </div>
+
+    <div class="cs-solution" data-reveal>
+      <div>
+        <h3 class="cs-h3">Full mobile experience</h3>
+        <p class="cs-body">We delivered equal experience for mobile for partners on-the-go</p>
+      </div>
+      <div>
+        <figure class="cs-figure">
+          <div class="cs-placeholder">Demo video — full mobile experience</div>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -341,6 +347,6 @@
 
 </div>
 
-<script src="js/script.js?v=10"></script>
+<script src="js/script.js?v=13"></script>
 </body>
 </html>

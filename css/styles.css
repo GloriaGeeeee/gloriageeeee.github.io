@@ -694,7 +694,8 @@ h1, h2, h3, p { margin: 0; }
   align-items: center;
   gap: 10px;
   font-family: var(--font-mono);
-  font-size: 15px;
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line);
   white-space: nowrap;
   color: var(--color-ink);
   transition: color .15s;
@@ -705,7 +706,13 @@ h1, h2, h3, p { margin: 0; }
 
 /* ---------- My thoughts ---------- */
 .thoughts { padding: 96px 0; border-top: 1px solid var(--color-stroke); }
-.eyebrow { font-family: var(--font-mono); font-size: 15px; color: var(--color-text-secondary); margin-bottom: 32px; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line);
+  color: var(--color-text-secondary);
+  margin-bottom: 32px;
+}
 .thoughts-link {
   display: flex;
   align-items: flex-end;
@@ -733,7 +740,8 @@ h1, h2, h3, p { margin: 0; }
   align-items: center;
   gap: 10px;
   font-family: var(--font-mono);
-  font-size: 15px;
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line);
   white-space: nowrap;
   color: var(--color-ink);
 }
@@ -775,7 +783,8 @@ h1, h2, h3, p { margin: 0; }
   flex-direction: column;
   gap: 10px;
   text-align: right;
-  font-size: 15px;
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line);
   color: var(--color-stroke);
 }
 .footer-email { color: var(--color-surface); }
@@ -986,9 +995,16 @@ h1, h2, h3, p { margin: 0; }
 /* ---------- Sections ---------- */
 .cs-section { padding: 96px 0; }
 .cs-section + .cs-section { padding-top: 0; }
+/* Brackets and lower-casing are added here rather than typed into the markup,
+   so every section label picks them up automatically — matching the {yunhan}
+   motif in the homepage hero. */
+.cs-label::before { content: "{"; }
+.cs-label::after  { content: "}"; }
 .cs-label {
   font-family: var(--font-mono);
-  font-size: 15px;
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line);
+  text-transform: lowercase;
   color: var(--color-text-secondary);
   margin-bottom: 20px;
 }
@@ -1063,6 +1079,14 @@ h1, h2, h3, p { margin: 0; }
   border-radius: 0;
   background: var(--color-surface);
 }
+/* For artwork that already carries its own framing — the hairline and the
+   surface fill only fight with it. */
+.cs-figure--plain img,
+.cs-figure--plain video {
+  border: none;
+  background: none;
+}
+
 .cs-caption {
   font-family: var(--font-mono);
   font-size: var(--text-body-sm-size);
@@ -1116,6 +1140,11 @@ h1, h2, h3, p { margin: 0; }
 .cs-grid-2 { grid-template-columns: repeat(2, 1fr); }
 .cs-grid-3 { grid-template-columns: repeat(3, 1fr); }
 .cs-grid-item { display: flex; flex-direction: column; gap: 12px; }
+
+/* Decorative logo-mark illustration used as a bullet above a goal/step
+   heading — see assets/illustrations/logo-pattern-*.svg. A little extra
+   room below it separates it from the title/description group underneath. */
+.cs-goal-icon { width: 40px; height: 40px; margin-bottom: 4px; }
 
 /* ---------- Solution blocks ---------- */
 .cs-solution + .cs-solution { margin-top: 96px; }
