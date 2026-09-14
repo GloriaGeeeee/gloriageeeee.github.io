@@ -14,11 +14,16 @@
 
 <!-- ?v= is a cache-buster: bump the number whenever styles.css changes so browsers
      fetch the new file instead of reusing the copy they already have. -->
-<link rel="stylesheet" href="css/styles.css?v=25">
+<link rel="stylesheet" href="css/styles.css?v=32">
 </head>
 <body>
 
-<!-- Preloader: shown for a moment while the page "counts up" to 100% -->
+<!-- Preloader: shown for a moment while the page "counts up" to 100% —
+     but only on the first page of a visit. The inline script right below
+     must run before anything paints, so it can mark <html> before the
+     browser ever draws the black overlay on a repeat page; the render-
+     blocking stylesheet above guarantees no paint happens before both this
+     and it have run. See js/script.js section 1 for the JS-side half. -->
 <div class="preloader" data-preloader>
   <div class="preloader-top">
     <span class="preloader-label">Gloria Gao — Portfolio 2026</span>
@@ -26,9 +31,29 @@
   </div>
   <div class="preloader-bar"><div class="preloader-bar-fill" data-bar></div></div>
 </div>
+<script>
+  if (sessionStorage.getItem('gg-preloader-seen')) {
+    document.documentElement.classList.add('skip-preloader');
+  } else {
+    sessionStorage.setItem('gg-preloader-seen', '1');
+  }
+</script>
 
-<!-- Page-transition curtain, swipes up when you click an internal link -->
+<!-- Page-transition curtain, swipes up when you click an internal link.
+     Starts pre-covered (no animation, just present) when arriving via one
+     of those links, so there's something to tuck away from — see
+     js/script.js section 8 for the reveal that plays once this state has
+     actually painted, and the "why inline / why here" reasoning (same
+     no-flash requirement as the preloader-skip check above: must run
+     before first paint, which the render-blocking stylesheet guarantees
+     for anything this early in <body>). -->
 <div class="curtain" data-curtain></div>
+<script>
+  if (sessionStorage.getItem('gg-curtain-incoming')) {
+    sessionStorage.removeItem('gg-curtain-incoming');
+    document.querySelector('[data-curtain]').classList.add('is-active');
+  }
+</script>
 
 <!-- Custom cursor (desktop only) -->
 <div class="cursor-ring" data-cursor-ring></div>
@@ -148,7 +173,7 @@
       <span class="about-grid-line"></span>
     </div>
     <div class="about-eyebrow" data-reveal>About me</div>
-    <h2 class="about-heading" data-reveal style="animation-delay:.06s">Senior Product Designer bridging the gap between complex financial systems and intuitive user experiences, powered by AI-driven workflows</h2>
+    <h2 class="about-heading" data-reveal style="animation-delay:.06s">Senior Product Designer bridging the gap between complex systems and intuitive user experiences, <span class="about-highlight">powered by AI design workflows</span></h2>
     <div class="about-stats" data-stats-reveal>
       <div class="about-stat">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21V7C8 6.07003 8 5.60504 8.10222 5.22354C8.37962 4.18827 9.18827 3.37962 10.2235 3.10222C10.605 3 11.07 3 12 3C12.93 3 13.395 3 13.7765 3.10222C14.8117 3.37962 15.6204 4.18827 15.8978 5.22354C16 5.60504 16 6.07003 16 7V21M5.2 21H18.8C19.9201 21 20.4802 21 20.908 20.782C21.2843 20.5903 21.5903 20.2843 21.782 19.908C22 19.4802 22 18.9201 22 17.8V10.2C22 9.07989 22 8.51984 21.782 8.09202C21.5903 7.71569 21.2843 7.40973 20.908 7.21799C20.4802 7 19.9201 7 18.8 7H5.2C4.07989 7 3.51984 7 3.09202 7.21799C2.71569 7.40973 2.40973 7.71569 2.21799 8.09202C2 8.51984 2 9.07989 2 10.2V17.8C2 18.9201 2 19.4802 2.21799 19.908C2.40973 20.2843 2.71569 20.5903 3.09202 20.782C3.51984 21 4.0799 21 5.2 21Z"/></svg>
@@ -205,16 +230,16 @@
              --bare modifier: no card background, border or clipping, letting
              the laptop's transparent PNG sit directly on the blue circle.
              --top/--left centre it on that circle; see .case-mockup--bare. -->
-        <div class="case-mockup case-mockup--bare" data-parallax="0.24" style="--top:12.6%;--left:-3%;--w:54%;--ar:2858/2417;">
+        <div class="case-mockup case-mockup--bare" data-parallax="0.24" style="--top:12.6%;--left:-3%;--w:54%;--ar:1400/1144;">
           <div class="case-mockup-slide" data-scroll-slide>
-            <img src="assets/pepperstone/home-banner.webp" alt="The Pepperstone Partner Portal dashboard on a laptop, showing account balance, rebate tier, a performance chart and recent client activity" loading="lazy" decoding="async" width="1400" height="1184">
+            <img src="assets/pepperstone/home-banner.webp" alt="The Pepperstone Partner Portal onboarding screen on a laptop, greeting partner John Smith with a profile-completion checklist and stats all at zero" loading="lazy" decoding="async" width="1400" height="1144">
           </div>
         </div>
         <div class="case-content case-content--right" data-scroll-fade style="--top:12%;--w:44%;">
           <div class="case-text">
             <span class="case-eyebrow">{case study 01}</span>
-            <h3 class="case-heading">Designing for Complexity: The Pepperstone Partner Portal</h3>
-            <p class="case-desc">Designing a complex, data-heavy partner dashboard with an AI-assisted Figma-to-delivery workflow.</p>
+            <h3 class="case-heading">Redesigning partner onboarding for faster activation</h3>
+            <p class="case-desc">Turning a long, manual onboarding process into a guided flow that activates new partners in minutes instead of days.</p>
           </div>
           <div class="tags">
             <span class="tag tag-neutral">Onboarding Experience</span>
@@ -378,6 +403,6 @@
 
 </div>
 
-<script src="js/script.js?v=25"></script>
+<script src="js/script.js?v=32"></script>
 </body>
 </html>

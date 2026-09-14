@@ -19,32 +19,44 @@ document.addEventListener('DOMContentLoaded', () => {
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => Array.from(document.querySelectorAll(s));
 
-  /* ---------- 1. Preloader ---------- */
+  /* ---------- 1. Preloader ----------
+     Plays only on the first page of a visit. A tiny inline script right
+     after the preloader markup in <head> (see every page's <body>) sets
+     .skip-preloader on <html> — before first paint, so there's no flash —
+     once sessionStorage confirms this isn't that first page. When skipped,
+     the count/bar animation never runs; hero content still reveals right
+     away rather than staying invisible waiting for a countdown that isn't
+     happening. */
   const preloader = $('[data-preloader]');
   const counter = $('[data-count]');
   const bar = $('[data-bar]');
-  const duration = 1200;
-  const start = performance.now();
+  const skippedPreload = document.documentElement.classList.contains('skip-preloader');
 
   function finishPreload() {
-    if (preloader) {
+    if (preloader && !skippedPreload) {
       preloader.classList.add('is-done');
       setTimeout(() => { preloader.style.display = 'none'; }, 850);
     }
     $$('[data-hero]').forEach((el) => el.classList.add('is-visible'));
   }
 
-  function tickPreload(now) {
-    const progress = Math.min(1, (now - start) / duration);
-    if (counter) counter.textContent = Math.floor(progress * 100);
-    if (bar) bar.style.width = (progress * 100) + '%';
-    if (progress < 1) {
-      requestAnimationFrame(tickPreload);
-    } else {
-      finishPreload();
+  if (skippedPreload) {
+    finishPreload();
+  } else {
+    const duration = 1200;
+    const start = performance.now();
+    function tickPreload(now) {
+      const progress = Math.min(1, (now - start) / duration);
+      if (counter) counter.textContent = Math.floor(progress * 100);
+      if (bar) bar.style.width = (progress * 100) + '%';
+      if (progress < 1) {
+        requestAnimationFrame(tickPreload);
+      } else {
+        finishPreload();
+      }
     }
+    requestAnimationFrame(tickPreload);
   }
-  requestAnimationFrame(tickPreload);
 
   /* ---------- 2. Scroll reveals ---------- */
   const revealTargets = $$('[data-reveal]');
@@ -283,19 +295,66 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSideNav();
   }
 
-  /* ---------- 8. Page transition curtain ---------- */
+  /* ---------- 8. Page transition curtain ----------
+     Always upward, never back down the way it came: rises from below to
+     cover the screen (ease-out, 500ms) before navigating away, then —
+     once the destination page has loaded — keeps rising up and off the
+     top to reveal it (ease-in, 500ms). Positions/easing live in CSS (see
+     .curtain / .is-active / .is-exiting in styles.css); this is just the
+     choreography of when each class applies.
+
+     The destination page needs to START already covering the screen, or
+     there's nothing to reveal from. A sessionStorage flag set right
+     before navigating tells that page's own early inline script (right
+     after its curtain markup in <body>) to add .is-active before first
+     paint, with no animation — the same no-flash technique the preloader
+     skip uses. This block waits for that painted state to actually commit
+     before reversing it — toggling classes in the same tick they were set
+     can get coalesced by the browser into a no-op, skipping the
+     transition, so a double rAF forces a real frame in between — then,
+     once the reveal has had its full 500ms to play, resets the curtain
+     straight back to resting-below with transitions suspended for a beat,
+     so nothing visibly moves (both positions are off-screen either way)
+     and it's ready to rise from below again next time. */
   const curtain = $('[data-curtain]');
+
+  function resetCurtainInstant() {
+    if (!curtain) return;
+    curtain.classList.add('no-transition');
+    curtain.classList.remove('is-active', 'is-exiting');
+    void curtain.offsetHeight; // force layout so the reset above lands before transitions come back
+    curtain.classList.remove('no-transition');
+  }
+
   $$('a[data-transition]').forEach((link) => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
       if (!href || href.charAt(0) === '#' || href.indexOf('http') === 0) return;
       e.preventDefault();
-      if (curtain) curtain.classList.add('is-active');
-      setTimeout(() => { window.location.href = href; }, 640);
+      sessionStorage.setItem('gg-curtain-incoming', '1');
+      if (curtain) {
+        curtain.classList.remove('is-exiting');
+        curtain.classList.add('is-active');
+      }
+      setTimeout(() => { window.location.href = href; }, 500);
     });
   });
-  window.addEventListener('pageshow', () => {
-    if (curtain) curtain.classList.remove('is-active');
+  if (curtain && curtain.classList.contains('is-active')) {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        curtain.classList.remove('is-active');
+        curtain.classList.add('is-exiting');
+        setTimeout(resetCurtainInstant, 500);
+      });
+    });
+  }
+  window.addEventListener('pageshow', (event) => {
+    // Only the bfcache-restore case (browser back/forward — event.persisted
+    // is true only then): the page reappears without DOMContentLoaded
+    // firing again, so the block above never ran on it. Resetting
+    // unconditionally here instead would fire on every ordinary load too,
+    // racing that block and potentially cutting its reveal short.
+    if (event.persisted) resetCurtainInstant();
   });
 
   /* ---------- 9. About page — portrait parallax ----------

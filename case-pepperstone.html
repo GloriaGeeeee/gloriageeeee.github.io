@@ -14,11 +14,16 @@
 
 <!-- ?v= is a cache-buster: bump the number whenever styles.css changes so browsers
      fetch the new file instead of reusing the copy they already have. -->
-<link rel="stylesheet" href="css/styles.css?v=25">
+<link rel="stylesheet" href="css/styles.css?v=32">
 </head>
 <body>
 
-<!-- Preloader: shown for a moment while the page "counts up" to 100% -->
+<!-- Preloader: shown for a moment while the page "counts up" to 100% —
+     but only on the first page of a visit. The inline script right below
+     must run before anything paints, so it can mark <html> before the
+     browser ever draws the black overlay on a repeat page; the render-
+     blocking stylesheet above guarantees no paint happens before both this
+     and it have run. See js/script.js section 1 for the JS-side half. -->
 <div class="preloader" data-preloader>
   <div class="preloader-top">
     <span class="preloader-label">Gloria Gao — Portfolio 2026</span>
@@ -26,9 +31,29 @@
   </div>
   <div class="preloader-bar"><div class="preloader-bar-fill" data-bar></div></div>
 </div>
+<script>
+  if (sessionStorage.getItem('gg-preloader-seen')) {
+    document.documentElement.classList.add('skip-preloader');
+  } else {
+    sessionStorage.setItem('gg-preloader-seen', '1');
+  }
+</script>
 
-<!-- Page-transition curtain, swipes up when you click an internal link -->
+<!-- Page-transition curtain, swipes up when you click an internal link.
+     Starts pre-covered (no animation, just present) when arriving via one
+     of those links, so there's something to tuck away from — see
+     js/script.js section 8 for the reveal that plays once this state has
+     actually painted, and the "why inline / why here" reasoning (same
+     no-flash requirement as the preloader-skip check above: must run
+     before first paint, which the render-blocking stylesheet guarantees
+     for anything this early in <body>). -->
 <div class="curtain" data-curtain></div>
+<script>
+  if (sessionStorage.getItem('gg-curtain-incoming')) {
+    sessionStorage.removeItem('gg-curtain-incoming');
+    document.querySelector('[data-curtain]').classList.add('is-active');
+  }
+</script>
 
 <!-- Custom cursor (desktop only) — without this markup the page has no visible cursor at all -->
 <div class="cursor-ring" data-cursor-ring></div>
@@ -359,6 +384,6 @@
 
 </div>
 
-<script src="js/script.js?v=25"></script>
+<script src="js/script.js?v=32"></script>
 </body>
 </html>

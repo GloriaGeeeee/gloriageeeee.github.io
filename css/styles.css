@@ -181,6 +181,13 @@ h1, h2, h3, p { margin: 0; }
   transition: transform .8s cubic-bezier(.76,0,.24,1);
 }
 .preloader.is-done { transform: translateY(-100%); }
+/* .skip-preloader is added to <html> by a tiny inline script right after
+   the preloader markup in each page, before sessionStorage says this is
+   the first page of the visit — so it lands before the browser's first
+   paint (this stylesheet is render-blocking, so nothing paints until both
+   it and that inline script have run) and the black overlay never flashes
+   on the curtain-driven navigations between pages. */
+.skip-preloader .preloader { display: none !important; }
 .preloader-top { display: flex; align-items: flex-end; justify-content: space-between; }
 .preloader-label {
   font-family: var(--font-mono);
@@ -199,17 +206,32 @@ h1, h2, h3, p { margin: 0; }
 .preloader-bar { height: 2px; background: rgba(255,251,243,0.14); margin-top: 28px; }
 .preloader-bar-fill { height: 100%; width: 0%; background: var(--color-red); }
 
-/* ---------- Page-transition curtain ---------- */
+/* ---------- Page-transition curtain ----------
+   Always moves upward, never back down the way it came: rises from below
+   to cover the screen, then keeps rising up and off the top to reveal
+   what's under it. Three positions:
+     (base)       translateY(101%)   resting, off-screen below
+     .is-active   translateY(0)      covering
+     .is-exiting  translateY(-101%)  off-screen above, just revealed
+   Each direction gets its own easing/duration — ease-out growing up into
+   .is-active, ease-in continuing up into .is-exiting — from whichever
+   rule the transition lands ON, since that's what a CSS transition reads
+   its timing-function from, not the rule it's leaving. .is-exiting resets
+   back to the base position with .no-transition (see js/script.js) so the
+   curtain is ready to rise from below again next time, rather than
+   sliding down into view from above. */
 .curtain {
   position: fixed;
   inset: 0;
   z-index: 90;
   background: var(--color-red);
   transform: translateY(101%);
-  transition: transform .7s cubic-bezier(.76,0,.24,1);
+  transition: transform .5s ease-in;
   pointer-events: none;
 }
-.curtain.is-active { transform: translateY(0); }
+.curtain.is-active  { transform: translateY(0);      transition: transform .5s ease-out; }
+.curtain.is-exiting { transform: translateY(-101%);  transition: transform .5s ease-in; }
+.curtain.no-transition { transition: none !important; }
 
 /* ---------- Custom cursor ---------- */
 .cursor-ring {
@@ -468,13 +490,19 @@ h1, h2, h3, p { margin: 0; }
 .about-grid-bg.is-visible .about-grid-line:nth-child(3) { transition-delay: .12s; }
 .about-grid-bg.is-visible .about-grid-line:nth-child(4) { transition-delay: .18s; }
 .about-grid-bg.is-visible .about-grid-line:nth-child(5) { transition-delay: .24s; }
+/* Braces via ::before/::after rather than typed into the text, matching how
+   every other {label} on the site (.cs-label) does it — so the markup just
+   holds "About me" and never needs the punctuation touched by hand. */
+.about-eyebrow::before { content: "{"; }
+.about-eyebrow::after  { content: "}"; }
 .about-eyebrow {
   position: relative;
   font-family: var(--font-display);
   font-weight: 400;
   font-size: 18px;
   line-height: 28px;
-  color: var(--color-ink);
+  text-transform: lowercase;
+  color: var(--color-text-secondary);
 }
 .about-heading {
   position: relative;
@@ -487,6 +515,28 @@ h1, h2, h3, p { margin: 0; }
   max-width: 650px;
   margin-top: -16px;
   text-wrap: pretty;
+}
+/* A highlighter stroke behind "powered by AI-driven workflows", sweeping
+   in left-to-right once the heading has scrolled into view. A background-
+   image (not an absolutely-positioned ::before) is what makes this survive
+   the phrase wrapping onto its own line at narrow widths — a gradient
+   background paints correctly across each wrapped line fragment of an
+   inline element, where a single ::before would only cover one fragment.
+   background-size is the growth axis (0% → 100% width), keyed off the
+   same .is-visible class the heading's own [data-reveal] fade-in already
+   adds — no separate JS needed. Yellow, same ink as ::selection, so this
+   reads as "highlighted" the same way selecting text on the page does. */
+.about-highlight {
+  background-image: linear-gradient(var(--color-yellow), var(--color-yellow));
+  background-repeat: no-repeat;
+  background-position: 0 78%;
+  background-size: 0% 42%;
+  transition: background-size .7s cubic-bezier(.22,1,.36,1);
+  transition-delay: .5s;
+}
+.about-heading.is-visible .about-highlight { background-size: 100% 42%; }
+@media (prefers-reduced-motion: reduce) {
+  .about-highlight { background-size: 100% 42%; transition: none; }
 }
 /* 4 equal columns with no gap, so each stat's left edge sits exactly on a
    grid line above — spacing comes from padding-right instead of a gap. */
@@ -721,7 +771,7 @@ h1, h2, h3, p { margin: 0; }
 /* Eyebrow + heading + description read as one tight group (16px); the
    32px above lives between that group, the tags, and the button. */
 .case-text { display: flex; flex-direction: column; align-items: inherit; gap: 16px; width: 100%; }
-.case-eyebrow { font-family: var(--font-display); font-size: 18px; line-height: 28px; color: var(--color-ink); }
+.case-eyebrow { font-family: var(--font-display); font-size: 18px; line-height: 28px; color: var(--color-text-secondary); }
 .case-heading {
   margin: 0;
   font-family: var(--font-display);
