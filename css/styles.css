@@ -643,6 +643,17 @@ h1, h2, h3, p { margin: 0; }
    so scrolling back up slides it back out and fades it away. Lives on an
    inner wrapper so it doesn't collide with the outer .case-mockup's
    continuous parallax transform. */
+/* For a real screenshot that already carries its own framing (a device
+   mockup on transparency), drop the placeholder card chrome so the artwork
+   sits straight on the shape behind it. */
+.case-mockup--bare {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+}
+.case-mockup--bare img { width: 100%; height: 100%; object-fit: contain; }
+
 .case-mockup-slide { width: 100%; height: 100%; }
 [data-scroll-slide] { opacity: 0; transform: translateX(48px); }
 .case-mockup-bar {

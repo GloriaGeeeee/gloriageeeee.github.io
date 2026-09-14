@@ -212,7 +212,14 @@ document.addEventListener('DOMContentLoaded', () => {
           el.style.clipPath = `inset(${topInset}% 0 ${bottomInset}% 0)`;
         });
         slideEls.forEach((el) => {
-          el.style.opacity = entryProgress;
+          // A .case-mockup--bare slide has no backing — it's a transparent
+          // screenshot PNG with nothing behind it but the shape it overlaps.
+          // Fading ITS opacity would fade the screenshot's own pixels, which
+          // lets that shape show through mid-scale-in — its still-growing
+          // edge then reads as a hard line cutting across the laptop. Held
+          // at 1 instead (never the CSS resting-state 0), so only the slide
+          // itself animates and the image is opaque throughout.
+          el.style.opacity = el.closest('.case-mockup--bare') ? 1 : entryProgress;
           el.style.transform = `translateX(${(1 - entryProgress) * 48}px)`;
         });
         fadeEls.forEach((el) => {
