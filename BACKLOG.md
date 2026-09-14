@@ -17,3 +17,12 @@ fixed in the moment. Not urgent, not forgotten.
 - [ ] **Case study images aren't clickable.** Images in `case-*.html`
       (`.cs-figure img`) are static — add a lightbox/full-size view so
       readers can inspect research artefacts and screenshots up close.
+- [ ] **Polish the About timeline into a "fun folder" view.** The journey
+      timeline (`about.html` `#journey`, `.about-tl` in `css/styles.css`)
+      works but is a first pass: five bubbles on an axis that reveal an
+      image on hover. Revisit the interaction — the idea is something more
+      playful and folder-like to browse through. Two loose ends to pick up
+      with it: the five hover images are still generated placeholders
+      (`assets/about/tl-*.webp`), and the whole thing collapses to a plain
+      horizontal scroll on mobile rather than having a designed small-screen
+      treatment.

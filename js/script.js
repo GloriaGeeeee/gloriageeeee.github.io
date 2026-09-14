@@ -290,4 +290,48 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('pageshow', () => {
     if (curtain) curtain.classList.remove('is-active');
   });
+
+  /* ---------- 9. About page — portrait parallax ----------
+     Turns the pointer's position into a -1..1 pair on the stage. Each layer
+     inside multiplies that by its own data-depth (set in the HTML), so the
+     square, circle and photo drift different distances and the group reads
+     as depth rather than one flat picture.
+
+     Guards: skipped entirely on touch devices (nothing hovers) and when the
+     reader has asked for reduced motion. With JS off the transforms resolve
+     to zero, so the composition still sits exactly where it should. */
+  const portrait = $('[data-portrait]');
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const stillPreferred = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (portrait && canHover && !stillPreferred) {
+    // Scoped to the stage — $$ above is document-wide and takes no root.
+    const layers = Array.from(portrait.querySelectorAll('[data-depth]'));
+    layers.forEach((el) => el.style.setProperty('--d', el.dataset.depth));
+
+    let queued = false;
+    let pending = { x: 0, y: 0 };
+
+    const apply = () => {
+      queued = false;
+      portrait.style.setProperty('--px', pending.x.toFixed(3));
+      portrait.style.setProperty('--py', pending.y.toFixed(3));
+    };
+
+    // Track across the whole header so the shapes react as you approach,
+    // not only once the cursor is inside the photo itself.
+    const zone = portrait.closest('.about-header') || portrait;
+
+    zone.addEventListener('mousemove', (e) => {
+      const r = zone.getBoundingClientRect();
+      pending.x = ((e.clientX - r.left) / r.width - 0.5) * 2;
+      pending.y = ((e.clientY - r.top) / r.height - 0.5) * 2;
+      if (!queued) { queued = true; requestAnimationFrame(apply); }
+    }, { passive: true });
+
+    zone.addEventListener('mouseleave', () => {
+      pending = { x: 0, y: 0 };
+      if (!queued) { queued = true; requestAnimationFrame(apply); }
+    }, { passive: true });
+  }
 });

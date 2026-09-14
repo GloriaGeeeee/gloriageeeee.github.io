@@ -1336,3 +1336,237 @@ h1, h2, h3, p { margin: 0; }
   .cs-quote p { font-size: 19px; line-height: 28px; }
   .cs-metric-value { font-size: 36px; line-height: 44px; }
 }
+
+/* ==========================================
+   ABOUT PAGE (about.html)
+   ==========================================
+   Reuses the case study shell, section rhythm and figure/label components.
+   Only three things are new here: the parallax portrait stage, the merged
+   journey timeline, and the art gallery grid.
+   ========================================== */
+
+/* .cs-shell sizes itself from --cs-max, which .case-study normally supplies —
+   the About page declares its own so it can share that container. */
+.about-page { --cs-max: 1280px; --cs-split: 72px; }
+
+/* ---------- Header: portrait beside the bio ---------- */
+.about-header {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: var(--cs-split);
+  align-items: center;
+  padding: 8px 0 72px;
+  border-bottom: 1px solid var(--color-stroke);
+}
+.about-name {
+  font-family: var(--font-display);
+  font-size: var(--text-h1-size);
+  line-height: var(--text-h1-line);
+  font-weight: var(--text-h1-weight);
+  color: var(--color-ink);
+  margin: 12px 0 0;
+}
+.about-lead {
+  font-family: var(--font-display);
+  font-size: var(--text-h3-size);
+  line-height: var(--text-h3-line);
+  font-weight: 400;
+  color: var(--color-ink);
+  margin: 24px 0 0;
+}
+/* The one italic serif accent on the page, same device as the homepage
+   headline's emphasised word. */
+.about-lead .serif-accent { color: var(--color-red); }
+.about-bio { margin-top: 28px; display: flex; flex-direction: column; gap: 16px; }
+.about-bio p { margin: 0; }
+
+/* ---------- Portrait stage (parallax) ----------
+   Square, circle and photo are three stacked layers. script.js writes
+   --px/--py (a -1..1 pointer position) on the stage; each layer multiplies
+   that by its own data-depth, so they slide different distances and read as
+   depth. Everything still sits correctly with JS off — the transforms just
+   resolve to zero. */
+.about-portrait-stage {
+  position: relative;
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
+  --px: 0; --py: 0;
+}
+.about-shape, .about-portrait-photo {
+  position: absolute;
+  transform: translate3d(calc(var(--px) * var(--d, 0) * 1px), calc(var(--py) * var(--d, 0) * 1px), 0);
+  transition: transform .45s cubic-bezier(.22,.61,.36,1);
+  will-change: transform;
+}
+.about-shape--square {
+  width: 62%; height: 62%;
+  top: 2%; left: 0;
+  background: var(--color-yellow);
+}
+.about-shape--circle {
+  width: 54%; height: 54%;
+  right: 0; bottom: 2%;
+  background: var(--color-blue);
+  border-radius: 50%;
+}
+.about-portrait-photo {
+  width: 88%; height: 88%;
+  top: 6%; left: 6%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+/* A pointer that isn't a mouse can't hover, so don't advertise motion there. */
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .about-shape, .about-portrait-photo { transition: none; }
+}
+
+/* ---------- Journey timeline ----------
+   Five stops on one horizontal axis. Each stop is its own 4-row grid so the
+   card can sit above or below the axis while every bubble still lines up. */
+.about-tl-scroll { overflow-x: auto; overflow-y: hidden; padding-bottom: 8px; }
+.about-tl {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(180px, 1fr);
+  position: relative;
+  min-width: 900px;
+}
+/* The axis itself, drawn once behind every stop. */
+.about-tl::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 50%;
+  border-top: 1px dashed var(--color-stroke);
+}
+.about-tl-stop {
+  display: grid;
+  grid-template-rows: 1fr auto 1fr auto;
+  justify-items: center;
+  align-items: center;
+  row-gap: 14px;
+  padding: 0 12px;
+  position: relative;
+  /* Stops sit above the axis line, and an enlarged bubble raises its own
+     stop so it isn't clipped by the next one along. */
+  z-index: 1;
+}
+.about-tl-stop:hover, .about-tl-stop:focus-within { z-index: 3; }
+.about-tl-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+  max-width: 240px;
+}
+.about-tl-stop--above .about-tl-card { grid-row: 1; align-self: end; }
+.about-tl-stop--below .about-tl-card { grid-row: 3; align-self: start; }
+/* Leader line from card to bubble, mirrored for the two positions. */
+.about-tl-card::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 28px;
+  margin: 8px auto 0;
+  background: var(--color-stroke);
+}
+.about-tl-stop--below .about-tl-card::after { margin: 0 auto 8px; order: -1; }
+.about-tl-org {
+  font-family: var(--font-display);
+  font-size: var(--text-body-lg-size);
+  line-height: var(--text-body-lg-line);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+.about-tl-role {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line);
+  color: var(--color-text-secondary);
+}
+.about-tl-when {
+  grid-row: 4;
+  font-family: var(--font-mono);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+/* The bubble: a flat ink disc with a monogram, which cross-fades to the
+   stop's image on hover or keyboard focus. */
+.about-tl-bubble {
+  grid-row: 2;
+  position: relative;
+  width: 84px;
+  height: 84px;
+  padding: 0;
+  border: 1px solid var(--color-stroke);
+  border-radius: 50%;
+  background: var(--color-surface);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .35s cubic-bezier(.22,.61,.36,1), border-color .2s ease;
+}
+.about-tl-bubble img,
+.about-tl-monogram {
+  position: absolute;
+  inset: 0;
+  transition: opacity .3s ease;
+}
+.about-tl-bubble img { width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.about-tl-monogram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-body-sm-size);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+.about-tl-stop--current .about-tl-bubble { border-color: var(--color-red); border-width: 2px; }
+/* Scales up enough that the revealed image is actually readable, not just a
+   thumbnail hint. z-index lifts it clear of its neighbours while enlarged. */
+.about-tl-bubble:hover,
+.about-tl-bubble:focus-visible {
+  transform: scale(1.75);
+  border-color: var(--color-red);
+  outline: none;
+  z-index: 2;
+}
+.about-tl-bubble:hover img,
+.about-tl-bubble:focus-visible img { opacity: 1; }
+.about-tl-bubble:hover .about-tl-monogram,
+.about-tl-bubble:focus-visible .about-tl-monogram { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .about-tl-bubble { transition: border-color .2s ease; }
+  .about-tl-bubble:hover, .about-tl-bubble:focus-visible { transform: none; }
+}
+
+/* ---------- Digital art gallery ---------- */
+.about-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.about-gallery .cs-figure { margin: 0; }
+/* Square cells throughout; anything taller than the cell keeps its bottom edge. */
+.about-gallery img { aspect-ratio: 1; object-fit: cover; object-position: bottom; }
+
+/* ---------- About page — responsive ---------- */
+@media (max-width: 1100px) {
+  .about-header { grid-template-columns: 1fr; gap: 40px; padding-bottom: 56px; }
+  .about-portrait-stage { max-width: 340px; margin-inline: 0; }
+}
+@media (max-width: 860px) {
+  .about-gallery { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .about-name { font-size: var(--text-h2-size); line-height: var(--text-h2-line); }
+  .about-lead { font-size: var(--text-h4-size); line-height: var(--text-h4-line); }
+}
+@media (max-width: 480px) {
+  .about-gallery { grid-template-columns: 1fr; }
+}
