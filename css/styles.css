@@ -1175,6 +1175,10 @@ h1, h2, h3, p { margin: 0; }
 .cs-grid-2 { grid-template-columns: repeat(2, 1fr); }
 .cs-grid-3 { grid-template-columns: repeat(3, 1fr); }
 .cs-grid-item { display: flex; flex-direction: column; gap: 12px; }
+/* A label sits tighter to the heading it introduces than the 12px the grid
+   item uses between its other parts — the negative margin trims that gap in
+   half without changing the spacing anywhere else. */
+.cs-grid-item .cs-label { margin-bottom: -6px; }
 
 /* Decorative logo-mark illustration used as a bullet above a goal/step
    heading — see assets/illustrations/logo-pattern-*.svg. A little extra
@@ -1185,6 +1189,9 @@ h1, h2, h3, p { margin: 0; }
 .cs-solution + .cs-solution { margin-top: 96px; }
 .cs-solution .cs-h3 { margin-bottom: 12px; }
 .cs-solution .cs-body { margin-bottom: 32px; }
+/* Same breathing room the body copy gets, for when a jargon list is the last
+   thing before the figure instead of a paragraph. */
+.cs-solution .cs-jargon { margin-bottom: 32px; }
 
 /* ---------- Numbered principles ---------- */
 .cs-principles {
