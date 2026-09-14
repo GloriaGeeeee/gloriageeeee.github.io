@@ -3,9 +3,8 @@
 Things noticed along the way that we've deliberately deferred rather than
 fixed in the moment. Not urgent, not forgotten.
 
-- [ ] **Nav has no way home.** The top nav (homepage and case study pages)
-      has no logo/wordmark linking back to `index.html` — only "About me",
-      "Work", "Blog". Add a clickable logo on the left of the navbar.
+- [x] **Nav has no way home.** Added the brand logo to the left of the
+      navbar on all three pages, linking back to `index.html`.
 - [ ] **Rotating banner pattern is wrong.** The rotating banner below the
       hero (`index.html`, `.rotating-banner`) — the pattern it's cycling
       through isn't right. Needs a look with fresh eyes against the Figma

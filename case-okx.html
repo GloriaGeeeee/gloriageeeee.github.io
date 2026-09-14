@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simplify the DeFi earning experience — Gloria Gao</title>
+<meta name="description" content="Redesigning OKX On-chain Earn's subscription journey — how prioritizing familiarity and information hierarchy led to 52% better conversion.">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+
+<!-- Fonts: Geist for headings, Inter for body, Instrument Serif for the editorial accent, Geist Mono for labels -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<!-- ?v= is a cache-buster: bump the number whenever styles.css changes so browsers
+     fetch the new file instead of reusing the copy they already have. -->
+<link rel="stylesheet" href="css/styles.css?v=17">
+</head>
+<body>
+
+<!-- Preloader: shown for a moment while the page "counts up" to 100% -->
+<div class="preloader" data-preloader>
+  <div class="preloader-top">
+    <span class="preloader-label">Gloria Gao — Portfolio 2026</span>
+    <span class="preloader-count"><span data-count>0</span>%</span>
+  </div>
+  <div class="preloader-bar"><div class="preloader-bar-fill" data-bar></div></div>
+</div>
+
+<!-- Page-transition curtain, swipes up when you click an internal link -->
+<div class="curtain" data-curtain></div>
+
+<!-- Custom cursor (desktop only) — without this markup the page has no visible cursor at all -->
+<div class="cursor-ring" data-cursor-ring></div>
+<div class="cursor-dot" data-cursor-dot></div>
+
+<div class="page case-study">
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html" data-transition class="nav-logo" aria-label="Gloria Gao — home">
+        <svg width="32" height="32" viewBox="0 0 168 168" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="84" height="168" fill="#FFE020"/>
+          <rect x="84" y="84" width="84" height="84" fill="#78B4EA"/>
+          <circle cx="84" cy="84" r="84" fill="#F23C8A"/>
+          <path d="M 83.626 167.999 C 37.234 167.793 -0.206 130.017 0.001 83.626 C 0.207 37.234 37.983 -0.206 84.374 0.001 L 83.626 167.999 Z" fill="#EF3E2E"/>
+          <path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#A61E6E"/>
+        </svg>
+        <span class="nav-logo-word">Gloria Gao<sup>{yunhan}</sup></span>
+      </a>
+      <div class="nav-links">
+        <a href="about.html" data-transition>About me</a>
+        <a href="index.html#work" data-transition>Work</a>
+        <a href="https://substack.com" target="_blank" rel="noopener">Blog</a>
+      </div>
+    </div>
+    <a href="assets/Gloria-Gao-CV.pdf" class="btn btn-primary btn-sm nav-cta">
+      Download CV
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.5 L10.5 8 L6 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </nav>
+
+  <!-- .cs-shell holds the whole page to a max width with 80px either side -->
+  <div class="cs-shell">
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="cs-header">
+    <div class="cs-intro">
+      <div class="cs-intro-top">
+        <h1 class="cs-title">Simplify the DeFi earning experience</h1>
+        <p class="cs-body-sm">How redesigning OKX On-chain Earn's subscription journey led to 52% better conversion rates by prioritizing familiarity and improved information hierarchy.</p>
+        <div class="tags">
+          <span class="tag tag-orange">Crypto</span>
+          <span class="tag tag-red">Subscription &amp; Conversion</span>
+          <span class="tag tag-blue">Fintech</span>
+        </div>
+      </div>
+
+      <dl class="cs-meta">
+        <div>
+          <dt class="cs-meta-label">Status</dt>
+          <dd class="cs-body-sm">Shipped</dd>
+        </div>
+        <div>
+          <dt class="cs-meta-label">Timeline</dt>
+          <dd class="cs-body-sm">May 2024 – Sep 2024</dd>
+        </div>
+        <div>
+          <dt class="cs-meta-label">Team</dt>
+          <dd class="cs-body-sm">Product, content design, engineers</dd>
+        </div>
+        <div>
+          <dt class="cs-meta-label">Role</dt>
+          <dd class="cs-body-sm">End-to-end product designer</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="cs-hero-media">
+      <figure class="cs-figure cs-figure--plain">
+        <img src="assets/okx/cover.png" alt="OKX On-chain Earn product cover" loading="eager" decoding="async" width="1600" height="900">
+      </figure>
+    </div>
+  </header>
+
+  <!-- ==================== BODY + STICKY SIDE NAV ==================== -->
+  <div class="cs-main">
+
+    <div class="cs-sidenav-col">
+      <nav class="cs-sidenav" data-sidenav aria-label="Case study sections">
+        <p class="cs-sidenav-label">On this page</p>
+        <ul>
+          <li><a href="#problem">The problem</a></li>
+          <li><a href="#goals">Project goals</a></li>
+          <li><a href="#phase-one">Phase one</a></li>
+          <li><a href="#phase-two">Phase two</a></li>
+          <li><a href="#impact">Project impact</a></li>
+          <li><a href="#takeaways">Key takeaways</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="cs-content">
+
+  <!-- ==================== THE PROBLEM ==================== -->
+  <section class="cs-section" id="problem">
+    <div data-reveal>
+      <h2 class="cs-h2">The Problem</h2>
+      <p class="cs-body">As the product line expands, 40+ products were listed to users all at once without a structure that helps them get started. Different products also come with different sets of rules, such as reward payment schedules, fixed or flexible terms, and withdrawal timeframes. The subscription page has become crowded with all this information, making it overwhelming and confusing for users to understand.</p>
+    </div>
+    <div data-reveal style="margin-top:48px;">
+      <figure class="cs-figure cs-figure--plain">
+        <img src="assets/okx/problem.png" alt="Annotated screenshots showing the landing page listing 40+ products without recommendation, and a subscription page crowded with product information" loading="lazy" decoding="async" width="1600" height="1043">
+      </figure>
+    </div>
+  </section>
+
+  <!-- ==================== PROJECT GOALS ==================== -->
+  <section class="cs-section" id="goals">
+    <div data-reveal>
+      <h2 class="cs-h2">Project Goals</h2>
+      <p class="cs-body">We took a phased approach to improve the overall experience.</p>
+      <div class="cs-grid-2">
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Phase One: Landing Page Optimization</h3>
+          <p class="cs-body-sm">Improve product discovery by optimizing the landing page to help users quickly find products that interest them.</p>
+        </div>
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Phase Two: Improve the Information Clarity During Subscription</h3>
+          <p class="cs-body-sm">Reduce cognitive load by making product information more digestible and ensuring critical details — like source of earning, reward distribution frequency, and redemption time — are presented more effectively.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PHASE ONE ==================== -->
+  <section class="cs-section" id="phase-one">
+    <div data-reveal>
+      <div class="cs-label">Phase one</div>
+      <h2 class="cs-h2">Landing Page Optimization</h2>
+      <p class="cs-body">To better understand users' thoughts and behaviours, we turned to interaction data and found some interesting insights.</p>
+    </div>
+
+    <div class="cs-solution" data-reveal>
+      <div>
+        <h3 class="cs-h3">Data finding 1: Users show strong exploration behavior but need better support</h3>
+        <p class="cs-body">We observed users' high motivation to explore the landing page independently, as shown by their frequent navigation between available pages before eventually dropping off.</p>
+      </div>
+      <div>
+        <figure class="cs-figure cs-figure--plain">
+          <img src="assets/okx/engagement-distribution.png" alt="Engagement distribution on the landing page, annotated with product highlight, 40+ product listing, and protocol intro sections and their engagement percentages" loading="lazy" decoding="async" width="1492" height="1454">
+          <figcaption class="cs-caption">Engagement distribution on landing page</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="cs-solution" data-reveal>
+      <div>
+        <h3 class="cs-h3">Data finding 2: Users convert faster with familiar tokens</h3>
+        <p class="cs-body">Users showed a higher and faster subscription rate when entering from the asset page, which displays their existing holdings. Other pages that clearly showed users' current assets also led to better conversion rates. This demonstrates that users' existing holdings are more influential than interest rates for product recommendations.</p>
+      </div>
+      <div>
+        <figure class="cs-figure cs-figure--plain" style="max-width:500px; margin-inline:auto;">
+          <img src="assets/okx/conversion-by-entry.png" alt="Bar chart showing conversion rate by entry point: 41.4% from asset, 25.9% from token recommendation, 20.6% from On-chain Landing, 14.8% from Explore" loading="lazy" decoding="async" width="423" height="359">
+          <figcaption class="cs-caption">Conversion based on entry point</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div data-reveal>
+      <blockquote class="cs-quote">
+        <p class="serif-accent">How might we help users discover relevant products more efficiently by leveraging their familiarity with existing assets, while simplifying the exploration journey?</p>
+      </blockquote>
+    </div>
+
+    <div class="cs-solution" data-reveal>
+      <div>
+        <h3 class="cs-h3">Designing for actionability</h3>
+        <p class="cs-body">We brainstormed ways to restructure products and display formats to capture users' interest, exploring categories like "staking"/"DeFi" and common labels like "popular" and "new." However, these categorizations felt either like forced education or irrelevant to users.</p>
+        <p class="cs-body" style="margin-top:16px;">Based on our data findings, we shifted our approach to prioritize showing tokens users already own instead of highlighting high APR rates. We streamlined the experience by removing unnecessary education and excessive filtering, focusing instead on familiar products in users' existing portfolios.</p>
+      </div>
+      <div>
+        <figure class="cs-figure cs-figure--plain">
+          <img src="assets/okx/landing-iteration.png" alt="Three landing page iterations: separating by staking/DeFi, regrouping by user understanding, and removing grouping to focus on token" loading="lazy" decoding="async" width="1600" height="900">
+        </figure>
+      </div>
+    </div>
+
+    <div data-reveal style="margin-top:48px;">
+      <figure class="cs-figure cs-figure--plain">
+        <video autoplay loop muted playsinline preload="metadata" src="assets/okx/landing-before-after.mp4" style="max-width:1152px; margin-inline:auto; width:100%;"></video>
+        <figcaption class="cs-caption">Landing page, before and after</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ==================== PHASE TWO ==================== -->
+  <section class="cs-section" id="phase-two">
+    <div data-reveal>
+      <div class="cs-label">Phase two</div>
+      <h2 class="cs-h2">Improve the Information Clarity During Subscription</h2>
+    </div>
+
+    <div data-reveal>
+      <h3 class="cs-h3">Aligning the Team</h3>
+      <p class="cs-body">To build shared understanding and goals, we held an alignment and prioritization workshop where we grouped 100+ customer service feedback by theme and ranked issues by importance and urgency.</p>
+      <p class="cs-body" style="margin-top:16px;">This focused approach helped us tackle our top priorities and reduced iteration rounds by 40% compared to previous projects.</p>
+    </div>
+    <div data-reveal style="margin-top:32px;">
+      <div class="cs-grid-3">
+        <figure class="cs-figure cs-figure--plain">
+          <img src="assets/okx/workshop-1.webp" alt="Team workshop grouping customer feedback by theme, in-person and over video call" loading="lazy" decoding="async" width="800" height="598">
+        </figure>
+        <figure class="cs-figure cs-figure--plain">
+          <img src="assets/okx/workshop-2.webp" alt="Importance/urgency prioritization matrix with sticky notes ranking feedback themes" loading="lazy" decoding="async" width="800" height="600">
+        </figure>
+        <figure class="cs-figure cs-figure--plain">
+          <img src="assets/okx/workshop-3.webp" alt="Team gathered around the prioritization matrix, discussing and placing sticky notes" loading="lazy" decoding="async" width="800" height="600">
+        </figure>
+      </div>
+    </div>
+
+    <div class="cs-solution" data-reveal style="margin-top:96px;">
+      <div>
+        <h3 class="cs-h3">Important product information are invisible to the user</h3>
+        <p class="cs-body">Though all information was present in the user journey, customers struggled to identify key product features like earning sources, reward schedules, and redemption periods. These crucial details were hidden within dense paragraphs instead of being highlighted effectively.</p>
+      </div>
+      <div>
+        <figure class="cs-figure cs-figure--plain">
+          <img src="assets/okx/subscription-before.png" alt="Original subscription flow with dense, unhighlighted product information across three screens" loading="lazy" decoding="async" width="1600" height="900">
+        </figure>
+      </div>
+    </div>
+
+    <div data-reveal>
+      <blockquote class="cs-quote">
+        <p class="serif-accent">How might we transform dense product information into easily digestible formats that capture users' attention?</p>
+      </blockquote>
+    </div>
+
+    <div data-reveal>
+      <h3 class="cs-h3">Designing for focus</h3>
+      <p class="cs-body">The workshop helped us identify key information that users frequently missed, leading to customer complaints. These critical details needed to be clearly visible throughout the subscription journey:</p>
+      <ol class="cs-principles">
+        <li><div class="cs-principle-body"><h3 class="cs-h4">Source of earning</h3></div></li>
+        <li><div class="cs-principle-body"><h3 class="cs-h4">Reward distribution frequency</h3></div></li>
+        <li><div class="cs-principle-body"><h3 class="cs-h4">Redemption time</h3></div></li>
+      </ol>
+      <p class="cs-body" style="margin-top:32px;">Working with stakeholders, we explored various approaches to determine the optimal placement for each piece of information.</p>
+    </div>
+
+    <div class="cs-solution" data-reveal>
+      <div>
+        <h3 class="cs-h3">Showing the right info at the right time</h3>
+        <p class="cs-body">Instead of overwhelming users with a wall of text, we removed the pre-subscription education page and encouraged them to type and visualize their estimated earnings.</p>
+        <p class="cs-body" style="margin-top:16px;">We strategically placed the information based on decision-making priority: redemption period was placed near the CTA button since it's crucial for decision-making, especially for users concerned about liquidity, while less critical information like reward frequency was moved to the confirmation page as supplementary information.</p>
+      </div>
+      <div>
+        <figure class="cs-figure cs-figure--plain">
+          <img src="assets/okx/subscription-exploration.png" alt="Grid of subscription screen explorations testing different placements for redemption period, reward frequency, and confirmation states" loading="lazy" decoding="async" width="1600" height="900">
+        </figure>
+      </div>
+    </div>
+
+    <div data-reveal style="margin-top:48px;">
+      <p class="cs-body">This approach transformed dense information into a more digestible format by presenting the right information at the right time in the user journey, rather than overwhelming users with everything at once.</p>
+      <figure class="cs-figure cs-figure--plain" style="margin-top:32px;">
+        <video autoplay loop muted playsinline preload="metadata" src="assets/okx/subscription-before-after.mp4"></video>
+        <figcaption class="cs-caption">Subscription flow, before and after</figcaption>
+      </figure>
+    </div>
+
+    <div class="cs-solution" data-reveal>
+      <div>
+        <h3 class="cs-h3">Improved visual hierarchy</h3>
+        <p class="cs-body">We simplified and improved the visual hierarchy of the help center page to make it more scannable. Clear section headers with large, bold typography create distinct content blocks, and semi-bold typography highlights key information. Bulleted timelines with ample spacing help break down complex information about token distribution and rewards.</p>
+      </div>
+      <div>
+        <figure class="cs-figure cs-figure--plain">
+          <img src="assets/okx/help-center-before-after.png" alt="Help center page before and after: dense paragraphs replaced with clear headers, structured Q&A, and a redemption timeline" loading="lazy" decoding="async" width="1600" height="900">
+        </figure>
+      </div>
+    </div>
+
+    <div data-reveal style="margin-top:96px;">
+      <h3 class="cs-h3">Removing DeFi jargons</h3>
+      <p class="cs-body">Together with the content designers, we re-evaluated and replaced DeFi jargon with easy-to-understand terms:</p>
+      <div class="cs-jargon">
+        <div class="cs-jargon-row">
+          <span class="cs-jargon-old">Protocol</span>
+          <svg class="cs-jargon-arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="cs-jargon-new">Source of earning</span>
+        </div>
+        <div class="cs-jargon-row">
+          <span class="cs-jargon-old">Interest accrual time</span>
+          <svg class="cs-jargon-arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="cs-jargon-new">Reward distribution</span>
+        </div>
+        <div class="cs-jargon-row">
+          <span class="cs-jargon-old">Product mechanism</span>
+          <svg class="cs-jargon-arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="cs-jargon-new">When will I start earning?</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROJECT IMPACT ==================== -->
+  <section class="cs-section" id="impact">
+    <div data-reveal>
+      <h2 class="cs-h2">Project Impact</h2>
+      <p class="cs-body">The landing page optimization in Phase One combined with the information clarity improvements in Phase Two enhanced overall user engagement and subscription completion rates.</p>
+
+      <div class="cs-grid-2" style="margin-top:32px;">
+        <div class="cs-metric">
+          <span class="cs-metric-value">
+            <svg class="cs-metric-trend" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 18L18 6M18 14V6H10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            114%
+          </span>
+          <span class="cs-metric-label">Increase in landing conversion</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-value">
+            <svg class="cs-metric-trend" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 18L18 6M18 14V6H10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            45%
+          </span>
+          <span class="cs-metric-label">Increase in subscription conversion</span>
+        </div>
+      </div>
+
+      <p class="cs-body" style="margin-top:48px;">Both phases delivered significant improvements to our conversion metrics.</p>
+
+      <div class="cs-grid-2" style="margin-top:32px;">
+        <div class="cs-metric">
+          <span class="cs-metric-value">
+            <svg class="cs-metric-trend" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 18L18 6M18 14V6H10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            52.28%
+          </span>
+          <span class="cs-metric-label">Increase in overall conversion</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-value">
+            <svg class="cs-metric-trend" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6L18 18M10 18H18V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            188%
+          </span>
+          <span class="cs-metric-label">Decrease in time to convert</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== KEY TAKEAWAYS ==================== -->
+  <section class="cs-section" id="takeaways">
+    <div data-reveal>
+      <h2 class="cs-h2">Key Takeaways</h2>
+      <ol class="cs-principles">
+        <li><div class="cs-principle-body"><h3 class="cs-h4">Revisit data when unsure about design decisions</h3></div></li>
+        <li><div class="cs-principle-body"><h3 class="cs-h4">Stakeholder alignment prior to design review saves time</h3></div></li>
+        <li><div class="cs-principle-body"><h3 class="cs-h4">Revamp takes time, so be patient and trust the process</h3></div></li>
+      </ol>
+    </div>
+  </section>
+
+    </div><!-- /.cs-content -->
+  </div><!-- /.cs-main -->
+
+  <!-- ==================== BACK TO WORK ==================== -->
+  <div class="cs-pagenav">
+    <a href="index.html#work" data-transition class="case-link">
+      <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M16 11 H6 M10 6 L5 11 L10 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to all work
+    </a>
+  </div>
+
+  </div><!-- /.cs-shell -->
+
+  <!-- ==================== FOOTER / LET'S CONNECT ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="eyebrow eyebrow-inverse">Let's connect</div>
+      <div class="footer-top">
+        <h2>Say hello.</h2>
+        <div class="footer-links">
+          <a href="mailto:hello@gloriagao.design" class="footer-email">hello@gloriagao.design</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://substack.com" target="_blank" rel="noopener">Substack</a>
+          <a href="https://read.cv" target="_blank" rel="noopener">Read.cv</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Gloria Gao Yunhan · Product Designer</span>
+        <span>© 2026 · Singapore</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script src="js/script.js?v=17"></script>
+</body>
+</html>

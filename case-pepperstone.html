@@ -14,7 +14,7 @@
 
 <!-- ?v= is a cache-buster: bump the number whenever styles.css changes so browsers
      fetch the new file instead of reusing the copy they already have. -->
-<link rel="stylesheet" href="css/styles.css?v=13">
+<link rel="stylesheet" href="css/styles.css?v=17">
 </head>
 <body>
 
@@ -38,10 +38,22 @@
 
   <!-- ==================== NAVIGATION ==================== -->
   <nav class="navbar">
-    <div class="nav-links">
-      <a href="about.html" data-transition>About me</a>
-      <a href="index.html#work" data-transition>Work</a>
-      <a href="https://substack.com" target="_blank" rel="noopener">Blog</a>
+    <div class="nav-left">
+      <a href="index.html" data-transition class="nav-logo" aria-label="Gloria Gao — home">
+        <svg width="32" height="32" viewBox="0 0 168 168" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="84" height="168" fill="#FFE020"/>
+          <rect x="84" y="84" width="84" height="84" fill="#78B4EA"/>
+          <circle cx="84" cy="84" r="84" fill="#F23C8A"/>
+          <path d="M 83.626 167.999 C 37.234 167.793 -0.206 130.017 0.001 83.626 C 0.207 37.234 37.983 -0.206 84.374 0.001 L 83.626 167.999 Z" fill="#EF3E2E"/>
+          <path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#A61E6E"/>
+        </svg>
+        <span class="nav-logo-word">Gloria Gao<sup>{yunhan}</sup></span>
+      </a>
+      <div class="nav-links">
+        <a href="about.html" data-transition>About me</a>
+        <a href="index.html#work" data-transition>Work</a>
+        <a href="https://substack.com" target="_blank" rel="noopener">Blog</a>
+      </div>
     </div>
     <a href="assets/Gloria-Gao-CV.pdf" class="btn btn-primary btn-sm nav-cta">
       Download CV
@@ -347,6 +359,6 @@
 
 </div>
 
-<script src="js/script.js?v=13"></script>
+<script src="js/script.js?v=17"></script>
 </body>
 </html>
