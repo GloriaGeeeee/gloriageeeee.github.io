@@ -14,7 +14,7 @@
 
 <!-- ?v= is a cache-buster: bump the number whenever styles.css changes so browsers
      fetch the new file instead of reusing the copy they already have. -->
-<link rel="stylesheet" href="css/styles.css?v=22">
+<link rel="stylesheet" href="css/styles.css?v=24">
 </head>
 <body>
 
@@ -86,45 +86,51 @@
        the page (the hero-wrap above, at 50vh) ends right at this banner's
        vertical midpoint — scrolling one more screenful takes you through
        its second half and into About me. It drifts left as you scroll
-       (see script.js) using a doubled-up strip so the loop never runs out. -->
+       (see script.js) using a doubled-up strip so the loop never runs out.
+       Every panel repeats the same brand-mark tile
+       (assets/homepage/header-pattern.svg) rather than cycling different
+       colours/shapes — 12 copies (6 + 6 duplicate) keeps the same safety
+       margin against ultra-wide viewports the varied version had;
+       script.js's loop math only cares about panel count, not what's
+       inside each one. -->
   <section class="rotating-banner" aria-hidden="true">
     <div class="rotating-banner-track" data-banner-track>
-      <div class="rotating-banner-panel" style="background:#ffe020;">
-        <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#F23C8A"/><path d="M 83.626 167.999 C 37.234 167.793 -0.206 130.017 0.001 83.626 C 0.207 37.234 37.983 -0.206 84.374 0.001 L 83.626 167.999 Z" fill="#EF3E2E"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#A61E6E"/></svg>
+      <div class="rotating-banner-panel">
+        <img src="assets/homepage/header-pattern.svg" alt="" loading="eager" decoding="async">
       </div>
-      <div class="rotating-banner-panel" style="background:#78b4ea;">
-        <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#ef3e2e"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#a61e6e"/></svg>
+      <div class="rotating-banner-panel">
+        <img src="assets/homepage/header-pattern.svg" alt="" loading="eager" decoding="async">
       </div>
-      <div class="rotating-banner-panel" style="background:#f23c8a;">
-        <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><rect width="84" height="168" fill="#ffe020"/><circle cx="84" cy="84" r="84" fill="#f47920"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#a61e6e"/></svg>
+      <div class="rotating-banner-panel">
+        <img src="assets/homepage/header-pattern.svg" alt="" loading="eager" decoding="async">
       </div>
-      <div class="rotating-banner-panel" style="background:#1a1714;">
-        <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#78b4ea"/><path d="M 83.626 167.999 C 37.234 167.793 -0.206 130.017 0.001 83.626 C 0.207 37.234 37.983 -0.206 84.374 0.001 L 83.626 167.999 Z" fill="#f23c8a"/></svg>
+      <div class="rotating-banner-panel">
+        <img src="assets/homepage/header-pattern.svg" alt="" loading="eager" decoding="async">
       </div>
-      <div class="rotating-banner-panel" style="background:#f47920;">
-        <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#78b4ea"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#a61e6e"/></svg>
+      <div class="rotating-banner-panel">
+        <img src="assets/homepage/header-pattern.svg" alt="" loading="eager" decoding="async">
       </div>
-      <div class="rotating-banner-panel" style="background:#a61e6e;">
-        <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#ffe020"/><path d="M 83.626 167.999 C 37.234 167.793 -0.206 130.017 0.001 83.626 C 0.207 37.234 37.983 -0.206 84.374 0.001 L 83.626 167.999 Z" fill="#ef3e2e"/></svg>
+      <div class="rotating-banner-panel">
+        <img src="assets/homepage/header-pattern.svg" alt="" loading="eager" decoding="async">
       </div>
       <!-- repeated once more for a seamless loop -->
-      <div class="rotating-banner-panel" style="background:#ffe020;" aria-hidden="true">
-        <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#F23C8A"/><path d="M 83.626 167.999 C 37.234 167.793 -0.206 130.017 0.001 83.626 C 0.207 37.234 37.983 -0.206 84.374 0.001 L 83.626 167.999 Z" fill="#EF3E2E"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#A61E6E"/></svg>
+      <div class="rotating-banner-panel" aria-hidden="true">
+        <img src="assets/homepage/header-pattern.svg" alt="" loading="eager" decoding="async">
       </div>
-      <div class="rotating-banner-panel" style="background:#78b4ea;" aria-hidden="true">
-        <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#ef3e2e"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#a61e6e"/></svg>
+      <div class="rotating-banner-panel" aria-hidden="true">
+        <img src="assets/homepage/header-pattern.svg" alt="" loading="eager" decoding="async">
       </div>
-      <div class="rotating-banner-panel" style="background:#f23c8a;" aria-hidden="true">
-        <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><rect width="84" height="168" fill="#ffe020"/><circle cx="84" cy="84" r="84" fill="#f47920"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#a61e6e"/></svg>
+      <div class="rotating-banner-panel" aria-hidden="true">
+        <img src="assets/homepage/header-pattern.svg" alt="" loading="eager" decoding="async">
       </div>
-      <div class="rotating-banner-panel" style="background:#1a1714;" aria-hidden="true">
-        <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#78b4ea"/><path d="M 83.626 167.999 C 37.234 167.793 -0.206 130.017 0.001 83.626 C 0.207 37.234 37.983 -0.206 84.374 0.001 L 83.626 167.999 Z" fill="#f23c8a"/></svg>
+      <div class="rotating-banner-panel" aria-hidden="true">
+        <img src="assets/homepage/header-pattern.svg" alt="" loading="eager" decoding="async">
       </div>
-      <div class="rotating-banner-panel" style="background:#f47920;" aria-hidden="true">
-        <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#78b4ea"/><path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#a61e6e"/></svg>
+      <div class="rotating-banner-panel" aria-hidden="true">
+        <img src="assets/homepage/header-pattern.svg" alt="" loading="eager" decoding="async">
       </div>
-      <div class="rotating-banner-panel" style="background:#a61e6e;" aria-hidden="true">
-        <svg viewBox="0 0 168 168" preserveAspectRatio="xMidYMid slice"><circle cx="84" cy="84" r="84" fill="#ffe020"/><path d="M 83.626 167.999 C 37.234 167.793 -0.206 130.017 0.001 83.626 C 0.207 37.234 37.983 -0.206 84.374 0.001 L 83.626 167.999 Z" fill="#ef3e2e"/></svg>
+      <div class="rotating-banner-panel" aria-hidden="true">
+        <img src="assets/homepage/header-pattern.svg" alt="" loading="eager" decoding="async">
       </div>
     </div>
   </section>
@@ -372,6 +378,6 @@
 
 </div>
 
-<script src="js/script.js?v=22"></script>
+<script src="js/script.js?v=24"></script>
 </body>
 </html>
