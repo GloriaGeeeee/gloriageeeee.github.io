@@ -31,12 +31,12 @@ fixed in the moment. Not urgent, not forgotten.
       one holistic mobile review end to end — worth going through every page
       on an actual phone-sized viewport looking for anything that slipped
       through the per-feature checks.
-- [ ] **IB onboarding case study is still missing real metrics.** The
-      Outcome section (`case-pepperstone.html` `#outcome`) has three
-      `.cs-metric` placeholders ("Metric one/two/three", value "—") instead
-      of real numbers. The homepage card's description was written to avoid
-      leaning on a stat for exactly this reason — fill these in and the
-      description could likely be sharpened too.
+- [x] **IB onboarding case study is still missing real metrics.** Filled in:
+      96.10% approval-conversion lift and 2.4 days → 1 min activation, then
+      the counter-result (a flat ~50 partners earning per month, 90-day
+      referral rate 4.2% → 1.1%) under "The bottleneck moved". Still open:
+      the homepage card's description was written to avoid leaning on a
+      stat, and could now be sharpened with one.
 - [ ] **Add an AI section to the homepage.** Both the homepage heading and
       the About page bio mention AI-driven/AI-assisted workflows in passing
       ("Now powered with AI design workflows!" in the Figma redesign at

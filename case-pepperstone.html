@@ -150,7 +150,8 @@
           <li><a href="#current-state">Current State</a></li>
           <li><a href="#principles">Design Principles</a></li>
           <li><a href="#solution">Solution</a></li>
-          <li><a href="#outcome">Outcome</a></li>
+          <li><a href="#impact">What We Improved</a></li>
+          <li><a href="#finding">A New Bottleneck</a></li>
         </ul>
       </nav>
     </div>
@@ -325,27 +326,61 @@
     </div>
   </section>
 
-  <!-- ==================== OUTCOME ====================
-       PLACEHOLDER metrics — replace the "—" in each .cs-metric-value with
-       your real number and drop the data-empty attribute so it turns dark. -->
-  <section class="cs-section" id="outcome">
+  <!-- ==================== IMPACT ==================== -->
+  <section class="cs-section" id="impact">
     <div data-reveal>
-      <div class="cs-label">Outcome</div>
-      <h2 class="cs-h2">Where It Landed</h2>
-      <div class="cs-metrics">
+      <div class="cs-label">Impact</div>
+      <h2 class="cs-h2">What We Improved</h2>
+      <p class="cs-body">The rebuilt flow did what it was designed to do. More partners make it through approval, and they now get their referral link as soon as they sign up.</p>
+
+      <div class="cs-grid-2" style="margin-top:48px; row-gap:48px;">
         <div class="cs-metric">
-          <span class="cs-metric-value" data-empty>—</span>
-          <span class="cs-metric-label">Metric one</span>
+          <span class="cs-metric-value">
+            <svg class="cs-metric-trend" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 18L18 6M18 14V6H10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            96.10%
+          </span>
+          <span class="cs-metric-label">Increase in registration-to-approval conversion, from 15.43% to 30.26%</span>
         </div>
         <div class="cs-metric">
-          <span class="cs-metric-value" data-empty>—</span>
-          <span class="cs-metric-label">Metric two</span>
-        </div>
-        <div class="cs-metric">
-          <span class="cs-metric-value" data-empty>—</span>
-          <span class="cs-metric-label">Metric three</span>
+          <span class="cs-metric-value">
+            <svg class="cs-metric-trend" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6L18 18M10 18H18V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            1 min
+          </span>
+          <span class="cs-metric-label">Time to activation, down from 2.4 days</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ==================== FINDING ====================
+       The counter-result. Its own section rather than a block under Impact
+       so the side nav can address it directly, and so it reads as a peer of
+       the wins above rather than a footnote to them. -->
+  <section class="cs-section" id="finding">
+    <div data-reveal>
+      <div class="cs-label">Finding</div>
+      <h2 class="cs-h2">A New Bottleneck Appeared</h2>
+      <p class="cs-body">The number of partners approved each month has almost doubled, yet only around 50 start earning in a given month. Approving more partners has not produced more partners earning revenue.</p>
+
+      <div class="cs-grid-2" style="margin-top:48px; row-gap:48px;">
+        <div class="cs-metric">
+          <span class="cs-metric-value">
+            <!-- Flat arrow: the whole point of this figure is that it didn't move. -->
+            <svg class="cs-metric-trend" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12H19M15 8L19 12L15 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            ~50
+          </span>
+          <span class="cs-metric-label">Partners starting to earn each month, unchanged before and after</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-value">
+            <svg class="cs-metric-trend" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6L18 18M10 18H18V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            1.1%
+          </span>
+          <span class="cs-metric-label">Referred a client within 90 days, down from 4.2%</span>
+        </div>
+      </div>
+
+      <p class="cs-body" style="margin-top:48px;">The bottleneck has moved rather than disappeared. The question now is what happens after someone receives their referral link: whether partners need better activation support, whether new partners need a stronger incentive to make a first referral, or whether a looser gate is simply admitting people who were never going to refer anyone.</p>
     </div>
   </section>
 
