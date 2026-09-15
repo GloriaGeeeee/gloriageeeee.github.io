@@ -13,6 +13,11 @@
    7. Case study side nav — "On this page" list highlights the section
       you're currently reading (case-*.html only)
    8. Page transition — a color "curtain" wipes up before leaving the page
+   9. About page portrait parallax — layers drift with the pointer
+  10. Media lightbox — case study images/video open full-size over a dim
+      overlay (case-*.html and the about page's gallery)
+  11. "See other works" carousel — arrow controls for the card strip that
+      closes every case study
    ========================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -121,11 +126,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     followCursor();
 
+    // Media opens a lightbox on click, so it gets the same ring feedback a
+    // link does — the CSS cursor:zoom-in never shows while cursor:none is on.
+    const HOVER_TARGETS = 'a, button, .cs-figure img, .cs-figure video';
     document.addEventListener('mouseover', (e) => {
-      if (e.target.closest('a, button')) ring && ring.classList.add('is-active');
+      if (e.target.closest(HOVER_TARGETS)) ring && ring.classList.add('is-active');
     });
     document.addEventListener('mouseout', (e) => {
-      if (e.target.closest('a, button')) ring && ring.classList.remove('is-active');
+      if (e.target.closest(HOVER_TARGETS)) ring && ring.classList.remove('is-active');
     });
   }
 
@@ -400,4 +408,119 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!queued) { queued = true; requestAnimationFrame(apply); }
     }, { passive: true });
   }
+
+  /* ---------- 10. Media lightbox ----------
+     Click any image or video in a .cs-figure to see it full-size over a
+     dimmed overlay. The overlay is built once here rather than repeated in
+     every page's markup, and triggers are found by selector, so new media
+     dropped into a case study is clickable without touching this file.
+
+     Closes on the X, on the backdrop, and on Escape. The enlarged copy is a
+     fresh element each time rather than the page's own moved into place —
+     moving it would leave a hole in the article behind the overlay. */
+  const lightboxTargets = $$('.cs-figure img, .cs-figure video');
+  if (lightboxTargets.length) {
+    const lightbox = document.createElement('div');
+    lightbox.className = 'lightbox';
+    lightbox.setAttribute('role', 'dialog');
+    lightbox.setAttribute('aria-modal', 'true');
+    lightbox.setAttribute('aria-label', 'Enlarged media');
+    lightbox.innerHTML =
+      '<button type="button" class="lightbox-close" aria-label="Close enlarged view">' +
+        '<svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true">' +
+          '<path d="M5 5 L17 17 M17 5 L5 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>' +
+        '</svg>' +
+      '</button>' +
+      '<div class="lightbox-stage"></div>';
+    document.body.appendChild(lightbox);
+
+    const stage = lightbox.querySelector('.lightbox-stage');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+    let lastTrigger = null;
+
+    function openLightbox(source) {
+      const enlarged = document.createElement(source.tagName.toLowerCase());
+      if (source.tagName === 'VIDEO') {
+        enlarged.src = source.currentSrc || source.src;
+        // Controls only in here — the in-page clips are decorative loops,
+        // but at full size it's worth being able to scrub and pause.
+        enlarged.controls = true;
+        enlarged.autoplay = true;
+        enlarged.loop = true;
+        enlarged.muted = true;
+        enlarged.playsInline = true;
+      } else {
+        enlarged.src = source.currentSrc || source.src;
+        enlarged.alt = source.alt || '';
+      }
+      stage.replaceChildren(enlarged);
+      lastTrigger = source;
+      lightbox.classList.add('is-open');
+      document.body.classList.add('lightbox-open');
+      closeBtn.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      document.body.classList.remove('lightbox-open');
+      // Wait out the fade before tearing the media down, so it doesn't
+      // vanish a beat before the overlay does.
+      setTimeout(() => {
+        if (!lightbox.classList.contains('is-open')) stage.replaceChildren();
+      }, 300);
+      if (lastTrigger) { lastTrigger.focus && lastTrigger.focus(); lastTrigger = null; }
+    }
+
+    lightboxTargets.forEach((media) => {
+      media.addEventListener('click', () => openLightbox(media));
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      // Backdrop only — clicks on the media itself shouldn't dismiss it.
+      if (e.target === lightbox || e.target === stage) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+    });
+  }
+
+  /* ---------- 11. "See other works" carousel ----------
+     The card strip scrolls natively (CSS scroll-snap), so this only adds the
+     arrow controls: one card per press, disabled at each end, and the whole
+     nav hidden whenever every card already fits. */
+  $$('[data-related]').forEach((carousel) => {
+    const track = carousel.querySelector('[data-related-track]');
+    const nav = carousel.querySelector('[data-related-nav]');
+    const prev = carousel.querySelector('[data-related-prev]');
+    const next = carousel.querySelector('[data-related-next]');
+    if (!track || !nav || !prev || !next) return;
+
+    function step() {
+      const card = track.firstElementChild;
+      if (!card) return track.clientWidth;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      return card.getBoundingClientRect().width + gap;
+    }
+
+    function syncArrows() {
+      // 1px of slack: fractional layout widths mean scrollLeft rarely lands
+      // exactly on the maximum.
+      const max = track.scrollWidth - track.clientWidth;
+      nav.hidden = max <= 1;
+      prev.disabled = track.scrollLeft <= 1;
+      next.disabled = track.scrollLeft >= max - 1;
+    }
+
+    prev.addEventListener('click', () => { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    next.addEventListener('click', () => { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+    track.addEventListener('scroll', syncArrows, { passive: true });
+    // Two paths on purpose: the observer catches layout settling after the
+    // lazy thumbnails load (a resize listener alone would measure too early),
+    // and the resize listener still covers it if observer callbacks are
+    // being withheld, since those are delivered with the frame lifecycle.
+    if ('ResizeObserver' in window) new ResizeObserver(syncArrows).observe(track);
+    window.addEventListener('resize', syncArrows);
+    syncArrows();
+  });
 });

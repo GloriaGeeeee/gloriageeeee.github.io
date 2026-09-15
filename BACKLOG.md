@@ -9,14 +9,14 @@ fixed in the moment. Not urgent, not forgotten.
       hero (`index.html`, `.rotating-banner`) — the pattern it's cycling
       through isn't right. Needs a look with fresh eyes against the Figma
       reference.
-- [ ] **Drop the page-transition curtain for case studies.** Clicking
-      "View case study" from the homepage currently triggers the red
-      curtain wipe (`data-transition` / `.curtain` in `js/script.js`)
-      before navigating. Decide whether case study links should skip it
-      for a more instant feel.
-- [ ] **Case study images aren't clickable.** Images in `case-*.html`
-      (`.cs-figure img`) are static — add a lightbox/full-size view so
-      readers can inspect research artefacts and screenshots up close.
+- [x] **Drop the page-transition curtain for case studies.** Decided
+      against it — the current red curtain wipe (`data-transition` /
+      `.curtain` in `js/script.js`) on "View case study" links stays as is.
+- [x] **Case study images aren't clickable.** Any image or video in a
+      `.cs-figure` now opens full-size over a dimmed overlay, closing on the
+      X, the backdrop, or Escape. Wired up by selector in `js/script.js`, so
+      media added later is clickable with no extra markup — which also picks
+      up the About page's digital art gallery.
 - [ ] **Polish the About timeline into a "fun folder" view.** The journey
       timeline (`about.html` `#journey`, `.about-tl` in `css/styles.css`)
       works but is a first pass: five bubbles on an axis that reveal an
@@ -43,10 +43,12 @@ fixed in the moment. Not urgent, not forgotten.
       node 30:446), but nothing on the site expands on it. Worth a proper
       section — probably between "About me" and "Selected work" — rather
       than a single clause buried in the intro copy.
-- [ ] **Case studies dead-end at "Back to all work."** Every case study
-      (`case-*.html` `.cs-pagenav`) only offers one link back to the
-      homepage — a reader who's just finished one case study has no way to
-      jump straight into another without leaving the page and scrolling
-      back down. Add a row of work cards (reusing the homepage's case-fold
-      content, probably in a lighter/compact form) before the footer so
-      readers can hop between case studies directly.
+- [x] **Case studies dead-end at "Back to all work."** Every case study now
+      ends with a "See other works" carousel (`.cs-related`) listing the
+      other three — thumbnail, title, description, tags and a CTA each.
+      Scrolls natively via CSS scroll-snap; the arrows hide themselves
+      whenever all three cards already fit. Two follow-ons: the Affiliate
+      card's thumbnail is still a "Mockups — TBD" placeholder until there's
+      a shippable screenshot, and each thumb borrows its homepage fold's
+      shape colour, so a fold recoloured later needs its `--thumb-bg`
+      updated to match.
