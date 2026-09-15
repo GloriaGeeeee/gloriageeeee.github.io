@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>From days to minutes: Redesigning partner onboarding — Gloria Gao</title>
-<meta name="description" content="Redesigning partner onboarding for the Pepperstone Partnership Program — cutting partner activation from days to minutes.">
+<title>Self-service Affiliate Management &amp; Rebate Sharing — Gloria Gao</title>
+<meta name="description" content="Designing a self-service affiliate management and rebate-sharing platform so partners can grow their referral networks without going through Operations.">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 
 <!-- Fonts: Geist for headings, Inter for body, Nothing You Could Do for the editorial accent, Geist Mono for labels -->
@@ -91,34 +91,32 @@
 
   <!-- ==================== HEADER ====================
        Two columns: title / description / details on the left, hero image on
-       the right. The details block is pushed to the bottom of the left
-       column (margin-top:auto) so it sits level with the foot of the image.
-       HERO PLACEHOLDER — when the real clip is ready, replace the
-       <div class="cs-placeholder"> with:
-       <video autoplay loop muted playsinline preload="metadata" src="assets/pepperstone/hero.mp4"></video> -->
+       the right. No cover image exists for this project yet, so the hero
+       slot is a plain .cs-placeholder rather than a real image/video — swap
+       it for a <img>/<video> in .cs-hero-media > .cs-figure once one exists. -->
   <header class="cs-header">
     <div class="cs-intro">
       <div class="cs-intro-top">
-        <h1 class="cs-title">From days to minutes: Redesigning partner onboarding for faster activation</h1>
-        <p class="cs-body-sm">Pepperstone Partnership Program uses a revenue-sharing model designed for educators, signal providers, and trading communities to monetise their networks. Partners earn volume-based rebates and get dedicated support to grow their referral business.</p>
+        <h1 class="cs-title">Self-service Affiliate Management &amp; Rebate Sharing Platform</h1>
+        <p class="cs-body-sm">I designed an affiliate management and commission-sharing platform that helps partners expand their own referral networks — affiliates bring in new clients and share the earnings with their partners in a negotiated split.</p>
         <div class="tags">
-          <span class="tag tag-neutral">Onboarding Experience</span>
-          <span class="tag tag-pink">Fintech</span>
+          <span class="tag tag-blue">Fintech</span>
+          <span class="tag tag-neutral">B2B Platform</span>
         </div>
       </div>
 
       <dl class="cs-meta">
         <div>
           <dt class="cs-meta-label">Status</dt>
-          <dd class="cs-body-sm">Shipped in Jan 2026</dd>
+          <dd class="cs-body-sm">In development</dd>
         </div>
         <div>
           <dt class="cs-meta-label">Timeline</dt>
-          <dd class="cs-body-sm">4 months</dd>
+          <dd class="cs-body-sm">Jun 2026 – Now</dd>
         </div>
         <div>
           <dt class="cs-meta-label">Team</dt>
-          <dd class="cs-body-sm">Product, content design, 5 engineers</dd>
+          <dd class="cs-body-sm">Product, content design, engineers</dd>
         </div>
         <div>
           <dt class="cs-meta-label">My role</dt>
@@ -128,11 +126,15 @@
     </div>
 
     <div class="cs-hero-media">
-      <figure class="cs-figure cs-figure--plain">
-        <video autoplay loop muted playsinline preload="metadata" src="assets/pepperstone/hero.mp4"></video>
-      </figure>
+      <div class="cs-placeholder">Hero image — TBD</div>
     </div>
   </header>
+
+  <!-- NDA / anonymization notice — sits right under the header, before the
+       first section, since it applies to everything below it on the page. -->
+  <div class="cs-callout">
+    <p class="cs-body-sm">This project is covered by an NDA. The product name, data, and select product details have been anonymized or modified to protect confidentiality. The screens shown are based on my original design work, with changes made where necessary. This case study highlights design challenges and solutions, not sensitive business information.</p>
+  </div>
 
   <!-- ==================== BODY + STICKY SIDE NAV ====================
        Same two columns as the header above, so the content lines up under
@@ -147,7 +149,7 @@
         <ul>
           <li><a href="#challenge">The Challenge</a></li>
           <li><a href="#goals">Business Goals</a></li>
-          <li><a href="#current-state">Current State</a></li>
+          <li><a href="#process">Process</a></li>
           <li><a href="#principles">Design Principles</a></li>
           <li><a href="#solution">Solution</a></li>
           <li><a href="#outcome">Outcome</a></li>
@@ -161,13 +163,8 @@
   <section class="cs-section" id="challenge">
     <div data-reveal>
       <div class="cs-label">The challenge</div>
-      <h2 class="cs-h2">The partner onboarding flow was long, high-friction, and heavily dependent on manual follow-ups from the ops team.</h2>
-      <p class="cs-body">Partners had to complete an all-or-nothing process before they could start referring clients, which caused drop-off and delayed activation from minutes to days.</p>
-
-      <blockquote class="cs-quote">
-        <p class="serif-accent">“This process works, but it’s highly manual and back-and-forth between sales and partners — especially since even opening a trading account is a hassle for the client”</p>
-        <footer>Sales team feedback</footer>
-      </blockquote>
+      <h2 class="cs-h2">Partners couldn't grow their affiliate networks without relying on the Operations team</h2>
+      <p class="cs-body">Our platform lets partners work with affiliates who refer new clients and earn a negotiated share of revenue. Previously, adding affiliates, agreeing splits, and reviewing performance required manual setup through an account manager, which took days and created heavy ops workload. This slowed partner growth and buried ops in repetitive setup requests.</p>
     </div>
   </section>
 
@@ -177,90 +174,100 @@
       <h2 class="cs-h2">Business Goals</h2>
       <div class="cs-grid-3">
         <div class="cs-grid-item">
-          <img class="cs-goal-icon" src="assets/illustrations/logo-pattern-01.svg" alt="" width="40" height="40">
-          <h3 class="cs-h4">Grow active partners with frictionless onboarding</h3>
-          <p class="cs-body-sm">Reduce redundant steps, lower onboarding friction and enabling faster referrals</p>
+          <h3 class="cs-h4">Give partners full control of their network</h3>
+          <p class="cs-body-sm">Enable self-service across the full lifecycle from adding an affiliate to performance monitoring.</p>
         </div>
         <div class="cs-grid-item">
-          <img class="cs-goal-icon" src="assets/illustrations/logo-pattern-04.svg" alt="" width="40" height="40">
-          <h3 class="cs-h4">Reduce time-to-activation</h3>
-          <p class="cs-body-sm">Automate KYC and account set up to reduce manual ops review dependency and number of follow-ups required</p>
+          <h3 class="cs-h4">Reduce operation cost and manual effort</h3>
+          <p class="cs-body-sm">Remove manual relationship setup and shorten the time for a new affiliate to start earning.</p>
         </div>
         <div class="cs-grid-item">
-          <img class="cs-goal-icon" src="assets/illustrations/logo-pattern-05.svg" alt="" width="40" height="40">
-          <h3 class="cs-h4">Due diligence at the right time</h3>
-          <p class="cs-body-sm">Moving due diligence to the right moments, not removing it</p>
+          <h3 class="cs-h4">Preserve partner-affiliate transparency and privacy balance</h3>
+          <p class="cs-body-sm">Keep the existing balance between what partners need to manage the relationship and what affiliates should (and shouldn't) see.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== PROCESS — UNDERSTAND CURRENT STATE ==================== -->
-  <section class="cs-section" id="current-state">
-    <div>
-      <div class="cs-label">Process</div>
-      <h2 class="cs-h2">Understand Current State</h2>
-    </div>
-
-    <div data-reveal style="margin-bottom:48px;">
-      <figure class="cs-figure cs-figure--plain">
-        <img src="assets/pepperstone/current-state.png" alt="Research artefacts from the discovery phase: a team interview call, the new onboarding flow mapped out, and a competitor benchmarking board" loading="lazy" decoding="async" width="1440" height="458">
-      </figure>
-    </div>
-
+  <!-- ==================== PROCESS ====================
+       Two sub-parts, matching the source's own structure: the workaround
+       for not having direct partner/affiliate access, then a separate note
+       on the AI-native delivery experiment this project doubled as. Both
+       images are placeholders — nothing exists yet for either. -->
+  <section class="cs-section" id="process">
     <div data-reveal>
+      <h2 class="cs-h2">Process</h2>
+    </div>
+
+    <div data-reveal style="margin-top:32px;">
+      <h3 class="cs-h3">Designing without direct access to partners and affiliates</h3>
+      <p class="cs-body">We could not interview partners directly, so I partnered with sales and ops teammates who work with partners daily.</p>
+    </div>
+    <div data-reveal style="margin-top:32px;">
+      <div class="cs-placeholder--wide cs-placeholder">Process artefacts — TBD</div>
+    </div>
+    <div data-reveal style="margin-top:32px;">
       <div class="cs-grid-3">
         <div class="cs-grid-item">
-          <h3 class="cs-h4">Sales &amp; Ops team interview</h3>
-          <p class="cs-body-sm">Interviewed sales, account managers, and ops to understand each step’s purpose and operational cost. Identified where information was duplicated, where checks were delayed, and where partners got stuck.</p>
+          <h3 class="cs-h4">Understand the relationship, not just the feature</h3>
+          <p class="cs-body-sm">Before going to the drawing board, I started by understanding how partner-affiliate relationships work in real life: why partners add affiliates, how revenue splits are negotiated, and how the relationship evolves over time.</p>
         </div>
         <div class="cs-grid-item">
-          <h3 class="cs-h4">Scenario mapping with PMs</h3>
-          <p class="cs-body-sm">Mapped the new flow against the legacy flow to ensure we still covered edge cases (business type, COR, new vs. existing user). Defined which steps were required before vs. after activation.</p>
+          <h3 class="cs-h4">Map the end-to-end journey</h3>
+          <p class="cs-body-sm">I mapped the full journey for both parties, from building a network to monitoring performance. This helped us define scope early and surface edge cases before implementation.</p>
         </div>
         <div class="cs-grid-item">
-          <h3 class="cs-h4">Competitor Benchmarking</h3>
-          <p class="cs-body-sm">Benchmarking competitor platform to compare onboarding patterns and expectation-setting across their journeys.</p>
+          <h3 class="cs-h4">Prioritize with PM using real usage patterns</h3>
+          <p class="cs-body-sm">We prioritized features based on frequency and impact. The goal was to keep a feature-dense surface scannable and decision-oriented.</p>
         </div>
       </div>
     </div>
+
+    <div data-reveal style="margin-top:96px;">
+      <h3 class="cs-h3">AI-native approach to design delivery</h3>
+      <p class="cs-body">Alongside the design work itself, this project doubled as an experiment in AI-native delivery workflow. We used Claude Design as the living source-of-truth and handover artefact, instead of relying only on static Figma files.</p>
+      <p class="cs-body" style="margin-top:16px;">Throughout this experiment, we explored the strengths and limitations of this tool in a multi-stakeholder collaborative process.</p>
+    </div>
+    <div data-reveal style="margin-top:32px;">
+      <div class="cs-placeholder--wide cs-placeholder">AI-native delivery flowchart — TBD</div>
+    </div>
   </section>
 
-  <!-- ==================== PROCESS — DESIGN PRINCIPLES ==================== -->
+  <!-- ==================== DESIGN PRINCIPLES ====================
+       Image placeholder for now — the real one (a Figma canvas overview)
+       shows unredacted internal naming that conflicts with the NDA notice
+       above, so it's held back until a redacted version exists. -->
   <section class="cs-section" id="principles">
-    <div>
-      <div class="cs-label">Process</div>
+    <div data-reveal>
       <h2 class="cs-h2">Design Principles</h2>
     </div>
-    <div data-reveal style="margin-bottom:48px;">
-      <figure class="cs-figure">
-        <img src="assets/pepperstone/design-principles.png" alt="Design file overview showing the KYC, partner questionnaire, reapplication and risk disclosure flows" loading="lazy" decoding="async" width="2384" height="490">
-      </figure>
+    <div data-reveal style="margin-top:32px;">
+      <div class="cs-placeholder--wide cs-placeholder">Design principles overview — TBD (redacted version pending)</div>
     </div>
-    <div data-reveal>
+    <div data-reveal style="margin-top:32px;">
       <ol class="cs-principles">
         <li>
           <div class="cs-principle-body">
-            <h3 class="cs-h4">Clarity on the next step</h3>
-            <p class="cs-body-sm">After each step, partners should know exactly what to do next, rather than being left to guess or wait to be contacted.</p>
+            <h3 class="cs-h4">Overview first, detail on demand</h3>
+            <p class="cs-body-sm">Give partners a quick overview first, then reveal depth when they choose to investigate.</p>
           </div>
         </li>
         <li>
           <div class="cs-principle-body">
-            <h3 class="cs-h4">Set expectations when waiting is real</h3>
-            <p class="cs-body-sm">If review takes time, show how long and why.</p>
+            <h3 class="cs-h4">Put answers where users hesitate</h3>
+            <p class="cs-body-sm">Surface key information at the moment of decision, rather than dumping everything upfront.</p>
           </div>
         </li>
         <li>
           <div class="cs-principle-body">
-            <h3 class="cs-h4">Make long forms feel doable</h3>
-            <p class="cs-body-sm">Longer sections are split into labelled sub-steps with visible progress.</p>
+            <h3 class="cs-h4">Design for two audiences that don't fully trust each other</h3>
+            <p class="cs-body-sm">Use permissions and disclosure patterns so each side can act confidently without having to worry about oversharing.</p>
           </div>
         </li>
         <li>
           <div class="cs-principle-body">
-            <h3 class="cs-h4">Design for mobile-first completion</h3>
-            <p class="cs-body-sm">~19% of partners primarily use mobile, so every step must work end-to-end on mobile.</p>
+            <h3 class="cs-h4">Mobile parity</h3>
+            <p class="cs-body-sm">~19% of partners primarily use mobile, so mobile cannot be a reduced experience.</p>
           </div>
         </li>
       </ol>
@@ -268,82 +275,92 @@
   </section>
 
   <!-- ==================== SOLUTION ====================
-       Each block: heading + description, then the demo video below it.
-       All videos are placeholders — see the hero comment above for the
-       markup to swap in. -->
+       All four demos are placeholders — nothing has been recorded yet. -->
   <section class="cs-section" id="solution">
-    <div>
+    <div data-reveal>
       <h2 class="cs-h2">Solution</h2>
     </div>
 
     <div class="cs-solution" data-reveal>
       <div>
-        <h3 class="cs-h3">Immediate activation after registration</h3>
-        <p class="cs-body">Partners can start referring with minimal information. This shifts onboarding from “complete everything first” to “start now, verify progressively.”</p>
+        <h3 class="cs-h3">One page, two views of the same network</h3>
+        <p class="cs-body">Two tabs present the same data differently, allowing users to compare performance and manage relationships quickly without excessive filtering.</p>
       </div>
       <div>
-        <figure class="cs-figure cs-figure--plain">
-          <video autoplay loop muted playsinline preload="metadata" src="assets/pepperstone/solution-1.mp4"></video>
-        </figure>
+        <div class="cs-placeholder">Demo video — TBD</div>
       </div>
     </div>
 
     <div class="cs-solution" data-reveal>
       <div>
-        <h3 class="cs-h3">Guided onboarding (tour + persistent checklist)</h3>
-        <p class="cs-body">Persistent benefit-driven messaging to encourage partners to complete the rest of the required step.</p>
+        <h3 class="cs-h3">Detail on demand via drawer</h3>
+        <p class="cs-body">A detail drawer lets users review a program or relationship without losing context, keeping the main page fast to scan.</p>
       </div>
       <div>
-        <figure class="cs-figure cs-figure--plain">
-          <img src="assets/pepperstone/solution-2.png" alt="Completion modal, identity verification status, and persistent checklist bar guiding the partner through the remaining onboarding steps" loading="lazy" decoding="async" width="1600" height="1067">
-        </figure>
+        <div class="cs-placeholder">Demo video — TBD</div>
       </div>
     </div>
 
     <div class="cs-solution" data-reveal>
       <div>
-        <h3 class="cs-h3">Split the form into 3 sections partners can finish over time</h3>
-        <p class="cs-body">The onboarding form is divided into three parts that can be completed in separate sittings. Each section provides time estimate and required info for clear expectation setting.</p>
+        <h3 class="cs-h3">Guided setup for basic and advanced users</h3>
+        <p class="cs-body">A linear flow supports the common setup path, with optional branches for advanced needs such as adding a second affiliate or configuring split-override rules by symbol and asset.</p>
       </div>
       <div>
-        <figure class="cs-figure cs-figure--plain">
-          <img src="assets/pepperstone/solution-3.png" alt="Complete partner details step, showing the time required and the information needed, with progress saved automatically between sections" loading="lazy" decoding="async" width="1600" height="1067">
-        </figure>
+        <div class="cs-placeholder">Demo video — TBD</div>
       </div>
     </div>
 
     <div class="cs-solution" data-reveal>
       <div>
         <h3 class="cs-h3">Full mobile experience</h3>
-        <p class="cs-body">We delivered equal experience for mobile for partners on-the-go</p>
+        <p class="cs-body">The mobile experience supports the same core workflows so partners can manage the network on the go.</p>
       </div>
       <div>
-        <figure class="cs-figure cs-figure--plain">
-          <img src="assets/pepperstone/solution-4.png" alt="Three mobile screens: onboarding progress, the partner portal welcome tour, and the partner business details form" loading="lazy" decoding="async" width="1600" height="1067">
-        </figure>
+        <div class="cs-placeholder">Demo video — TBD</div>
       </div>
     </div>
   </section>
 
   <!-- ==================== OUTCOME ====================
-       PLACEHOLDER metrics — replace the "—" in each .cs-metric-value with
-       your real number and drop the data-empty attribute so it turns dark. -->
+       Two parts: today's metrics (real, but not percentages — text values,
+       so no trend arrows) and the forward-looking metrics that only make
+       sense once the product has actually shipped. -->
   <section class="cs-section" id="outcome">
     <div data-reveal>
       <div class="cs-label">Outcome</div>
-      <h2 class="cs-h2">Where It Landed</h2>
+      <h2 class="cs-h2">A Fully Self-Service Affiliate Management Platform</h2>
       <div class="cs-metrics">
         <div class="cs-metric">
-          <span class="cs-metric-value" data-empty>—</span>
-          <span class="cs-metric-label">Metric one</span>
+          <span class="cs-metric-value">0</span>
+          <span class="cs-metric-label">Manual ops tickets needed to add an affiliate, set a split, or check earnings</span>
         </div>
         <div class="cs-metric">
-          <span class="cs-metric-value" data-empty>—</span>
-          <span class="cs-metric-label">Metric two</span>
+          <span class="cs-metric-value">1 report</span>
+          <span class="cs-metric-label">Replacing a scattered process of emails, spreadsheets, and Jira tickets</span>
         </div>
         <div class="cs-metric">
-          <span class="cs-metric-value" data-empty>—</span>
-          <span class="cs-metric-label">Metric three</span>
+          <span class="cs-metric-value">2 audiences</span>
+          <span class="cs-metric-label">Partner and affiliate each get controlled transparency on their relationship</span>
+        </div>
+      </div>
+    </div>
+
+    <div data-reveal style="margin-top:96px;">
+      <h3 class="cs-h3">What We'll Watch After Go-Live</h3>
+      <p class="cs-body">The product is still in development. After launch, these metrics will show whether self-service is working:</p>
+      <div class="cs-grid-3" style="margin-top:32px;">
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Ops ticket volume</h3>
+          <p class="cs-body-sm">The direct measure of back-office dependency — it should trend towards zero for anything the new flow covers.</p>
+        </div>
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Time from add-affiliate to first active client</h3>
+          <p class="cs-body-sm">Indicator of whether partner network growth is following the easier network enablement.</p>
+        </div>
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Add-affiliate flow completion rate</h3>
+          <p class="cs-body-sm">Indicator of potential friction in the journey.</p>
         </div>
       </div>
     </div>
