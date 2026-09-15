@@ -271,6 +271,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ---------- 6b. Case fold reveal (mobile) ----------
+     The scroll-scrub above is desktop-only, so below 861px the folds had no
+     entrance at all while every other section still faded in. This marks
+     each fold as it arrives and the mobile CSS does the rest — desktop has
+     no rule for .is-inview, so the class is inert up there. */
+  if (scrollFolds.length && !reducedMotion) {
+    if ('IntersectionObserver' in window) {
+      const ioFold = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-inview');
+            ioFold.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+      scrollFolds.forEach((fold) => ioFold.observe(fold));
+    } else {
+      scrollFolds.forEach((fold) => fold.classList.add('is-inview'));
+    }
+  }
+
   /* ---------- 7. Case study side nav ----------
      Marks whichever section you're currently reading. A section counts as
      current once its top passes a line a third of the way down the screen,

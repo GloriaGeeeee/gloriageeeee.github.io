@@ -133,7 +133,23 @@ h1, h2, h3, p { margin: 0; }
 .btn-primary:hover { background: #d8351f; color: var(--color-bg); }
 .btn-secondary { background: var(--color-surface); color: var(--color-ink); }
 .btn-secondary:hover { background: #e2ddd2; color: var(--color-ink); }
+/* Size steps. .btn-sm only trims the padding, so it still carries the base
+   16px type; .btn-xs is a full step down for tight rows. Its metrics are
+   tokens rather than literals so a context can adopt the step without
+   restating them — the mobile navbar does exactly that. */
+:root {
+  --btn-xs-pad: 7px 12px;
+  --btn-xs-gap: 6px;
+  --btn-xs-font: 14px;
+  --btn-xs-line: 20px;
+}
 .btn-sm { padding: 8px 16px; gap: 8px; }
+.btn-xs {
+  padding: var(--btn-xs-pad);
+  gap: var(--btn-xs-gap);
+  font-size: var(--btn-xs-font);
+  line-height: var(--btn-xs-line);
+}
 
 /* ---------- Tags ---------- */
 .tags { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -812,6 +828,31 @@ h1, h2, h3, p { margin: 0; }
 .case-link:hover { color: var(--color-red); }
 .case-link:hover svg { transform: translate(3px, -3px); }
 
+/* ---------- Work card hover ----------
+   The whole .case-content block is the link on the homepage, so its inner
+   "View case study" is a <span> (an <a> inside an <a> is invalid) and every
+   hover state keys off the card instead of that small link. Without this the
+   global a:hover would wash the entire block red by inheritance. */
+.case-content:hover { color: inherit; }
+.case-mockup img { transition: transform .45s cubic-bezier(.22,1,.36,1); }
+
+@media (hover: hover) {
+  .case-content:hover .case-heading,
+  .case-content:hover .case-link { color: var(--color-red); }
+  .case-content:hover .case-link svg { transform: translate(3px, -3px); }
+  /* The mockup sits BEFORE the content in the DOM, so no sibling combinator
+     reaches it — :has() on the stage they share does. The zoom lands on the
+     img rather than .case-mockup or .case-mockup-slide because those two
+     carry inline transforms from the parallax and slide-in, which would beat
+     any stylesheet rule here. */
+  .case-stage:has(.case-content:hover) .case-mockup img { transform: scale(1.04); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-mockup img { transition: none; }
+  .case-stage:has(.case-content:hover) .case-mockup img { transform: none; }
+}
+
 /* ---------- My thoughts ---------- */
 .thoughts { padding: 96px 0; border-top: 1px solid var(--color-stroke); }
 .eyebrow {
@@ -945,8 +986,12 @@ h1, h2, h3, p { margin: 0; }
   .hero-title { font-size: 84px; }
   .hero-subtitle { font-size: 26px; line-height: 32px; }
   .hero-flourish { font-size: 22px; top: -18px; }
-  .rotating-banner { min-height: 320px; }
-  .rotating-banner-panel { min-width: 320px; min-height: 320px; }
+  /* height/width, not just min-*: the base rule sizes these to 100dvh, which
+     wins over a bare min-height and left the banner a full screen tall with
+     tiles wider than the viewport — one tile read as an abstract colour
+     field rather than a repeating pattern. */
+  .rotating-banner { height: 320px; min-height: 320px; }
+  .rotating-banner-panel { width: 320px; height: 320px; min-width: 320px; min-height: 320px; }
   .about-me { padding: 56px var(--hero-pad); gap: 28px; }
   .about-heading { font-size: 32px; line-height: 40px; margin-top: 0; }
   .about-stat { padding-right: 16px; }
@@ -971,6 +1016,26 @@ h1, h2, h3, p { margin: 0; }
   [data-scroll-slide] { opacity: 1; transform: none; }
   .case-content[data-scroll-fade] { opacity: 1; }
   .case-heading { font-size: 32px; line-height: 1.15; }
+
+  /* Resetting the scrub to "at rest" above also left these folds with no
+     entrance at all, while every other section on the page still fades in.
+     A one-shot reveal in its place, staggered shape → mockup → text, off the
+     .is-inview that script.js sets as each fold arrives. Must come after the
+     resets above: those set the same opacity at equal specificity. */
+  @media (prefers-reduced-motion: no-preference) {
+    .case-fold .case-shape,
+    .case-fold .case-mockup,
+    .case-fold .case-content[data-scroll-fade] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);
+    }
+    .case-fold.is-inview .case-shape,
+    .case-fold.is-inview .case-mockup,
+    .case-fold.is-inview .case-content[data-scroll-fade] { opacity: 1; transform: none; }
+    .case-fold.is-inview .case-mockup { transition-delay: .09s; }
+    .case-fold.is-inview .case-content[data-scroll-fade] { transition-delay: .18s; }
+  }
   .thoughts { padding: 56px 0; }
   .thoughts-link { flex-direction: column; align-items: flex-start; gap: 20px; }
   .thoughts-link h2 { font-size: 36px; }
@@ -981,22 +1046,39 @@ h1, h2, h3, p { margin: 0; }
 
 @media (max-width: 480px) {
   :root { --page-pad: 20px; --hero-pad: 20px; }
-  .nav-links { gap: 16px; font-size: 15px; }
-  .nav-left { gap: 16px; }
+  /* Keeping the CTA out of a second row needs about 47px back at 375px, and
+     the button can only give ~22 of it, so the row is tightened as a whole:
+     the CTA drops to the xs step, the three flex gaps come in, and the links
+     lose a point. The chevron goes too — decorative, and worth 20px here.
+     Below ~340px it still wraps, which is the graceful outcome. */
+  .nav-links { gap: 12px; font-size: 14px; }
+  .nav-left { gap: 12px; }
+  .navbar { gap: 12px; }
+  .nav-cta {
+    padding: var(--btn-xs-pad);
+    gap: var(--btn-xs-gap);
+    font-size: var(--btn-xs-font);
+    line-height: var(--btn-xs-line);
+  }
+  .nav-cta svg { display: none; }
   .nav-logo svg { width: 24px; height: 24px; }
-  /* Icon alone at the narrowest width — logo, 3 links, and the CTA are
-     already wrapping onto two rows; the wordmark would crowd it further. */
+  /* Icon alone at the narrowest width — the wordmark would crowd the row. */
   .nav-logo-word { display: none; }
   .hero-title { font-size: 56px; }
   .hero-subtitle { font-size: 19px; line-height: 26px; }
   .hero-flourish { font-size: 16px; top: -12px; }
-  .rotating-banner { min-height: 220px; }
-  .rotating-banner-panel { min-width: 220px; min-height: 220px; }
+  .rotating-banner { height: 220px; min-height: 220px; }
+  .rotating-banner-panel { width: 220px; height: 220px; min-width: 220px; min-height: 220px; }
   .about-heading { font-size: 26px; line-height: 34px; }
   .about-stat { padding-right: 8px; }
   .about-stat-label { font-size: 10px; }
   .about-stat-value { font-size: 16px; line-height: 22px; }
   .case-heading { font-size: 26px; }
+  /* Both hold 18px at every other width, which works under a 48px heading
+     but not under this one — the eyebrow ends up nearly heading-sized and
+     the description stops reading as supporting copy. */
+  .case-eyebrow { font-size: 14px; line-height: 20px; }
+  .case-desc { font-size: 16px; line-height: 24px; }
   .case-shape { max-width: 180px; }
   .case-mockup { margin-top: -40px; }
   .footer-bottom { flex-direction: column; }
