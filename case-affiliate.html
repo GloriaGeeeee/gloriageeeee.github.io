@@ -14,7 +14,7 @@
 
 <!-- ?v= is a cache-buster: bump the number whenever styles.css changes so browsers
      fetch the new file instead of reusing the copy they already have. -->
-<link rel="stylesheet" href="css/styles.css?v=40">
+<link rel="stylesheet" href="css/styles.css?v=44">
 </head>
 <body>
 
@@ -91,9 +91,7 @@
 
   <!-- ==================== HEADER ====================
        Two columns: title / description / details on the left, hero image on
-       the right. No cover image exists for this project yet, so the hero
-       slot is a plain .cs-placeholder rather than a real image/video — swap
-       it for a <img>/<video> in .cs-hero-media > .cs-figure once one exists. -->
+       the right. -->
   <header class="cs-header">
     <div class="cs-intro">
       <div class="cs-intro-top">
@@ -126,7 +124,9 @@
     </div>
 
     <div class="cs-hero-media">
-      <div class="cs-placeholder">Hero image — TBD</div>
+      <figure class="cs-figure cs-figure--plain">
+        <video autoplay loop muted playsinline preload="metadata" src="assets/affiliate/hero.mp4"></video>
+      </figure>
     </div>
   </header>
 
@@ -174,14 +174,17 @@
       <h2 class="cs-h2">Business Goals</h2>
       <div class="cs-grid-3">
         <div class="cs-grid-item">
+          <img class="cs-goal-icon" src="assets/illustrations/logo-pattern-01.svg" alt="" width="40" height="40">
           <h3 class="cs-h4">Give partners full control of their network</h3>
           <p class="cs-body-sm">Enable self-service across the full lifecycle from adding an affiliate to performance monitoring.</p>
         </div>
         <div class="cs-grid-item">
+          <img class="cs-goal-icon" src="assets/illustrations/logo-pattern-02.svg" alt="" width="40" height="40">
           <h3 class="cs-h4">Reduce operation cost and manual effort</h3>
           <p class="cs-body-sm">Remove manual relationship setup and shorten the time for a new affiliate to start earning.</p>
         </div>
         <div class="cs-grid-item">
+          <img class="cs-goal-icon" src="assets/illustrations/logo-pattern-04.svg" alt="" width="40" height="40">
           <h3 class="cs-h4">Preserve partner-affiliate transparency and privacy balance</h3>
           <p class="cs-body-sm">Keep the existing balance between what partners need to manage the relationship and what affiliates should (and shouldn't) see.</p>
         </div>
@@ -204,7 +207,9 @@
       <p class="cs-body">We could not interview partners directly, so I partnered with sales and ops teammates who work with partners daily.</p>
     </div>
     <div data-reveal style="margin-top:32px;">
-      <div class="cs-placeholder--wide cs-placeholder">Process artefacts — TBD</div>
+      <figure class="cs-figure cs-figure--plain">
+        <img src="assets/affiliate/process.png" alt="Research artefacts: a team workshop photo, the end-to-end partner-affiliate journey mapped as swimlane flowcharts, and a table prioritizing findings by user goal and frequency" loading="lazy" decoding="async" width="1440" height="458">
+      </figure>
     </div>
     <div data-reveal style="margin-top:32px;">
       <div class="cs-grid-3">
@@ -229,20 +234,21 @@
       <p class="cs-body" style="margin-top:16px;">Throughout this experiment, we explored the strengths and limitations of this tool in a multi-stakeholder collaborative process.</p>
     </div>
     <div data-reveal style="margin-top:32px;">
-      <div class="cs-placeholder--wide cs-placeholder">AI-native delivery flowchart — TBD</div>
+      <figure class="cs-figure cs-figure--plain">
+        <img src="assets/affiliate/ai-process.png" alt="A three-part Venn diagram: PM and design brainstorm asking whether we're designing the right thing, requirement finalisation asking whether all cases are considered, and engineering implementation asking how an agent can convert this to code, unified by Claude Design as a live source of truth" loading="lazy" decoding="async" width="1600" height="979">
+      </figure>
     </div>
   </section>
 
-  <!-- ==================== DESIGN PRINCIPLES ====================
-       Image placeholder for now — the real one (a Figma canvas overview)
-       shows unredacted internal naming that conflicts with the NDA notice
-       above, so it's held back until a redacted version exists. -->
+  <!-- ==================== DESIGN PRINCIPLES ==================== -->
   <section class="cs-section" id="principles">
     <div data-reveal>
       <h2 class="cs-h2">Design Principles</h2>
     </div>
     <div data-reveal style="margin-top:32px;">
-      <div class="cs-placeholder--wide cs-placeholder">Design principles overview — TBD (redacted version pending)</div>
+      <figure class="cs-figure cs-figure--plain">
+        <img src="assets/affiliate/design-file.png" alt="A Figma canvas overview of the affiliate management flows: shared rebate programs, the partner detail drawer, and the guided rebate-program setup" loading="lazy" decoding="async" width="1215" height="287">
+      </figure>
     </div>
     <div data-reveal style="margin-top:32px;">
       <ol class="cs-principles">
@@ -274,8 +280,7 @@
     </div>
   </section>
 
-  <!-- ==================== SOLUTION ====================
-       All four demos are placeholders — nothing has been recorded yet. -->
+  <!-- ==================== SOLUTION ==================== -->
   <section class="cs-section" id="solution">
     <div data-reveal>
       <h2 class="cs-h2">Solution</h2>
@@ -287,7 +292,9 @@
         <p class="cs-body">Two tabs present the same data differently, allowing users to compare performance and manage relationships quickly without excessive filtering.</p>
       </div>
       <div>
-        <div class="cs-placeholder">Demo video — TBD</div>
+        <figure class="cs-figure cs-figure--plain">
+          <video autoplay loop muted playsinline preload="metadata" src="assets/affiliate/demo-1.mp4"></video>
+        </figure>
       </div>
     </div>
 
@@ -297,7 +304,9 @@
         <p class="cs-body">A detail drawer lets users review a program or relationship without losing context, keeping the main page fast to scan.</p>
       </div>
       <div>
-        <div class="cs-placeholder">Demo video — TBD</div>
+        <figure class="cs-figure cs-figure--plain">
+          <img src="assets/affiliate/demo-2.png" alt="A partner detail drawer sliding in over the shared rebate programs table, showing aggregated earnings, clients, and rebate programs for one affiliate" loading="lazy" decoding="async" width="1600" height="1067">
+        </figure>
       </div>
     </div>
 
@@ -307,7 +316,9 @@
         <p class="cs-body">A linear flow supports the common setup path, with optional branches for advanced needs such as adding a second affiliate or configuring split-override rules by symbol and asset.</p>
       </div>
       <div>
-        <div class="cs-placeholder">Demo video — TBD</div>
+        <figure class="cs-figure cs-figure--plain">
+          <img src="assets/affiliate/demo-3.png" alt="The guided rebate-program setup flow: finding an affiliate by email, setting the default rebate split with symbol- and asset-level overrides, reviewing and confirming, and verifying with a one-time code" loading="lazy" decoding="async" width="1600" height="1067">
+        </figure>
       </div>
     </div>
 
@@ -317,7 +328,9 @@
         <p class="cs-body">The mobile experience supports the same core workflows so partners can manage the network on the go.</p>
       </div>
       <div>
-        <div class="cs-placeholder">Demo video — TBD</div>
+        <figure class="cs-figure cs-figure--plain">
+          <img src="assets/affiliate/demo-4.png" alt="Three mobile screens: the affiliate list with earnings summary, the guided rebate-split setup, and the affiliate detail drawer with privacy settings" loading="lazy" decoding="async" width="1600" height="1067">
+        </figure>
       </div>
     </div>
   </section>
@@ -340,7 +353,7 @@
           <span class="cs-metric-label">Replacing a scattered process of emails, spreadsheets, and Jira tickets</span>
         </div>
         <div class="cs-metric">
-          <span class="cs-metric-value">2 audiences</span>
+          <span class="cs-metric-value">2 groups</span>
           <span class="cs-metric-label">Partner and affiliate each get controlled transparency on their relationship</span>
         </div>
       </div>
@@ -351,14 +364,17 @@
       <p class="cs-body">The product is still in development. After launch, these metrics will show whether self-service is working:</p>
       <div class="cs-grid-3" style="margin-top:32px;">
         <div class="cs-grid-item">
+          <img class="cs-goal-icon" src="assets/illustrations/logo-pattern-03.svg" alt="" width="40" height="40">
           <h3 class="cs-h4">Ops ticket volume</h3>
           <p class="cs-body-sm">The direct measure of back-office dependency — it should trend towards zero for anything the new flow covers.</p>
         </div>
         <div class="cs-grid-item">
+          <img class="cs-goal-icon" src="assets/illustrations/logo-pattern-07.svg" alt="" width="40" height="40">
           <h3 class="cs-h4">Time from add-affiliate to first active client</h3>
           <p class="cs-body-sm">Indicator of whether partner network growth is following the easier network enablement.</p>
         </div>
         <div class="cs-grid-item">
+          <img class="cs-goal-icon" src="assets/illustrations/logo-pattern-06.svg" alt="" width="40" height="40">
           <h3 class="cs-h4">Add-affiliate flow completion rate</h3>
           <p class="cs-body-sm">Indicator of potential friction in the journey.</p>
         </div>
@@ -467,6 +483,6 @@
 
 </div>
 
-<script src="js/script.js?v=40"></script>
+<script src="js/script.js?v=44"></script>
 </body>
 </html>
