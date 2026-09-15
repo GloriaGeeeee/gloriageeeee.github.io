@@ -721,17 +721,22 @@ h1, h2, h3, p { margin: 0; }
 }
 .case-mockup--bare img { width: 100%; height: 100%; object-fit: contain; }
 
-.case-mockup-slide { width: 100%; height: 100%; }
+.case-mockup-slide { width: 100%; height: 100%; display: flex; flex-direction: column; }
 [data-scroll-slide] { opacity: 0; transform: translateX(48px); }
 .case-mockup-bar {
   display: flex;
   gap: 6px;
   padding: 10px 12px;
   border-bottom: 1px solid var(--color-surface);
+  flex-shrink: 0;
 }
 .case-mockup-bar span { width: 8px; height: 8px; border-radius: 50%; background: var(--color-surface); }
+.case-mockup-bar span:nth-child(1) { background: #ec6a5e; }
+.case-mockup-bar span:nth-child(2) { background: #f5bd4f; }
+.case-mockup-bar span:nth-child(3) { background: #61c454; }
 .case-mockup-body {
-  height: calc(100% - 33px);
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1072,6 +1077,12 @@ h1, h2, h3, p { margin: 0; }
 .cs-sidenav-col { grid-column: 1; padding-top: 96px; }
 .cs-content { grid-column: 2; min-width: 0; }
 
+/* For a case study with no side nav / .cs-main grid (case-insurance.html),
+   so its body still reads at the same width as the other case studies'
+   content column instead of stretching across the full header width. 805px
+   is that column's own computed width: (--cs-max - --cs-split) * 2/3. */
+.cs-body-narrow { max-width: 805px; margin-inline: auto; }
+
 .cs-sidenav {
   position: sticky;
   top: 48px;
@@ -1262,6 +1273,28 @@ h1, h2, h3, p { margin: 0; }
   background: var(--color-surface);
 }
 .cs-callout p { color: var(--color-text-secondary); margin: 0; }
+
+/* ---------- Bulleted list ----------
+   First use: accomplishment lists inside case-insurance.html's role cards.
+   Every other list on case study pages is either .cs-principles (numbered,
+   its own component) or plain paragraphs — this is for the one case where
+   the source content is genuinely a flat bulleted list. Body-sm typography,
+   a small red marker matching the brand accent rather than a default
+   browser bullet. */
+.cs-bullets {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cs-bullets li {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line);
+  color: var(--color-text-secondary);
+}
+.cs-bullets li::marker { color: var(--color-red); }
 
 /* ---------- Column blocks ---------- */
 .cs-grid-2,

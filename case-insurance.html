@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Insurance Website Localisation &amp; Revamp — Gloria Gao</title>
+<meta name="description" content="Leading design and business analysis for an award-winning localisation and revamp of a global insurance website — 500+ subpages across three languages, at IBM iX.">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+
+<!-- Fonts: Geist for headings, Inter for body, Nothing You Could Do for the editorial accent, Geist Mono for labels -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
+
+<!-- ?v= is a cache-buster: bump the number whenever styles.css changes so browsers
+     fetch the new file instead of reusing the copy they already have. -->
+<link rel="stylesheet" href="css/styles.css?v=36">
+</head>
+<body>
+
+<!-- Preloader: shown for a moment while the page "counts up" to 100% —
+     but only on the first page of a visit. The inline script right below
+     must run before anything paints, so it can mark <html> before the
+     browser ever draws the black overlay on a repeat page; the render-
+     blocking stylesheet above guarantees no paint happens before both this
+     and it have run. See js/script.js section 1 for the JS-side half. -->
+<div class="preloader" data-preloader>
+  <div class="preloader-top">
+    <span class="preloader-label">Gloria Gao — Portfolio 2026</span>
+    <span class="preloader-count"><span data-count>0</span>%</span>
+  </div>
+  <div class="preloader-bar"><div class="preloader-bar-fill" data-bar></div></div>
+</div>
+<script>
+  if (sessionStorage.getItem('gg-preloader-seen')) {
+    document.documentElement.classList.add('skip-preloader');
+  } else {
+    sessionStorage.setItem('gg-preloader-seen', '1');
+  }
+</script>
+
+<!-- Page-transition curtain, swipes up when you click an internal link.
+     Starts pre-covered (no animation, just present) when arriving via one
+     of those links, so there's something to tuck away from — see
+     js/script.js section 8 for the reveal that plays once this state has
+     actually painted, and the "why inline / why here" reasoning (same
+     no-flash requirement as the preloader-skip check above: must run
+     before first paint, which the render-blocking stylesheet guarantees
+     for anything this early in <body>). -->
+<div class="curtain" data-curtain></div>
+<script>
+  if (sessionStorage.getItem('gg-curtain-incoming')) {
+    sessionStorage.removeItem('gg-curtain-incoming');
+    document.querySelector('[data-curtain]').classList.add('is-active');
+  }
+</script>
+
+<!-- Custom cursor (desktop only) — without this markup the page has no visible cursor at all -->
+<div class="cursor-ring" data-cursor-ring></div>
+<div class="cursor-dot" data-cursor-dot></div>
+
+<div class="page case-study">
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html" data-transition class="nav-logo" aria-label="Gloria Gao — home">
+        <svg width="32" height="32" viewBox="0 0 168 168" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="84" height="168" fill="#FFE020"/>
+          <rect x="84" y="84" width="84" height="84" fill="#78B4EA"/>
+          <circle cx="84" cy="84" r="84" fill="#F23C8A"/>
+          <path d="M 83.626 167.999 C 37.234 167.793 -0.206 130.017 0.001 83.626 C 0.207 37.234 37.983 -0.206 84.374 0.001 L 83.626 167.999 Z" fill="#EF3E2E"/>
+          <path transform="translate(83.626 84.002)" d="M 84.373 0.374 C 84.167 46.766 46.391 84.206 0 83.999 L 0.374 0 L 84.373 0.374 Z" fill="#A61E6E"/>
+        </svg>
+        <span class="nav-logo-word">Gloria Gao<sup>{yunhan}</sup></span>
+      </a>
+      <div class="nav-links">
+        <a href="about.html" data-transition>About me</a>
+        <a href="index.html#work" data-transition>Work</a>
+        <a href="https://substack.com" target="_blank" rel="noopener">Blog</a>
+      </div>
+    </div>
+    <a href="assets/Gloria-Gao-CV.pdf" class="btn btn-primary btn-sm nav-cta">
+      Download CV
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.5 L10.5 8 L6 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </nav>
+
+  <!-- .cs-shell holds the whole page to a max width with 80px either side -->
+  <div class="cs-shell">
+
+  <!-- ==================== HEADER ====================
+       This project is older and shaped differently from the others: a
+       reflective "role and impact" writeup rather than a challenge/process/
+       solution narrative (the source page itself has no design artefacts to
+       show — NDA'd international corporate work), so the body below follows
+       its own structure instead of the usual side-nav section set. -->
+  <header class="cs-header">
+    <div class="cs-intro">
+      <div class="cs-intro-top">
+        <h1 class="cs-title">Global Insurance Website Localisation &amp; Revamp</h1>
+        <p class="cs-body-sm">At IBM iX, I led the design of a website revamp and localisation project. I worked closely with the client's product and content owners to propose and build the new experience.</p>
+        <div class="tags">
+          <span class="tag tag-neutral">Agile</span>
+          <span class="tag tag-blue">UI Design</span>
+        </div>
+      </div>
+
+      <dl class="cs-meta">
+        <div>
+          <dt class="cs-meta-label">Status</dt>
+          <dd class="cs-body-sm">Shipped</dd>
+        </div>
+        <div>
+          <dt class="cs-meta-label">Timeline</dt>
+          <dd class="cs-body-sm">5 months (6 sprints)</dd>
+        </div>
+        <div>
+          <dt class="cs-meta-label">Team</dt>
+          <dd class="cs-body-sm">IBM iX</dd>
+        </div>
+        <div>
+          <dt class="cs-meta-label">Role</dt>
+          <dd class="cs-body-sm">Lead UI Designer &amp; Business Analyst</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="cs-hero-media">
+      <figure class="cs-figure cs-figure--plain">
+        <img src="assets/insurance/hero.webp" alt="The IBM iX logo mark — an eye, a bee, and the letter M, spelling out 'I-B-M' as a rebus" loading="eager" decoding="async" width="1600" height="788">
+      </figure>
+    </div>
+  </header>
+
+  <!-- NDA notice — this project's screens and client details can't be shown
+       publicly, same reasoning/treatment as case-affiliate.html's callout. -->
+  <div class="cs-callout">
+    <p class="cs-body-sm">This project is under NDA, so I can't show specific screens or client details here. <a href="mailto:gloriagao0210@gmail.com">Reach out</a> for more.</p>
+  </div>
+
+  <!-- ==================== BODY ====================
+       No sticky side nav / .cs-main two-column grid here — the page is
+       short enough (3 sections) that one wasn't worth adding, unlike the
+       longer case studies. .cs-body-narrow centers the content at the same
+       width the other case studies' reading column computes to (805px,
+       from --cs-max/--cs-split), rather than stretching prose and bullet
+       lists across the full 1280px header width. -->
+  <div class="cs-body-narrow">
+
+  <!-- ==================== MY ROLE ==================== -->
+  <section class="cs-section" id="role">
+    <div data-reveal>
+      <h2 class="cs-h2">My Role</h2>
+      <div class="cs-grid-2">
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Lead UI Designer</h3>
+          <ul class="cs-bullets">
+            <li>Led design for 10+ page clusters and 500+ subpages, across three languages and both mobile and desktop.</li>
+            <li>Customised three components and two UX flows for the Hong Kong site.</li>
+            <li>Wrote detailed design guidelines for developers, cutting clarification back-and-forth by 50%.</li>
+          </ul>
+        </div>
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Lead Business Analyst</h3>
+          <ul class="cs-bullets">
+            <li>Hosted 40+ workshops with 50+ product and content owners to review designs and gather requirements.</li>
+            <li>Wrote 300+ user stories and QA'd 400+ subpages across mobile, desktop, and three languages.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== IMPACT ==================== -->
+  <section class="cs-section" id="impact">
+    <div data-reveal>
+      <h2 class="cs-h2">Impact</h2>
+      <div class="cs-grid-2" style="margin-top:32px; row-gap:48px;">
+        <div class="cs-metric">
+          <span class="cs-metric-value">500+</span>
+          <span class="cs-metric-label">Subpages designed, across three languages and mobile/desktop</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-value">50%</span>
+          <span class="cs-metric-label">Reduction in developer clarification back-and-forth</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-value">40+</span>
+          <span class="cs-metric-label">Workshops with 50+ product and content owners</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-value">300+</span>
+          <span class="cs-metric-label">User stories created</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LESSON LEARNED ==================== -->
+  <section class="cs-section" id="lessons">
+    <div data-reveal>
+      <div class="cs-label">Reflection</div>
+      <h2 class="cs-h2">Lesson Learned</h2>
+      <p class="cs-body">The team shipped 500+ pages in phase one in November 2022. Looking back, I learned to use design system components to move faster, communicate design decisions clearly across stakeholders, and work well within a multidisciplinary team.</p>
+    </div>
+
+    <div data-reveal style="margin-top:32px;">
+      <figure class="cs-figure cs-figure--plain">
+        <img src="assets/insurance/team.webp" alt="The team gathered around a kitchen table at the office, celebrating together — a colleague holds up a photo of Gloria on a tablet" loading="lazy" decoding="async" width="1400" height="730">
+      </figure>
+    </div>
+
+    <div data-reveal style="margin-top:48px;">
+      <div class="cs-grid-3">
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Designing for both mobile and web</h3>
+          <p class="cs-body-sm">After spotting a gap in mobile responsiveness, I wrote style guidelines covering both desktop and mobile views. This sped up QA and cut review time.</p>
+        </div>
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Working with developers</h3>
+          <p class="cs-body-sm">I partnered with developers on clear specs and a padding guide. This streamlined communication and cut down on quality issues.</p>
+        </div>
+        <div class="cs-grid-item">
+          <h3 class="cs-h4">Broader team-wide enabling</h3>
+          <p class="cs-body-sm">Next time, I'd give developers direct Figma access instead of exported, manually labeled images. This would mean fewer requirement checks and less back-and-forth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /.cs-body-narrow -->
+
+  <!-- ==================== BACK TO WORK ==================== -->
+  <div class="cs-pagenav">
+    <a href="index.html#work" data-transition class="case-link">
+      <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M16 11 H6 M10 6 L5 11 L10 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to all work
+    </a>
+  </div>
+
+  </div><!-- /.cs-shell -->
+
+  <!-- ==================== FOOTER / LET'S CONNECT ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="eyebrow eyebrow-inverse">Let's connect</div>
+      <div class="footer-top">
+        <h2>Say hello.</h2>
+        <div class="footer-links">
+          <a href="mailto:hello@gloriagao.design" class="footer-email">hello@gloriagao.design</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://substack.com" target="_blank" rel="noopener">Substack</a>
+          <a href="https://read.cv" target="_blank" rel="noopener">Read.cv</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Gloria Gao Yunhan · Product Designer</span>
+        <span>© 2026 · Singapore</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script src="js/script.js?v=36"></script>
+</body>
+</html>
