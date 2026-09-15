@@ -14,7 +14,7 @@
 
 <!-- ?v= is a cache-buster: bump the number whenever styles.css changes so browsers
      fetch the new file instead of reusing the copy they already have. -->
-<link rel="stylesheet" href="css/styles.css?v=44">
+<link rel="stylesheet" href="css/styles.css?v=47">
 </head>
 <body>
 
@@ -99,99 +99,20 @@
       <div class="about-portrait-stage" data-portrait>
         <span class="about-shape about-shape--square" data-depth="26" aria-hidden="true"></span>
         <span class="about-shape about-shape--circle" data-depth="16" aria-hidden="true"></span>
-        <img class="about-portrait-photo" data-depth="-10" src="assets/about/profile.webp" alt="Gloria Gao smiling, wearing a beanie and round glasses, holding a small paper cut-out in front of a wall painted with the word Fiama" loading="eager" decoding="async" width="800" height="800">
+        <img class="about-portrait-photo" data-depth="-10" src="assets/about/profile2.webp" alt="Gloria Gao smiling and looking up while seated under a glowing rainbow-lit archway" loading="eager" decoding="async" width="800" height="800">
       </div>
     </div>
 
     <div class="about-intro" data-reveal style="animation-delay:.06s">
       <div class="cs-label">About me</div>
-      <h1 class="about-name">Gloria Yunhan Gao</h1>
-      <p class="about-lead">I started out as an engineer — and kept getting distracted by the <em class="serif-accent">person</em> on the other end of the code.</p>
+      <h1 class="about-name">Gloria Gao<sup>{yunhan}</sup></h1>
+      <p class="about-lead">I started out as an engineer, and kept thinking about the <em class="serif-accent">person</em> on the other end of the code.</p>
       <div class="about-bio">
-        <p class="cs-body">That distraction turned into the work. Side projects first, then design at IBM, then the whole career: web and mobile products that aren't just beautiful, but that hold up when real people use them.</p>
-        <p class="cs-body">Today I'm a Senior Product Designer at Pepperstone, working on partner platforms. Before that, financial products at OKX — forty of them, from first look through to subscription.</p>
-        <p class="cs-body">I'm endlessly curious about how different industries work, and about the human behaviour running underneath them.</p>
+        <p class="cs-body">That thought became the career. From teaching myself mobile design in Photoshop, to designing for complex systems full-time, to leveraging AI to vibe-design: the foundations don't change. You always go back to thinking deeply about the person you're designing for.</p>
+        <p class="cs-body">Today, I'm a Senior Product Designer at Pepperstone, building scalable and intuitive partner platforms.</p>
       </div>
     </div>
   </header>
-
-  <!-- ==================== JOURNEY — ONE MERGED TIMELINE ====================
-       Experience and education read as a single chronology rather than two
-       separate lists. Cards alternate above/below the axis so five stops fit
-       without crowding; hovering or focusing a stop reveals its image. -->
-  <section class="cs-section" id="journey">
-    <div data-reveal>
-      <div class="cs-label">Journey</div>
-      <h2 class="cs-h2">Where I've Worked &amp; Studied</h2>
-      <p class="cs-body">Hover a stop to see more.</p>
-    </div>
-
-    <div class="about-tl-scroll" data-reveal style="margin-top:56px;">
-      <ol class="about-tl">
-
-        <li class="about-tl-stop about-tl-stop--below" data-kind="education">
-          <div class="about-tl-card">
-            <span class="about-tl-org">Chinese University of Hong Kong</span>
-            <span class="about-tl-role">BEng, Electronic Engineering</span>
-          </div>
-          <button class="about-tl-bubble" type="button" aria-label="Chinese University of Hong Kong, BEng Electronic Engineering, 2015 to 2019">
-            <img src="assets/about/tl-cuhk.webp" alt="" loading="lazy" decoding="async" width="720" height="540">
-            <span class="about-tl-monogram">CUHK</span>
-          </button>
-          <span class="about-tl-when">2015 — 2019</span>
-        </li>
-
-        <li class="about-tl-stop about-tl-stop--above" data-kind="work">
-          <div class="about-tl-card">
-            <span class="about-tl-org">IBM</span>
-            <span class="about-tl-role">Experience Consultant</span>
-          </div>
-          <button class="about-tl-bubble" type="button" aria-label="IBM, Experience Consultant, 2020 to 2022">
-            <img src="assets/about/tl-ibm.webp" alt="" loading="lazy" decoding="async" width="720" height="540">
-            <span class="about-tl-monogram">IBM</span>
-          </button>
-          <span class="about-tl-when">2020 — 2022</span>
-        </li>
-
-        <li class="about-tl-stop about-tl-stop--below" data-kind="education">
-          <div class="about-tl-card">
-            <span class="about-tl-org">University College London</span>
-            <span class="about-tl-role">MSc, Human-Computer Interaction</span>
-          </div>
-          <button class="about-tl-bubble" type="button" aria-label="University College London, MSc Human-Computer Interaction, 2022 to 2023">
-            <img src="assets/about/tl-ucl.webp" alt="" loading="lazy" decoding="async" width="720" height="540">
-            <span class="about-tl-monogram">UCL</span>
-          </button>
-          <span class="about-tl-when">2022 — 2023</span>
-        </li>
-
-        <li class="about-tl-stop about-tl-stop--above" data-kind="work">
-          <div class="about-tl-card">
-            <span class="about-tl-org">OKX</span>
-            <span class="about-tl-role">Product Designer II, Financial Products</span>
-          </div>
-          <button class="about-tl-bubble" type="button" aria-label="OKX, Product Designer II in Financial Products, 2023 to 2025">
-            <img src="assets/about/tl-okx.webp" alt="" loading="lazy" decoding="async" width="720" height="540">
-            <span class="about-tl-monogram">OKX</span>
-          </button>
-          <span class="about-tl-when">2023 — 2025</span>
-        </li>
-
-        <li class="about-tl-stop about-tl-stop--below about-tl-stop--current" data-kind="work">
-          <div class="about-tl-card">
-            <span class="about-tl-org">Pepperstone</span>
-            <span class="about-tl-role">Senior Product Designer, Partner Platforms</span>
-          </div>
-          <button class="about-tl-bubble" type="button" aria-label="Pepperstone, Senior Product Designer in Partner Platforms, 2025 to present">
-            <img src="assets/about/tl-pepperstone.webp" alt="" loading="lazy" decoding="async" width="720" height="540">
-            <span class="about-tl-monogram">PS</span>
-          </button>
-          <span class="about-tl-when">2025 — Now</span>
-        </li>
-
-      </ol>
-    </div>
-  </section>
 
   <!-- ==================== DIGITAL ART ==================== -->
   <section class="cs-section" id="art">
@@ -249,6 +170,6 @@
 
 </div>
 
-<script src="js/script.js?v=44"></script>
+<script src="js/script.js?v=47"></script>
 </body>
 </html>

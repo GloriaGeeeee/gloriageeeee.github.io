@@ -473,7 +473,7 @@ h1, h2, h3, p { margin: 0; }
   position: relative;
   max-width: var(--hero-max);
   margin: 0 auto;
-  padding: 96px var(--hero-pad);
+  padding: 48px var(--hero-pad) 96px;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -1565,7 +1565,7 @@ h1, h2, h3, p { margin: 0; }
   grid-template-columns: 1fr 1.5fr;
   gap: var(--cs-split);
   align-items: center;
-  padding: 8px 0 72px;
+  padding: 48px 0 72px;
   border-bottom: 1px solid var(--color-stroke);
 }
 .about-name {
@@ -1575,6 +1575,14 @@ h1, h2, h3, p { margin: 0; }
   font-weight: var(--text-h1-weight);
   color: var(--color-ink);
   margin: 12px 0 0;
+}
+/* Same treatment as .nav-logo-word's {yunhan} — scaled up for the h1's
+   larger size so the mark stays proportionally where it sits in the nav. */
+.about-name sup {
+  font-size: 0.5em;
+  font-weight: var(--text-h1-weight);
+  vertical-align: super;
+  margin-left: 4px;
 }
 .about-lead {
   font-family: var(--font-display);
@@ -1611,14 +1619,14 @@ h1, h2, h3, p { margin: 0; }
   will-change: transform;
 }
 .about-shape--square {
-  width: 62%; height: 62%;
-  top: 2%; left: 0;
-  background: var(--color-yellow);
+  width: 70%; height: 70%;
+  top: -5%; left: -6%;
+  background: var(--color-red);
 }
 .about-shape--circle {
-  width: 54%; height: 54%;
-  right: 0; bottom: 2%;
-  background: var(--color-blue);
+  width: 60%; height: 60%;
+  right: -5%; bottom: -2%;
+  background: var(--color-yellow);
   border-radius: 50%;
 }
 .about-portrait-photo {
@@ -1630,131 +1638,6 @@ h1, h2, h3, p { margin: 0; }
 /* A pointer that isn't a mouse can't hover, so don't advertise motion there. */
 @media (pointer: coarse), (prefers-reduced-motion: reduce) {
   .about-shape, .about-portrait-photo { transition: none; }
-}
-
-/* ---------- Journey timeline ----------
-   Five stops on one horizontal axis. Each stop is its own 4-row grid so the
-   card can sit above or below the axis while every bubble still lines up. */
-.about-tl-scroll { overflow-x: auto; overflow-y: hidden; padding-bottom: 8px; }
-.about-tl {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(180px, 1fr);
-  position: relative;
-  min-width: 900px;
-}
-/* The axis itself, drawn once behind every stop. */
-.about-tl::before {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; top: 50%;
-  border-top: 1px dashed var(--color-stroke);
-}
-.about-tl-stop {
-  display: grid;
-  grid-template-rows: 1fr auto 1fr auto;
-  justify-items: center;
-  align-items: center;
-  row-gap: 14px;
-  padding: 0 12px;
-  position: relative;
-  /* Stops sit above the axis line, and an enlarged bubble raises its own
-     stop so it isn't clipped by the next one along. */
-  z-index: 1;
-}
-.about-tl-stop:hover, .about-tl-stop:focus-within { z-index: 3; }
-.about-tl-card {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  text-align: center;
-  max-width: 240px;
-}
-.about-tl-stop--above .about-tl-card { grid-row: 1; align-self: end; }
-.about-tl-stop--below .about-tl-card { grid-row: 3; align-self: start; }
-/* Leader line from card to bubble, mirrored for the two positions. */
-.about-tl-card::after {
-  content: "";
-  display: block;
-  width: 1px;
-  height: 28px;
-  margin: 8px auto 0;
-  background: var(--color-stroke);
-}
-.about-tl-stop--below .about-tl-card::after { margin: 0 auto 8px; order: -1; }
-.about-tl-org {
-  font-family: var(--font-display);
-  font-size: var(--text-body-lg-size);
-  line-height: var(--text-body-lg-line);
-  font-weight: 600;
-  color: var(--color-ink);
-}
-.about-tl-role {
-  font-family: var(--font-sans);
-  font-size: var(--text-body-sm-size);
-  line-height: var(--text-body-sm-line);
-  color: var(--color-text-secondary);
-}
-.about-tl-when {
-  grid-row: 4;
-  font-family: var(--font-mono);
-  font-size: var(--text-body-sm-size);
-  line-height: var(--text-body-sm-line);
-  color: var(--color-text-secondary);
-  white-space: nowrap;
-}
-
-/* The bubble: a flat ink disc with a monogram, which cross-fades to the
-   stop's image on hover or keyboard focus. */
-.about-tl-bubble {
-  grid-row: 2;
-  position: relative;
-  width: 84px;
-  height: 84px;
-  padding: 0;
-  border: 1px solid var(--color-stroke);
-  border-radius: 50%;
-  background: var(--color-surface);
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform .35s cubic-bezier(.22,.61,.36,1), border-color .2s ease;
-}
-.about-tl-bubble img,
-.about-tl-monogram {
-  position: absolute;
-  inset: 0;
-  transition: opacity .3s ease;
-}
-.about-tl-bubble img { width: 100%; height: 100%; object-fit: cover; opacity: 0; }
-.about-tl-monogram {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono);
-  font-size: var(--text-body-sm-size);
-  font-weight: 500;
-  color: var(--color-text-secondary);
-}
-.about-tl-stop--current .about-tl-bubble { border-color: var(--color-red); border-width: 2px; }
-/* Scales up enough that the revealed image is actually readable, not just a
-   thumbnail hint. z-index lifts it clear of its neighbours while enlarged. */
-.about-tl-bubble:hover,
-.about-tl-bubble:focus-visible {
-  transform: scale(1.75);
-  border-color: var(--color-red);
-  outline: none;
-  z-index: 2;
-}
-.about-tl-bubble:hover img,
-.about-tl-bubble:focus-visible img { opacity: 1; }
-.about-tl-bubble:hover .about-tl-monogram,
-.about-tl-bubble:focus-visible .about-tl-monogram { opacity: 0; }
-@media (prefers-reduced-motion: reduce) {
-  .about-tl-bubble { transition: border-color .2s ease; }
-  .about-tl-bubble:hover, .about-tl-bubble:focus-visible { transform: none; }
 }
 
 /* ---------- Digital art gallery ---------- */
@@ -1769,7 +1652,7 @@ h1, h2, h3, p { margin: 0; }
 
 /* ---------- About page — responsive ---------- */
 @media (max-width: 1100px) {
-  .about-header { grid-template-columns: 1fr; gap: 40px; padding-bottom: 56px; }
+  .about-header { grid-template-columns: 1fr; gap: 40px; padding-top: 8px; padding-bottom: 56px; }
   .about-portrait-stage { max-width: 340px; margin-inline: 0; }
 }
 @media (max-width: 860px) {
