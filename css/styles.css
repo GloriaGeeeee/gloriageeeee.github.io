@@ -1709,6 +1709,18 @@ h1, h2, h3, p { margin: 0; }
   .about-portrait-stage { max-width: 340px; margin-inline: 0; }
 }
 @media (max-width: 860px) {
+  /* Tighter and centered, rather than the tablet-range treatment above
+     (340px, left-aligned to the text column's edge) — margin-inline:auto
+     re-centers it now that it's no longer sized to line up with anything
+     beside it, and the smaller box is what actually pulls .about-intro up
+     underneath it (the shapes are absolutely positioned inside, so shrinking
+     them alone wouldn't have changed the stage's own footprint). */
+  .about-portrait-stage { max-width: 300px; margin-inline: auto; }
+  .about-shape--square { width: 60%; height: 60%; top: -3%; left: 0%; }
+  .about-shape--circle { width: 50%; height: 50%; right: -5%; bottom: 3%; }
+  .about-portrait-photo { width: 80%; height: 80%; top: 6%; left: 13%; }
+  /* Tighter than the 40px inherited from the tablet-range rule above. */
+  .about-header { gap: 8px; }
   .about-gallery { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .about-name { font-size: var(--text-h2-size); line-height: var(--text-h2-line); }
   .about-lead { font-size: var(--text-h4-size); line-height: var(--text-h4-line); }

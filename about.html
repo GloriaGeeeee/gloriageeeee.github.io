@@ -14,7 +14,7 @@
 
 <!-- ?v= is a cache-buster: bump the number whenever styles.css changes so browsers
      fetch the new file instead of reusing the copy they already have. -->
-<link rel="stylesheet" href="css/styles.css?v=52">
+<link rel="stylesheet" href="css/styles.css?v=55">
 </head>
 <body>
 
@@ -122,19 +122,23 @@
       <p class="cs-body">I like to use digital art to create the realms of my dream 🦋</p>
     </div>
 
-    <div class="about-gallery" data-reveal style="margin-top:48px;">
-      <figure class="cs-figure cs-figure--plain"><img src="assets/about/art-01.webp" alt="Wild Ordinary — a blue-washed subway carriage interior with a jellyfish drifting through it and neon lettering across the doors" loading="lazy" decoding="async" width="1000" height="1000"></figure>
-      <figure class="cs-figure cs-figure--plain"><img src="assets/about/art-02.webp" alt="An astronaut whose helmet visor holds a galaxy, set against a full moon and a yellow circle with blue butterflies" loading="lazy" decoding="async" width="1000" height="1000"></figure>
-      <figure class="cs-figure cs-figure--plain"><img src="assets/about/art-03.webp" alt="Retro collage of a space shuttle launching over the Golden Gate Bridge, a city skyline and a vintage computer screen" loading="lazy" decoding="async" width="1000" height="1415"></figure>
-      <figure class="cs-figure cs-figure--plain"><img src="assets/about/art-04.webp" alt="A tree suspended inside a glowing diamond outline against a deep starfield nebula" loading="lazy" decoding="async" width="990" height="990"></figure>
-      <figure class="cs-figure cs-figure--plain"><img src="assets/about/art-05.webp" alt="Solo Floating — a forest lake with a small boat, a butterfly resting on a moon, under a rainbow gradient sky" loading="lazy" decoding="async" width="1000" height="1000"></figure>
-      <figure class="cs-figure cs-figure--plain"><img src="assets/about/art-06.webp" alt="A cat in an astronaut suit with a slice of pizza behind its helmet, floating in a starfield" loading="lazy" decoding="async" width="1000" height="1000"></figure>
-      <figure class="cs-figure cs-figure--plain"><img src="assets/about/art-07.webp" alt="An astronaut suit whose helmet is filled with wildflowers, framed by concentric pink arcs and clouds" loading="lazy" decoding="async" width="1000" height="1000"></figure>
-      <figure class="cs-figure cs-figure--plain"><img src="assets/about/art-08.webp" alt="Pictures — a pink and purple 3D room with a staircase, a chrome sphere and a small cloud" loading="lazy" decoding="async" width="1000" height="1000"></figure>
-      <figure class="cs-figure cs-figure--plain"><img src="assets/about/art-09.webp" alt="Insane — a hand reaching up with a butterfly on one finger, surrounded by pastel crystals and sky" loading="lazy" decoding="async" width="1000" height="1000"></figure>
-      <figure class="cs-figure cs-figure--plain"><img src="assets/about/art-10.webp" alt="Gravity — two red betta fish circling a blue planet against black, with the word repeated in outline type" loading="lazy" decoding="async" width="1000" height="1000"></figure>
-      <figure class="cs-figure cs-figure--plain"><img src="assets/about/art-11.webp" alt="Ethereal — a neon-lit city street at night with oversized planets hanging above the buildings" loading="lazy" decoding="async" width="1000" height="1000"></figure>
-      <figure class="cs-figure cs-figure--plain"><img src="assets/about/art-12.webp" alt="Snow-covered mountains with a glowing crystal at the centre and a lone car on the road below" loading="lazy" decoding="async" width="1000" height="1000"></figure>
+    <!-- Each figure reveals on its own as it individually crosses the
+         viewport, rather than the whole 12-item grid firing as a single
+         data-reveal target — a container this tall wouldn't clear the
+         12%-visible threshold until scrolled well past its first rows. -->
+    <div class="about-gallery" style="margin-top:48px;">
+      <figure class="cs-figure cs-figure--plain" data-reveal><img src="assets/about/art-01.webp" alt="Wild Ordinary — a blue-washed subway carriage interior with a jellyfish drifting through it and neon lettering across the doors" loading="lazy" decoding="async" width="1000" height="1000"></figure>
+      <figure class="cs-figure cs-figure--plain" data-reveal><img src="assets/about/art-02.webp" alt="An astronaut whose helmet visor holds a galaxy, set against a full moon and a yellow circle with blue butterflies" loading="lazy" decoding="async" width="1000" height="1000"></figure>
+      <figure class="cs-figure cs-figure--plain" data-reveal><img src="assets/about/art-03.webp" alt="Retro collage of a space shuttle launching over the Golden Gate Bridge, a city skyline and a vintage computer screen" loading="lazy" decoding="async" width="1000" height="1415"></figure>
+      <figure class="cs-figure cs-figure--plain" data-reveal><img src="assets/about/art-04.webp" alt="A tree suspended inside a glowing diamond outline against a deep starfield nebula" loading="lazy" decoding="async" width="990" height="990"></figure>
+      <figure class="cs-figure cs-figure--plain" data-reveal><img src="assets/about/art-05.webp" alt="Solo Floating — a forest lake with a small boat, a butterfly resting on a moon, under a rainbow gradient sky" loading="lazy" decoding="async" width="1000" height="1000"></figure>
+      <figure class="cs-figure cs-figure--plain" data-reveal><img src="assets/about/art-06.webp" alt="A cat in an astronaut suit with a slice of pizza behind its helmet, floating in a starfield" loading="lazy" decoding="async" width="1000" height="1000"></figure>
+      <figure class="cs-figure cs-figure--plain" data-reveal><img src="assets/about/art-07.webp" alt="An astronaut suit whose helmet is filled with wildflowers, framed by concentric pink arcs and clouds" loading="lazy" decoding="async" width="1000" height="1000"></figure>
+      <figure class="cs-figure cs-figure--plain" data-reveal><img src="assets/about/art-08.webp" alt="Pictures — a pink and purple 3D room with a staircase, a chrome sphere and a small cloud" loading="lazy" decoding="async" width="1000" height="1000"></figure>
+      <figure class="cs-figure cs-figure--plain" data-reveal><img src="assets/about/art-09.webp" alt="Insane — a hand reaching up with a butterfly on one finger, surrounded by pastel crystals and sky" loading="lazy" decoding="async" width="1000" height="1000"></figure>
+      <figure class="cs-figure cs-figure--plain" data-reveal><img src="assets/about/art-10.webp" alt="Gravity — two red betta fish circling a blue planet against black, with the word repeated in outline type" loading="lazy" decoding="async" width="1000" height="1000"></figure>
+      <figure class="cs-figure cs-figure--plain" data-reveal><img src="assets/about/art-11.webp" alt="Ethereal — a neon-lit city street at night with oversized planets hanging above the buildings" loading="lazy" decoding="async" width="1000" height="1000"></figure>
+      <figure class="cs-figure cs-figure--plain" data-reveal><img src="assets/about/art-12.webp" alt="Snow-covered mountains with a glowing crystal at the centre and a lone car on the road below" loading="lazy" decoding="async" width="1000" height="1000"></figure>
     </div>
   </section>
 
@@ -170,6 +174,6 @@
 
 </div>
 
-<script src="js/script.js?v=52"></script>
+<script src="js/script.js?v=55"></script>
 </body>
 </html>
