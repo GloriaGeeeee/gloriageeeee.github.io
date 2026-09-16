@@ -473,7 +473,7 @@ h1, h2, h3, p { margin: 0; }
   position: relative;
   max-width: var(--hero-max);
   margin: 0 auto;
-  padding: 48px var(--hero-pad) 96px;
+  padding: 96px var(--hero-pad) 96px;
   display: flex;
   flex-direction: column;
   gap: 40px;
