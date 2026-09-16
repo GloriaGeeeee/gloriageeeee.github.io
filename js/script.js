@@ -213,24 +213,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const fadeEls = fold.querySelectorAll('[data-scroll-fade]');
 
     function tickCaseScrub() {
+      const vh = window.innerHeight;
+      const rect = fold.getBoundingClientRect();
+      // entryProgress: 0 while still below the viewport, 1 once the fold's
+      // top has reached the viewport's top. exitAmount: 0 until that same
+      // point, then rises toward 1 as you keep scrolling the fold further
+      // past the top — both are pure functions of rect.top, so scrolling
+      // back up unwinds either one exactly, no separate state needed.
+      const entryProgress = Math.min(1, Math.max(0, 1 - rect.top / vh));
+      const exitAmount = Math.min(1, Math.max(0, -rect.top / vh));
+
+      // The shape's own grow/clip animation runs at every width — both only
+      // touch the shape's inner SVG, which has no other mobile animation
+      // competing for it (unlike slide/fade below, which would fight the
+      // CSS-driven .is-inview reveal that covers the mockup/content stack
+      // on mobile).
+      growGroups.forEach(({ els, toTransform }) => {
+        els.forEach((el) => { el.style.transform = toTransform(entryProgress); });
+      });
+      clipYEls.forEach((el) => {
+        const topInset = (1 - entryProgress) * 100;
+        const bottomInset = exitAmount * 100;
+        el.style.clipPath = `inset(${topInset}% 0 ${bottomInset}% 0)`;
+      });
+
       if (parallaxQuery.matches) {
-        const vh = window.innerHeight;
-        const rect = fold.getBoundingClientRect();
-        // entryProgress: 0 while still below the viewport, 1 once the fold's
-        // top has reached the viewport's top. exitAmount: 0 until that same
-        // point, then rises toward 1 as you keep scrolling the fold further
-        // past the top — both are pure functions of rect.top, so scrolling
-        // back up unwinds either one exactly, no separate state needed.
-        const entryProgress = Math.min(1, Math.max(0, 1 - rect.top / vh));
-        const exitAmount = Math.min(1, Math.max(0, -rect.top / vh));
-        growGroups.forEach(({ els, toTransform }) => {
-          els.forEach((el) => { el.style.transform = toTransform(entryProgress); });
-        });
-        clipYEls.forEach((el) => {
-          const topInset = (1 - entryProgress) * 100;
-          const bottomInset = exitAmount * 100;
-          el.style.clipPath = `inset(${topInset}% 0 ${bottomInset}% 0)`;
-        });
         slideEls.forEach((el) => {
           // A .case-mockup--bare slide has no backing — it's a transparent
           // screenshot PNG with nothing behind it but the shape it overlaps.
@@ -247,8 +254,6 @@ document.addEventListener('DOMContentLoaded', () => {
           el.style.transform = `translateY(${(1 - entryProgress) * 20}px)`;
         });
       } else {
-        growGroups.forEach(({ els }) => { els.forEach((el) => { el.style.transform = ''; }); });
-        clipYEls.forEach((el) => { el.style.clipPath = ''; });
         slideEls.forEach((el) => { el.style.opacity = ''; el.style.transform = ''; });
         fadeEls.forEach((el) => { el.style.opacity = ''; el.style.transform = ''; });
       }

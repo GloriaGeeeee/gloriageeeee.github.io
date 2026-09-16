@@ -994,6 +994,9 @@ h1, h2, h3, p { margin: 0; }
   .rotating-banner-panel { width: 320px; height: 320px; min-width: 320px; min-height: 320px; }
   .about-me { padding: 56px var(--hero-pad); gap: 28px; }
   .about-heading { font-size: 32px; line-height: 40px; margin-top: 0; }
+  /* 4 columns left each stat too narrow to hold a label like "PREVIOUSLY
+     AT" without cramping — 2x2 gives each one room to breathe. */
+  .about-stats { grid-template-columns: repeat(2, 1fr); row-gap: 24px; }
   .about-stat { padding-right: 16px; }
   .about-stat-value { font-size: 20px; line-height: 28px; }
   .marquee-group { font-size: 28px; gap: 24px; padding-right: 24px; }
@@ -1001,18 +1004,66 @@ h1, h2, h3, p { margin: 0; }
      plain stack: shape, mockup, then the text block, in DOM order.
      display:block on the stage neutralizes every child's absolute inset
      the same way it does elsewhere on this page. */
-  .case-fold { min-height: auto; padding: 56px 0; }
+  .case-fold { min-height: auto; padding: 72px 0; }
+  .case-fold + .case-fold { margin-top: 0; }
   .case-stage { display: block; height: auto; padding: 0 var(--hero-pad); }
   .case-grid-bg { display: none; }
-  .case-shape { position: static; width: 60%; max-width: 260px; margin: 0 0 20px; }
-  .case-mockup { position: static; width: 100%; max-width: 320px; margin: -60px 0 24px; }
+  /* The shape moves out of flow and behind the mockup instead of stacking
+     above it: absolutely positioned off .case-stage (still position:relative
+     here — only its display changed above), centered, sized to bleed past
+     the mockup's edges, and pinned behind via a negative z-index (an
+     absolutely-positioned box would otherwise paint OVER static in-flow
+     content like the mockup, regardless of DOM order). --ar falls back to
+     1/1 for the folds whose shape is a circle or square; only case study
+     3's diagonal-cut shape would need its own to keep its real proportions,
+     and preserveAspectRatio="none" on that one means it was already built
+     to stretch to whatever box it's given. */
+  .case-shape {
+    position: absolute;
+    z-index: -1;
+    top: -32px; left: 50%; right: auto; bottom: auto;
+    transform: translateX(-50%);
+    width: 80vw;
+    max-width: 360px;
+    aspect-ratio: var(--ar, 1 / 1);
+    margin: 0;
+  }
+  /* margin-inline:auto (not the old 0) — width:100% capped at max-width
+     otherwise sits flush left in whatever this fold's stage width happens
+     to be, which is only ever == the mockup's own width by coincidence at
+     the narrowest phones. Centering it properly is also what keeps it
+     concentric with .case-shape above. */
+  .case-mockup { position: static; width: 100%; max-width: 320px; margin: 12px auto 24px; }
+  /* Case study 3's asset is two layered phone screens (aspect ratio
+     1100/1401) — at the shared 320px cap it renders ~400px tall, tall
+     enough that shape + mockup + heading + description + tags didn't fit
+     one screen. Both come down together so the fold stays proportionate. */
+  #case-study-3 .case-shape { width: 60vw; max-width: 260px; top: -12px; }
+  #case-study-3 .case-mockup { max-width: 230px; margin-top: 4px; }
+  /* The rectangles (folds 2 & 4 — the circle and the diagonal parallelogram
+     stay as they are) bleed to the true viewport edge: left:50% + this same
+     translateX(-50%) centers a 100vw-wide box exactly on the viewport
+     regardless of .case-stage's own padding, the standard full-bleed-from-
+     a-padded-container trick. aspect-ratio is dropped for a fixed height
+     instead, since tying height to a now-much-wider width would make these
+     two very tall; preserveAspectRatio="none" on both rects means the SVG
+     stretches cleanly to whatever box it's given, any ratio. */
+  #case-study-2 .case-shape,
+  #case-study-4 .case-shape {
+    width: 100vw;
+    max-width: 100vw;
+    aspect-ratio: auto;
+  }
+  #case-study-2 .case-shape { height: 280px; }
+  /* Taller, and the mockup itself sized down — this fold's mockup is a
+     framed browser-chrome card (not a bare screenshot), so shrinking it
+     doesn't touch what's already a full-bleed logo image inside. */
+  #case-study-4 .case-shape { height: 340px; top: -52px; }
+  #case-study-4 .case-mockup { max-width: 260px; }
   .case-content { position: static; width: auto; align-items: flex-start; text-align: left; }
-  /* Case studies 1–4's scroll-scrubbed grow/slide/fade is desktop-only
-     (script.js gates it the same way it gates the parallax) — reset each
-     element to its plain resting state so it isn't stuck invisible/
-     scaled-to-0 here. */
-  [data-scroll-grow], [data-scroll-grow-x-right] { transform: none; }
-  [data-scroll-clip-y] { clip-path: none; }
+  /* The shape's grow/clip animation (script.js) now runs at every width, so
+     neither is reset here — only slide/fade stay desktop-only, since those
+     would fight the .is-inview reveal below for the mockup/content stack. */
   [data-scroll-slide] { opacity: 1; transform: none; }
   .case-content[data-scroll-fade] { opacity: 1; }
   .case-heading { font-size: 32px; line-height: 1.15; }
@@ -1030,7 +1081,11 @@ h1, h2, h3, p { margin: 0; }
       transform: translateY(24px);
       transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);
     }
-    .case-fold.is-inview .case-shape,
+    /* .case-shape also carries a permanent translateX(-50%) for centering
+       (see above) — transform:none here would wipe that out along with the
+       entrance offset, so it keeps just the X term instead of resetting. */
+    .case-fold .case-shape { transform: translateX(-50%) translateY(24px); }
+    .case-fold.is-inview .case-shape { opacity: 1; transform: translateX(-50%); }
     .case-fold.is-inview .case-mockup,
     .case-fold.is-inview .case-content[data-scroll-fade] { opacity: 1; transform: none; }
     .case-fold.is-inview .case-mockup { transition-delay: .09s; }
@@ -1077,10 +1132,8 @@ h1, h2, h3, p { margin: 0; }
   /* Both hold 18px at every other width, which works under a 48px heading
      but not under this one — the eyebrow ends up nearly heading-sized and
      the description stops reading as supporting copy. */
-  .case-eyebrow { font-size: 14px; line-height: 20px; }
+  .case-eyebrow, .about-eyebrow { font-size: 14px; line-height: 20px; }
   .case-desc { font-size: 16px; line-height: 24px; }
-  .case-shape { max-width: 180px; }
-  .case-mockup { margin-top: -40px; }
   .footer-bottom { flex-direction: column; }
 }
 
