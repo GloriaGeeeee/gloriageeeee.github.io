@@ -1589,6 +1589,7 @@ h1, h2, h3, p { margin: 0; }
   .cs-h4 { font-size: 20px; line-height: 28px; }
   .cs-grid-2,
   .cs-grid-3 { grid-template-columns: 1fr; gap: 40px; }
+  .cs-goal-icon { width: 32px; height: 32px; }
   .cs-metrics { grid-template-columns: 1fr; gap: 24px; }
   .cs-solution + .cs-solution { margin-top: 64px; }
   .cs-quote { padding-left: 20px; margin-top: 32px; }
