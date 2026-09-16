@@ -258,14 +258,6 @@ h1, h2, h3, p { margin: 0; }
   transform: translateY(101%);
   transition: transform .5s ease-in;
   pointer-events: none;
-  /* Promotes the curtain to its own GPU-composited layer, independent of
-     the rest of the page. Without this, a layout recalculation elsewhere
-     on the page (e.g. a web font finishing download and swapping in) can
-     force a full-document repaint that briefly blanks everything —
-     including the curtain — before redrawing. Isolating it here means the
-     curtain keeps covering the screen even if the page underneath stalls. */
-  will-change: transform;
-  backface-visibility: hidden;
 }
 .curtain.is-active  { transform: translateY(0);      transition: transform .5s ease-out; }
 .curtain.is-exiting { transform: translateY(-101%);  transition: transform .5s ease-in; }
