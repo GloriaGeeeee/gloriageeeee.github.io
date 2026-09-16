@@ -1627,7 +1627,7 @@ h1, h2, h3, p { margin: 0; }
   grid-template-columns: 1fr 1.5fr;
   gap: var(--cs-split);
   align-items: center;
-  padding: 48px 0 72px;
+  padding: 96px 0 72px;
   border-bottom: 1px solid var(--color-stroke);
 }
 .about-name {
