@@ -37,12 +37,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const bar = $('[data-bar]');
   const skippedPreload = document.documentElement.classList.contains('skip-preloader');
 
+  function revealHero() {
+    $$('[data-hero]').forEach((el) => el.classList.add('is-visible'));
+  }
+
   function finishPreload() {
     if (preloader && !skippedPreload) {
       preloader.classList.add('is-done');
-      setTimeout(() => { preloader.style.display = 'none'; }, 850);
+      /* Wait for the .8s slide-away to actually clear the screen before
+         starting the hero's rise-in — added together with is-done above,
+         it used to run its course mostly hidden behind the still-visible
+         preloader, so by the time the overlay was gone there was only the
+         last fraction of a second of motion left to see. */
+      setTimeout(() => {
+        preloader.style.display = 'none';
+        revealHero();
+      }, 850);
+    } else {
+      revealHero();
     }
-    $$('[data-hero]').forEach((el) => el.classList.add('is-visible'));
   }
 
   if (skippedPreload) {
