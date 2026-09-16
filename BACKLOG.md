@@ -52,3 +52,19 @@ fixed in the moment. Not urgent, not forgotten.
       a shippable screenshot, and each thumb borrows its homepage fold's
       shape colour, so a fold recoloured later needs its `--thumb-bg`
       updated to match.
+- [ ] **Page-transition curtain flashes mid-transition, on both desktop and
+      mobile.** Confirmed real via a frame-by-frame breakdown of a screen
+      recording: the curtain (`.curtain` / `data-curtain`, `js/script.js`
+      section 8) fully disappears for a handful of frames mid-cover, along
+      with the entire page underneath it, before snapping back — not just a
+      brief navigation gap. Two attempted fixes (`@view-transition` for
+      cross-document navigation, then promoting the curtain to its own
+      compositor layer via `will-change`/`backface-visibility`) were both
+      reverted after real-device testing showed neither resolved it. Worth
+      revisiting with fresh eyes — possibly the web-font swap (Geist/Inter
+      finishing download mid-transition) forcing a full-page relayout is
+      only part of the story.
+- [ ] **Magnetic scroll effect for the homepage case-study section.** The
+      case-study folds on `index.html` (`#work`) currently scroll like any
+      other content. Explore a "magnetic" scroll-snap feel where each fold
+      pulls into place as you scroll past it, rather than free scrolling.
