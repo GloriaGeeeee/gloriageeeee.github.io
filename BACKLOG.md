@@ -17,20 +17,10 @@ fixed in the moment. Not urgent, not forgotten.
       X, the backdrop, or Escape. Wired up by selector in `js/script.js`, so
       media added later is clickable with no extra markup — which also picks
       up the About page's digital art gallery.
-- [ ] **Polish the About timeline into a "fun folder" view.** The journey
-      timeline (`about.html` `#journey`, `.about-tl` in `css/styles.css`)
-      works but is a first pass: five bubbles on an axis that reveal an
-      image on hover. Revisit the interaction — the idea is something more
-      playful and folder-like to browse through. Two loose ends to pick up
-      with it: the five hover images are still generated placeholders
-      (`assets/about/tl-*.webp`), and the whole thing collapses to a plain
-      horizontal scroll on mobile rather than having a designed small-screen
-      treatment.
-- [ ] **Mobile responsiveness needs a proper pass.** Individual pieces have
-      been spot-checked at 375px as they were built, but the site hasn't had
-      one holistic mobile review end to end — worth going through every page
-      on an actual phone-sized viewport looking for anything that slipped
-      through the per-feature checks.
+- [x] **Mobile responsiveness needs a proper pass.** Done in practice: the
+      homepage case-study folds, the About page, and all 4 case studies
+      each got dedicated mobile fixes this session (layout, animation,
+      spacing, type scale, icon sizing). No outstanding known issues.
 - [x] **IB onboarding case study is still missing real metrics.** Filled in:
       96.10% approval-conversion lift and 2.4 days → 1 min activation, then
       the counter-result (a flat ~50 partners earning per month, 90-day
@@ -52,18 +42,20 @@ fixed in the moment. Not urgent, not forgotten.
       a shippable screenshot, and each thumb borrows its homepage fold's
       shape colour, so a fold recoloured later needs its `--thumb-bg`
       updated to match.
-- [ ] **Page-transition curtain flashes mid-transition, on both desktop and
-      mobile.** Confirmed real via a frame-by-frame breakdown of a screen
-      recording: the curtain (`.curtain` / `data-curtain`, `js/script.js`
-      section 8) fully disappears for a handful of frames mid-cover, along
-      with the entire page underneath it, before snapping back — not just a
-      brief navigation gap. Two attempted fixes (`@view-transition` for
+- [ ] **[Known issue, shipping anyway] Page-transition curtain flashes
+      mid-transition, on both desktop and mobile.** Confirmed real via a
+      frame-by-frame breakdown of a screen recording: the curtain
+      (`.curtain` / `data-curtain`, `js/script.js` section 8) fully
+      disappears for a handful of frames mid-cover, along with the entire
+      page underneath it, before snapping back — not just a brief
+      navigation gap. Two attempted fixes (`@view-transition` for
       cross-document navigation, then promoting the curtain to its own
       compositor layer via `will-change`/`backface-visibility`) were both
-      reverted after real-device testing showed neither resolved it. Worth
-      revisiting with fresh eyes — possibly the web-font swap (Geist/Inter
-      finishing download mid-transition) forcing a full-page relayout is
-      only part of the story.
+      reverted after real-device testing showed neither resolved it.
+      Deliberately deferred to a post-launch fix rather than holding launch
+      for it. Worth revisiting with fresh eyes — possibly the web-font swap
+      (Geist/Inter finishing download mid-transition) forcing a full-page
+      relayout is only part of the story.
 - [ ] **Magnetic scroll effect for the homepage case-study section.** The
       case-study folds on `index.html` (`#work`) currently scroll like any
       other content. Explore a "magnetic" scroll-snap feel where each fold
