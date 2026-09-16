@@ -1567,7 +1567,11 @@ h1, h2, h3, p { margin: 0; }
   .cs-main { display: block; }
   .cs-sidenav-col { display: none; }
   .cs-intro { display: block; }
-  .cs-hero-media { margin-top: 48px; }
+  /* Off the split-row layout, height no longer comes from matching the
+     details column — pin it to the same 16:9 the rest of the site's media
+     uses instead, or object-fit:cover crops a landscape video/image down
+     to whatever tall, narrow box min-height:420px leaves at mobile widths. */
+  .cs-hero-media { margin-top: 48px; min-height: 0; aspect-ratio: 16 / 9; }
   .cs-meta { margin-top: 40px; }
 }
 
@@ -1581,6 +1585,8 @@ h1, h2, h3, p { margin: 0; }
   .cs-meta { grid-template-columns: 1fr; gap: 20px; }
   .cs-section { padding: 56px 0; }
   .cs-h2 { font-size: 28px; line-height: 36px; margin-bottom: 24px; }
+  .cs-h3 { font-size: 22px; line-height: 30px; }
+  .cs-h4 { font-size: 20px; line-height: 28px; }
   .cs-grid-2,
   .cs-grid-3 { grid-template-columns: 1fr; gap: 40px; }
   .cs-metrics { grid-template-columns: 1fr; gap: 24px; }
@@ -1595,6 +1601,8 @@ h1, h2, h3, p { margin: 0; }
 @media (max-width: 480px) {
   .cs-title { font-size: 32px; line-height: 40px; }
   .cs-h2 { font-size: 24px; line-height: 32px; }
+  .cs-h3 { font-size: 20px; line-height: 28px; }
+  .cs-h4 { font-size: 18px; line-height: 26px; }
   .cs-body { font-size: var(--text-body-size); line-height: var(--text-body-line); }
   .cs-quote p { font-size: 19px; line-height: 28px; }
   .cs-metric-value { font-size: 36px; line-height: 44px; }
@@ -1830,6 +1838,9 @@ body.lightbox-open .cursor-ring { border-color: var(--color-white); }
   gap: 24px;
   margin-bottom: 40px;
 }
+/* .cs-h2's own margin-bottom would count toward flex centering, nudging the
+   title above the arrows' visual center rather than level with them. */
+.cs-related-head .cs-h2 { margin-bottom: 0; }
 .cs-related-nav { display: flex; gap: 8px; flex-shrink: 0; }
 /* An author `display` beats the hidden attribute's UA `display:none`, so the
    script's nav.hidden needs this to actually take the arrows off the page. */
@@ -1883,7 +1894,6 @@ body.lightbox-open .cursor-ring { border-color: var(--color-white); }
   padding: 28px;
   overflow: hidden;
   background: var(--thumb-bg, var(--color-surface));
-  border: 1px solid var(--color-stroke);
 }
 .cs-related-thumb img {
   width: 100%;
@@ -1900,7 +1910,7 @@ body.lightbox-open .cursor-ring { border-color: var(--color-white); }
   color: var(--color-text-secondary);
   text-align: center;
   background: var(--color-bg);
-  border-style: dashed;
+  border: 1px dashed var(--color-stroke);
 }
 
 .cs-related-title {
