@@ -80,23 +80,9 @@
   --hero-max: 1440px;
 }
 
-/* Tells browsers that support cross-document View Transitions to hold the
-   outgoing page's last frame (curtain fully covering) on screen while the
-   next page's files are still loading, instead of swapping to a blank white
-   frame in between — this is the actual cause of the curtain "flash" on real
-   networks (a fast local dev server never hits this gap, which is why it
-   didn't reproduce in testing). No-op on browsers that don't support it yet. */
-@view-transition {
-  navigation: auto;
-}
-
 /* ---------- Reset ---------- */
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
-/* Belt-and-suspenders: match html's background to body's so the canvas is
-   never browser-default white even in the split second before body's own
-   background rule (below) has painted. */
-html { background: var(--color-bg); }
 /* Anchor links (the case study side nav, "Work" in the header) glide
    rather than jump — unless the reader has asked for less motion. */
 @media (prefers-reduced-motion: no-preference) {
